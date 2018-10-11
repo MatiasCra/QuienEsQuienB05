@@ -20,8 +20,23 @@ namespace QEQB05.Controllers
         [HttpPost]
         public ActionResult CargarDatos(Usuario x)
         {
-            Usuario usu = BD.VerificarLogin(x);
-            return View();
+            if (!ModelState.IsValid)
+            {
+                return View("Login", x);
+            }
+            else
+            {
+                Usuario usu = BD.VerificarLogin(x);
+                Session["UsuarioActivo"] = usu;
+                if (usu.Admin == false)
+                {
+                    return View("Bienvenido");
+                }
+                else
+                {
+                    return View("MenuBackoffice");
+                }
+            }
         }
         public ActionResult About()
         {
