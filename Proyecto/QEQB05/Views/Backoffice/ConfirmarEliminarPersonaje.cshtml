@@ -1,0 +1,18 @@
+﻿@using QEQB05.Models;
+@model Personaje
+@{
+    ViewBag.Title = "ConfirmarEliminarPersonaje";
+}
+
+<h2>ConfirmarEliminarPersonaje</h2>
+
+@using (Html.BeginForm("OperacionesPersonaje", "Backoffice", FormMethod.Post))
+{
+
+    <h5>¿Está seguro de que quiere eliminar este personaje?</h5>
+    @Html.HiddenFor(x => x.Id)
+    @Html.HiddenFor(x => x.Nombre)
+    @Html.HiddenFor(x => x.Foto)
+    <input type="hidden" name="Accion" value=@ViewBag.Accion />
+    <input type="submit" value=Finalizar />
+}

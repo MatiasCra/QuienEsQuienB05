@@ -1,0 +1,41 @@
+﻿@using QEQB05.Models;
+@model Personaje
+
+@{
+    ViewBag.Title = "FormPersonaje";
+}
+
+<h2>FormPersonaje</h2>
+
+@using (Html.BeginForm("OperacionesPersonaje", "Backoffice", FormMethod.Post))
+{
+    @Html.HiddenFor(x => x.Id)
+    if (ViewBag.Accion == "Ver")
+    {
+        <p>Nombre: </p> @Html.TextBoxFor(x => x.Nombre, new { disabled = "disabled" })<br />
+        <p>Foto: </p> @Html.TextBoxFor(x => x.Foto, new { disabled = "disabled", type = "file" })<br />
+        //checks de ver
+        @foreach (CategoríaP c in ViewBag.TodasCategorías)
+        {
+            if ()
+            {
+                @Html.CheckBox(c.Nombre, new { id = c.Id })
+            }
+        }
+    }
+    else
+    {
+        <p>Nombre: </p> @Html.TextBoxFor(x => x.Nombre) @Html.ValidationMessageFor(x => x.Nombre) <br />
+        <p>Foto: </p> @Html.TextBoxFor(x => x.Foto, new { type = "file" }) @Html.ValidationMessageFor(x => x.Foto) <br />
+    }
+    if (ViewBag.Accion == "Modificar")
+    {
+
+    }
+    if (ViewBag.Accion == "Insertar")
+    {
+
+    }
+    <input type="hidden" name="Accion" value=@ViewBag.Accion />
+    <input type="submit" value=Finalizar />
+}

@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+}@model  WebApplication1.Models.Usuario
+
+<h2>Login</h2>
+@Html.ActionLink("Olvide contraseña", "EdicionTrabajador", "Home")
+@using (Html.BeginForm("CargarDatos", "Home", FormMethod.Post))
+{
+    <p>Mail:</p>@Html.TextBoxFor(x => x.Mail)@Html.ValidationMessageFor(x => x.Mail) <br />
+    <p>Contraseña</p> @Html.PasswordFor(x => x.Password)@Html.ValidationMessageFor(x => x.Password) <br />
+    <input type="submit" value="Enviar" />
+
+}

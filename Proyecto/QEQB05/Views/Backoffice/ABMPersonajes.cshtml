@@ -1,0 +1,28 @@
+﻿@using QEQB05.Models;
+@{
+    ViewBag.Title = "ABMPersonajes";
+}
+
+<link rel="stylesheet" href="~/Content/ABM.css">
+
+
+<h2>Administrar personajes</h2>
+
+<br />@Html.ActionLink("Agregar personaje", "EdicionPersonaje", "Backoffice", new { Accion = "Insertar", Id = -1 }, null)<br /><br />
+<table style="width:100%">
+    <tr>
+        <th>Nombre</th>
+        <th>Foto</th>
+
+    </tr>
+    @foreach (Personaje P in ViewBag.ListaPersonajes)
+    {
+        <tr>
+            <th>@P.Nombre</th>
+            <th><img src="@P.Foto" alt="@P.Nombre"/></th>
+            <th>@Html.ActionLink("Ver", "EdicionPersonaje", "Backoffice", new { Accion = "Ver", Id = P.Id }, null)</th>
+            <th>@Html.ActionLink("Editar", "EdicionPersonaje", "Backoffice", new { Accion = "Modificar", Id = P.Id }, null)</th>
+            <th>@Html.ActionLink("Eliminar", "EdicionPersonaje", "Backoffice", new { Accion = "Eliminar", Id = P.Id }, null)</th>
+        </tr>
+    }
+</table>
