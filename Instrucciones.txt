@@ -1,14 +1,19 @@
-Crear un repositorio local
+La primera vez que se abre en una computadora hay que configurar tu mail y/o usuario:
+git config --global user.email "[email@example.com]"
+git config --global user.name "[Nombre]"
+
+Crear un repositorio local:
 cd [ruta con barras /]
 git clone [Repositorio] (va a clonar el repositorio en un nuevo repositorio local adentro de la carpeta que se puso en el cd]
 
 No hay que volver a hacer git clone de nuevo a exepcion que se quiera crear otro repositorio local
 Ahora hay que posicionarse adentro de este repositorio: 
 cd [ruta de la carpeta que creo el git clone (con barras /)]
-Pull:
+
+Antes de editar algun archivo, hacer pull:
 git pull [Repositorio]
 
-Push y commit:
+Para subir cambios hacer Commit y Push:
 git add .  
 git commit -m "[titulo del commit]" 
 git remote add [Nombre] [Repositorio]
