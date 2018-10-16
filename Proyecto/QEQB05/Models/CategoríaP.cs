@@ -10,8 +10,28 @@ namespace QEQB05.Models
         int _Id;
         string _Nombre;
 
-        public int Id { get => _Id; set => _Id = value; }
-        public string Nombre { get => _Nombre; set => _Nombre = value; }
+        public int Id {
+            get
+            {
+                return _Id;
+            }
+
+            set
+            {
+                _Id = value;
+            }
+        }
+        public string Nombre {
+            get
+            {
+                return _Nombre;
+            }
+
+            set
+            {
+                _Nombre = value;
+            }
+        }
 
         public CategoríaP()
         {

@@ -36,11 +36,71 @@ namespace QEQB05.Models
             _ID = 0;
         }
 
-        public string Nombre { get => _Nombre; set => _Nombre = value; }
-        public string Password { get => _password; set => _password = value; }
-        public string Mail { get => _mail; set => _mail = value; }
-        public bool Admin { get => _Admin; set => _Admin = value; }
-        public int Puntos { get => _puntos; set => _puntos = value; }
-        public int ID { get => _ID; set => _ID = value; }
+        public string Nombre {
+            get
+            {
+                return _Nombre;
+            }
+
+            set
+            {
+                _Nombre = value;
+            }
+        }
+        public string Password {
+            get
+            {
+                return _password;
+            }
+
+            set
+            {
+                _password = value;
+            }
+        }
+        public string Mail {
+            get
+            {
+                return _mail;
+            }
+
+            set
+            {
+                _mail = value;
+            }
+        }
+        public bool Admin {
+            get
+            {
+                return _Admin;
+            }
+
+            set
+            {
+                _Admin = value;
+            }
+        }
+        public int Puntos {
+            get
+            {
+                return _puntos;
+            }
+
+            set
+            {
+                _puntos = value;
+            }
+        }
+        public int ID {
+            get
+            {
+                return _ID;
+            }
+
+            set
+            {
+                _ID = value;
+            }
+        }
     }
 }

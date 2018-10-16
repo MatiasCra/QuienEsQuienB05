@@ -14,12 +14,21 @@
     {
         <p>Nombre: </p> @Html.TextBoxFor(x => x.Nombre, new { disabled = "disabled" })<br />
         <p>Foto: </p> @Html.TextBoxFor(x => x.Foto, new { disabled = "disabled", type = "file" })<br />
-        //checks de ver
-        @foreach (CategoríaP c in ViewBag.TodasCategorías)
+        bool y;
+        foreach (CategoríaP C in ViewBag.TodasCategorías)
         {
-            if ()
+            y = false;
+            foreach (CategoríaP Cp in ViewBag.CategoríasP)
             {
-                @Html.CheckBox(c.Nombre, new { id = c.Id })
+                if (Cp.Id == C.Id)
+                {
+                    y = true;
+                    @Html.CheckBox(C.Nombre, new { id = C.Id, @checked = "checked", disabled = "disabled" })
+                }
+            }
+            if (y == false)
+            {
+                @Html.CheckBox(C.Nombre, new { id = C.Id, disabled = "disabled" })
             }
         }
     }
@@ -30,12 +39,31 @@
     }
     if (ViewBag.Accion == "Modificar")
     {
-
+        bool y;
+        foreach (CategoríaP C in ViewBag.TodasCategorías)
+        {
+            y = false;
+            foreach (CategoríaP Cp in ViewBag.CategoríasP)
+            {
+                if (Cp.Id == C.Id)
+                {
+                    y = true;
+                    @Html.CheckBox(C.Nombre, new { id = C.Id, @checked = "checked" })
+                }
+            }
+            if (y == false)
+            {
+                @Html.CheckBox(C.Nombre, new { id = C.Id })
+            }
+        }
     }
     if (ViewBag.Accion == "Insertar")
     {
-
+        foreach (CategoríaP C in ViewBag.TodasCategorías)
+        {
+            @Html.CheckBox(C.Nombre, new { id = C.Id })
+        }
     }
-    <input type="hidden" name="Accion" value=@ViewBag.Accion />
-    <input type="submit" value=Finalizar />
+        <input type="hidden" name="Accion" value=@ViewBag.Accion />
+        <input type="submit" value=Finalizar />
 }
