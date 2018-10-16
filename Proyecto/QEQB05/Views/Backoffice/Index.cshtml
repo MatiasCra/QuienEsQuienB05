@@ -5,12 +5,11 @@
 
 <h2>Menú</h2>
 
-@Html.ActionLink("Administrar personajes", "AdminPersonajes", "Backoffice")
-@Html.ActionLink("Administrar preguntas", "AdminPreguntas", "Backoffice")
-@Html.ActionLink("Administrar usuarios", "AdminUsuarios", "Backoffice")
-@Html.ActionLink("Administrar categorías de personajes", "AdminCatPersonajes", "Backoffice")
-@Html.ActionLink("Administrar categorías de preguntas", "AdminCatPreguntas", "Backoffice")
 
-
+<p><a href="@Url.Action("ABMPersonajes", "Backoffice")" class="btn btn-primary btn-lg">Administrar personajes&raquo;</a></p>
+<p><a href="@Url.Action("ABMPreguntas", "Backoffice")" class="btn btn-primary btn-lg">Administrar preguntas &raquo;</a></p>
+<p><a href="@Url.Action("ABMUsuarios", "Backoffice")" class="btn btn-primary btn-lg">Administrar usuarios &raquo;</a></p>
+<p><a href="@Url.Action("ABMCatPersonajes", "Backoffice")" class="btn btn-primary btn-lg">Administrar categorías de personajes &raquo;</a></p>
+<p><a href="@Url.Action("ABMCatPreguntas", "Backoffice")" class="btn btn-primary btn-lg">Administrar categorías de preguntas &raquo;</a></p>
 
 
