@@ -15,6 +15,7 @@ namespace QEQB05.Controllers
             return View();
         }
 
+
         public ActionResult ABMPersonajes()
         {
             ViewBag.ListaPersonajes = BD.ListarPersonajes();
@@ -89,7 +90,6 @@ namespace QEQB05.Controllers
             }
             return View("ErrorOp");
         }
-
 
     }
 }

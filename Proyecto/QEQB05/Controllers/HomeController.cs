@@ -34,7 +34,7 @@ namespace QEQB05.Controllers
                 }
                 else
                 {
-                    return View("MenuBackoffice");
+                    return View("../BackOffice/Index");
                 }
             }
         }
@@ -49,6 +49,30 @@ namespace QEQB05.Controllers
         {
             ViewBag.Message = "Your contact page.";
 
+            return View();
+        }
+
+        public ActionResult OlvidoContraseña()
+        {
+            return View();
+        }
+
+        public ActionResult RegistrarUsuario(Usuario y)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("Registro", y);
+            }
+            else
+            {
+                y.Admin = true;
+                BD.RegistrarUsuario(y);
+                return View("Index");
+            }
+        }
+
+        public ActionResult Registro()
+        {
             return View();
         }
     }

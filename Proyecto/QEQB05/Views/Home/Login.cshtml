@@ -1,14 +1,16 @@
 ﻿
 @{
     ViewBag.Title = "Login";
-}@model  QEQB05.Models.Usuario
+}
+@model  QEQB05.Models.Usuario
 
 <h2>Login</h2>
-@Html.ActionLink("Olvide contraseña", "EdicionTrabajador", "Home")
+
 @using (Html.BeginForm("CargarDatos", "Home", FormMethod.Post))
 {
     <p>Mail:</p>@Html.TextBoxFor(x => x.Mail)@Html.ValidationMessageFor(x => x.Mail) <br />
-    <p>Contraseña</p> @Html.PasswordFor(x => x.Password)@Html.ValidationMessageFor(x => x.Password) <br />
+    <p>Contraseña:</p> @Html.PasswordFor(x => x.Password)@Html.ValidationMessageFor(x => x.Password) <br />
     <input type="submit" value="Enviar" />
 
 }
+@Html.ActionLink("Olvidé mi contraseña", "OlvidoContraseña", "Home")

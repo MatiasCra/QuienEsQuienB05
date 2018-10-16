@@ -240,5 +240,23 @@ namespace QEQB05.Models
             Desconectar(Conexion);
             return x;
         }
+        public static bool RegistrarUsuario(Usuario U)
+        {
+            bool val = false;
+            SqlConnection Conexion = Conectar();
+            SqlCommand Consulta = Conexion.CreateCommand();
+            Consulta.CommandText = "sp_RegistrarUsuario";
+            Consulta.CommandType = System.Data.CommandType.StoredProcedure;
+            Consulta.Parameters.AddWithValue("@pNombre", U.Nombre);
+            Consulta.Parameters.AddWithValue("@pMail", U.Mail);
+            Consulta.Parameters.AddWithValue("@pPassword", U.Password);
+            Consulta.Parameters.AddWithValue("@pAdmin", U.Admin);
+            int i = Consulta.ExecuteNonQuery();
+            if (i > 0)
+            {
+                val = true;
+            }
+            return val;
+        }
     }
 }
