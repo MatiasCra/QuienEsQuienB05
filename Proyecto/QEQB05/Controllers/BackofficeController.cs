@@ -21,13 +21,13 @@ namespace QEQB05.Controllers
             return View();
         }
 
-        public ActionResult EdicionPersonajes(string Accion, int Id)
+        public ActionResult EdicionPersonajes(int Id, string Accion)
         {
             ViewBag.TodasCategorías = BD.ListarTodasCategoriasP();
             ViewBag.Accion = Accion;
             if (Accion == "Insertar")
             {
-                return View("FormPersonajes");
+                return View("FormPersonaje");
             }
             else
             {
@@ -39,7 +39,7 @@ namespace QEQB05.Controllers
                 }
                 else
                 {
-                    return View("FormPersonajes", P);
+                    return View("FormPersonaje", P);
                 }
             }
         }
@@ -60,7 +60,7 @@ namespace QEQB05.Controllers
             }
             if (Accion == "Ver")
             {
-                ViewBag.Lista = BD.ListarPersonajes();
+                ViewBag.ListaPersonajes = BD.ListarPersonajes();
                 return View("ABMPersonajes");
             }
             if (Accion == "Modificar")

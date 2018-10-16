@@ -20,9 +20,9 @@
         <tr>
             <th>@P.Nombre</th>
             <th><img src="@P.Foto" alt="@P.Nombre" /></th>
-            <th>@Html.ActionLink("Ver", "EdicionPersonaje", "Backoffice", new { Accion = "Ver", Id = P.Id }, null)</th>
-            <th>@Html.ActionLink("Editar", "EdicionPersonaje", "Backoffice", new { Accion = "Modificar", Id = P.Id }, null)</th>
-            <th>@Html.ActionLink("Eliminar", "EdicionPersonaje", "Backoffice", new { Accion = "Eliminar", Id = P.Id }, null)</th>
+            <th>@Html.ActionLink("Ver", "EdicionPersonajes", "Backoffice", new { Accion = "Ver", Id = P.Id }, null)</th>
+            <th>@Html.ActionLink("Editar", "EdicionPersonajes", "Backoffice", new { Accion = "Modificar", Id = P.Id }, null)</th>
+            <th>@Html.ActionLink("Eliminar", "EdicionPersonajes", "Backoffice", new { Accion = "Eliminar", Id = P.Id }, null)</th>
         </tr>
     }
 </table>

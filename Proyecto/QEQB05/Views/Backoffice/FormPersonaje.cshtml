@@ -23,12 +23,12 @@
                 if (Cp.Id == C.Id)
                 {
                     y = true;
-                    @Html.CheckBox(C.Nombre, new { id = C.Id, @checked = "checked", disabled = "disabled" })
+                    <p>@C.Nombre</p>@Html.CheckBox(C.Nombre, new { id = C.Id, @checked = "checked", disabled = "disabled" })
                 }
             }
             if (y == false)
             {
-                @Html.CheckBox(C.Nombre, new { id = C.Id, disabled = "disabled" })
+                <p>@C.Nombre</p>@Html.CheckBox(C.Nombre, new { id = C.Id, disabled = "disabled" })
             }
         }
     }
@@ -48,12 +48,12 @@
                 if (Cp.Id == C.Id)
                 {
                     y = true;
-                    @Html.CheckBox(C.Nombre, new { id = C.Id, @checked = "checked" })
+                    <p>@C.Nombre</p>@Html.CheckBox(C.Nombre, new { id = C.Id, @checked = "checked" })
                 }
             }
             if (y == false)
             {
-                @Html.CheckBox(C.Nombre, new { id = C.Id })
+                    <p>@C.Nombre</p>@Html.CheckBox(C.Nombre, new { id = C.Id })
             }
         }
     }
@@ -61,7 +61,7 @@
     {
         foreach (CategoríaP C in ViewBag.TodasCategorías)
         {
-            @Html.CheckBox(C.Nombre, new { id = C.Id })
+                  <p>@C.Nombre</p>@Html.CheckBox(C.Nombre, new { id = C.Id })
         }
     }
         <input type="hidden" name="Accion" value=@ViewBag.Accion />

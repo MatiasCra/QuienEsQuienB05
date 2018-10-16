@@ -8,6 +8,7 @@ namespace QEQB05.Models
 {
     public class BD
     {
+        public static string connectionString = "Server=10.128.8.16;Database=QEQB05;User Id=QEQB05; Password=QEQB05;";
         private static SqlConnection Conectar()
         {
             SqlConnection Conexion = new SqlConnection(connectionString);
@@ -15,7 +16,6 @@ namespace QEQB05.Models
             return Conexion;
         }
 
-        public static string connectionString = "Server=10.128.8.16;Database=QEQB05;Trusted_Connection=True;";
         private static void Desconectar(SqlConnection Conexion)
         {
             Conexion.Close();
@@ -47,7 +47,7 @@ namespace QEQB05.Models
             SqlCommand Consulta = Conexion.CreateCommand();
             Consulta.CommandText = "sp_Traer1Personaje";
             Consulta.CommandType = System.Data.CommandType.StoredProcedure;
-            Consulta.Parameters.AddWithValue("@pId", Id);
+            Consulta.Parameters.AddWithValue("@pIdPers", Id);
             SqlDataReader Lector = Consulta.ExecuteReader();
             Lector.Read();
             int id = Convert.ToInt32(Lector["IdPersonaje"]);
@@ -83,6 +83,7 @@ namespace QEQB05.Models
             Consulta.CommandText = "sp_PersonajeModif";
             Consulta.CommandType = System.Data.CommandType.StoredProcedure;
             Consulta.Parameters.AddWithValue("@pId", P.Id);
+            Consulta.Parameters.AddWithValue("@pNombre", P.Nombre);
             Consulta.Parameters.AddWithValue("@pFoto", P.Foto);
             int i = Consulta.ExecuteNonQuery();
             if (i > 0)
@@ -139,7 +140,7 @@ namespace QEQB05.Models
             SqlDataReader Lector = Consulta.ExecuteReader();
             while (Lector.Read())
             {
-                int idc = Convert.ToInt32(Lector["IdCategoría"]);
+                int idc = Convert.ToInt32(Lector["IdCategoriaP"]);
                 string Cat = (Lector["Categoría"]).ToString();
                 CategoríaP C = new CategoríaP(idc, Cat);
                 AuxLista.Add(C);
