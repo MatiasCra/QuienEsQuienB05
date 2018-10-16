@@ -28,6 +28,10 @@ namespace QEQB05.Controllers
             ViewBag.Accion = Accion;
             if (Accion == "Insertar")
             {
+                if (!ModelState.IsValid)
+                {
+                    return View("FormPersonaje");
+                }
                 return View("FormPersonaje");
             }
             else
@@ -40,6 +44,10 @@ namespace QEQB05.Controllers
                 }
                 else
                 {
+                    if (!ModelState.IsValid)
+                    {
+                        return View("FormPersonaje", P);
+                    }
                     return View("FormPersonaje", P);
                 }
             }

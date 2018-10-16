@@ -8,7 +8,7 @@
 
 <h2>Administrar personajes</h2>
 
-<br />@Html.ActionLink("Agregar personaje", "EdicionPersonaje", "Backoffice", new { Accion = "Insertar", Id = -1 }, null)<br /><br />
+<br />@Html.ActionLink("Agregar personaje", "EdicionPersonajes", "Backoffice", new { Id = -1, Accion = "Insertar"}, null)<br /><br />
 <table style="width:100%">
     <tr>
         <th>Nombre</th>
@@ -19,7 +19,7 @@
     {
         <tr>
             <th>@P.Nombre</th>
-            <th><img src="@P.Foto" alt="@P.Nombre" /></th>
+            <th><img src=@P.Foto alt="@P.Nombre" /></th>
             <th>@Html.ActionLink("Ver", "EdicionPersonajes", "Backoffice", new { Accion = "Ver", Id = P.Id }, null)</th>
             <th>@Html.ActionLink("Editar", "EdicionPersonajes", "Backoffice", new { Accion = "Modificar", Id = P.Id }, null)</th>
             <th>@Html.ActionLink("Eliminar", "EdicionPersonajes", "Backoffice", new { Accion = "Eliminar", Id = P.Id }, null)</th>

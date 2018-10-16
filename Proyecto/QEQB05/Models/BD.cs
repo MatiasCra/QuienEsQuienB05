@@ -66,12 +66,13 @@ namespace QEQB05.Models
             Consulta.CommandText = "sp_PersonajeAlta";
             Consulta.CommandType = System.Data.CommandType.StoredProcedure;
             Consulta.Parameters.AddWithValue("@pNombre", P.Nombre);
-            Consulta.Parameters.AddWithValue("@pApellido", P.Foto);
+            Consulta.Parameters.AddWithValue("@pFoto", P.Foto);
             int i = Consulta.ExecuteNonQuery();
             if (i > 0)
             {
                 val = true;
             }
+
             return val;
         }
 
