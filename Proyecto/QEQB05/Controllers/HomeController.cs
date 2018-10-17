@@ -65,9 +65,17 @@ namespace QEQB05.Controllers
             }
             else
             {
-                y.Admin = true;
+               
                 BD.RegistrarUsuario(y);
-                return View("Index");
+                if(y.Admin==true)
+                {
+                    return RedirectToAction("Index", "Backoffice");
+                }
+                else
+                {
+                    Session["UsuarioActivo"] = y;
+                    return View("Jugar");
+                }
             }
         }
 

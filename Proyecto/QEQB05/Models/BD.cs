@@ -226,7 +226,7 @@ namespace QEQB05.Models
             consulta.CommandText = "sp_Login";
             consulta.CommandType = System.Data.CommandType.StoredProcedure;
             consulta.Parameters.AddWithValue("@pMail", usu.Mail);
-            consulta.Parameters.AddWithValue("@Contraseña", usu.Password);
+            consulta.Parameters.AddWithValue("@pContraseña", usu.Password);
             SqlDataReader datareader = consulta.ExecuteReader();
 
             while (datareader.Read())
@@ -234,7 +234,7 @@ namespace QEQB05.Models
                 x.Nombre = datareader["Nombre"].ToString();
                 x.Password = datareader["Contraseña"].ToString();
                 x.Mail = datareader["mail"].ToString();
-                x.Admin = Convert.ToBoolean(datareader["Admin"]);
+                x.Admin = Convert.ToBoolean(datareader["Administrador"]);
                 x.Puntos = Convert.ToInt32(datareader["PuntosAcumulados"]);
                 x.ID = Convert.ToInt32(datareader["ID_Usuario"]);
             }
@@ -246,12 +246,13 @@ namespace QEQB05.Models
             bool val = false;
             SqlConnection Conexion = Conectar();
             SqlCommand Consulta = Conexion.CreateCommand();
-            Consulta.CommandText = "sp_RegistrarUsuario";
+            Consulta.CommandText = "sp_RegistrarNuevoUsuario";
             Consulta.CommandType = System.Data.CommandType.StoredProcedure;
             Consulta.Parameters.AddWithValue("@pNombre", U.Nombre);
             Consulta.Parameters.AddWithValue("@pMail", U.Mail);
-            Consulta.Parameters.AddWithValue("@pPassword", U.Password);
+            Consulta.Parameters.AddWithValue("@pContraseña", U.Password);
             Consulta.Parameters.AddWithValue("@pAdmin", U.Admin);
+            Consulta.Parameters.AddWithValue("@pPuntosAcum", 0);
             int i = Consulta.ExecuteNonQuery();
             if (i > 0)
             {
