@@ -14,55 +14,13 @@
     {
         <p>Nombre: </p> @Html.TextBoxFor(x => x.Nombre, new { disabled = "disabled" })<br />
         <p>Foto: </p> @Html.TextBoxFor(x => x.Foto, new { disabled = "disabled", type = "file" })<br />
-        bool y;
-        foreach (CategoríaP C in ViewBag.TodasCategorías)
-        {
-            y = false;
-            foreach (CategoríaP Cp in ViewBag.CategoríasP)
-            {
-                if (Cp.Id == C.Id)
-                {
-                    y = true;
-                    <p>@C.Nombre</p>@Html.CheckBox(C.Nombre, new { id = C.Id, @checked = "checked", disabled = "disabled" })
-                }
-            }
-            if (y == false)
-            {
-                <p>@C.Nombre</p>@Html.CheckBox(C.Nombre, new { id = C.Id, disabled = "disabled" })
-            }
-        }
+        //@Html.DropDownListFor(x => x.Categoría, new SelectList(ViewBag.Categorias, "Seleccione una categoría"))
+        
     }
     else
     {
         <p>Nombre: </p> @Html.TextBoxFor(x => x.Nombre) @Html.ValidationMessageFor(x => x.Nombre) <br />
         <p>Foto: </p> @Html.TextBoxFor(x => x.Foto, new { type = "file" }) @Html.ValidationMessageFor(x => x.Foto) <br />
-    }
-    if (ViewBag.Accion == "Modificar")
-    {
-        bool y;
-        foreach (CategoríaP C in ViewBag.TodasCategorías)
-        {
-            y = false;
-            foreach (CategoríaP Cp in ViewBag.CategoríasP)
-            {
-                if (Cp.Id == C.Id)
-                {
-                    y = true;
-                    <p>@C.Nombre</p>@Html.CheckBox(C.Nombre, new { id = C.Id, @checked = "checked" })
-                }
-            }
-            if (y == false)
-            {
-                    <p>@C.Nombre</p>@Html.CheckBox(C.Nombre, new { id = C.Id })
-            }
-        }
-    }
-    if (ViewBag.Accion == "Insertar")
-    {
-        foreach (CategoríaP C in ViewBag.TodasCategorías)
-        {
-                  <p>@C.Nombre</p>@Html.CheckBox(C.Nombre, new { id = C.Id })
-        }
     }
         <input type="hidden" name="Accion" value=@ViewBag.Accion />
         <input type="submit" value=Finalizar />

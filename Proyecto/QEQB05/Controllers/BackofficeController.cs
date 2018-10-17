@@ -24,7 +24,7 @@ namespace QEQB05.Controllers
 
         public ActionResult EdicionPersonajes(int Id, string Accion)
         {
-            ViewBag.TodasCategorías = BD.ListarTodasCategoriasP();
+            ViewBag.Categorias = BD.ListarTodasCategoriasP();
             ViewBag.Accion = Accion;
             if (Accion == "Insertar")
             {
@@ -37,7 +37,6 @@ namespace QEQB05.Controllers
             else
             {
                 Personaje P = BD.GetPersonaje(Id);
-                ViewBag.CategoríasP = BD.ListarCategoriasP(Id);
                 if (Accion == "Eliminar")
                 {
                     return View("ConfirmarEliminarPersonaje", P);
