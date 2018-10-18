@@ -285,6 +285,7 @@
     <Content Include="Views\Home\InfoJuego.cshtml" />
     <Content Include="Views\Home\AboutUs.cshtml" />
     <Content Include="Views\Home\Registro.cshtml" />
+    <Content Include="Views\Backoffice\HacerAdmin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

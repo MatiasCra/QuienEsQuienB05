@@ -21,6 +21,39 @@ namespace QEQB05.Models
         {
             Conexion.Close();
         }
+        public static void AgregarAdmins(int id)
+        {
+            SqlConnection Conexion = Conectar();
+            SqlCommand consulta = Conexion.CreateCommand();
+            consulta.CommandText = "sp_HacerAdmin";
+            consulta.CommandType = System.Data.CommandType.StoredProcedure;
+            consulta.Parameters.AddWithValue("@pId", id);
+            consulta.ExecuteNonQuery();
+            Desconectar(Conexion);
+        }
+        public static List<Usuario> TraerUsuarios()
+        {
+            List<Usuario> Usus = new List<Usuario>();
+            SqlConnection Conexion = Conectar();
+            SqlCommand consulta = Conexion.CreateCommand();
+            consulta.CommandText = "sp_TraerTodosUsuarios";
+            consulta.CommandType = System.Data.CommandType.StoredProcedure;
+            SqlDataReader datareader = consulta.ExecuteReader();
+
+            while (datareader.Read())
+            {
+                Usuario x = new Usuario();
+                x.Nombre = datareader["Nombre"].ToString();
+                x.Password = datareader["Contraseña"].ToString();
+                x.Mail = datareader["mail"].ToString();
+                x.Admin = Convert.ToBoolean(datareader["Administrador"]);
+                x.Puntos = Convert.ToInt32(datareader["PuntosAcumulados"]);
+                x.ID = Convert.ToInt32(datareader["ID_Usuario"]);
+                Usus.Add(x);
+            }
+            Desconectar(Conexion);
+            return Usus;
+        }
 
         public static List<Personaje> ListarPersonajes()
         {

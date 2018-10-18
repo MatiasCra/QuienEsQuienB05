@@ -15,8 +15,23 @@ namespace QEQB05.Controllers
         {
             return View();
         }
-
-
+        [HttpPost]
+        public ActionResult ModificarAdmin(int[] Box)
+        {
+            if (Box != null)
+            {
+                foreach (int i in Box)
+                {
+                    BD.AgregarAdmins(i);
+                }
+            }
+            return RedirectToAction("Index", "Backoffice");
+        }
+        public ActionResult HacerAdmin()
+        {
+            ViewBag.Users = BD.TraerUsuarios();
+            return View();
+        }
         public ActionResult ABMPersonajes()
         {
             ViewBag.ListaPersonajes = BD.ListarPersonajes();
