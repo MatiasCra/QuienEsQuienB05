@@ -8,8 +8,7 @@ namespace QEQB05.Models
 {
     public class BD
     {
-        //public static string connectionString = "Server=10.128.8.16;Database=QEQB05;User Id=QEQB05; Password=QEQB05;";
-        public static string connectionString = "Server=DESKTOP-FJ4BM8M\\SQLEXPRESS;Database=QEQB05;Trusted_Connection=True;";
+        public static string connectionString = "Server=10.128.8.16;Database=QEQB05;User Id=QEQB05; Password=QEQB05;";
         private static SqlConnection Conectar()
         {
             SqlConnection Conexion = new SqlConnection(connectionString);
@@ -20,6 +19,39 @@ namespace QEQB05.Models
         private static void Desconectar(SqlConnection Conexion)
         {
             Conexion.Close();
+        }
+        public static void AgregarAdmins(int id)
+        {
+            SqlConnection Conexion = Conectar();
+            SqlCommand consulta = Conexion.CreateCommand();
+            consulta.CommandText = "sp_HacerAdmin";
+            consulta.CommandType = System.Data.CommandType.StoredProcedure;
+            consulta.Parameters.AddWithValue("@pId", id);
+            consulta.ExecuteNonQuery();
+            Desconectar(Conexion);
+        }
+        public static List<Usuario> TraerUsuarios()
+        {
+            List<Usuario> Usus = new List<Usuario>();
+            SqlConnection Conexion = Conectar();
+            SqlCommand consulta = Conexion.CreateCommand();
+            consulta.CommandText = "sp_TraerTodosUsuarios";
+            consulta.CommandType = System.Data.CommandType.StoredProcedure;
+            SqlDataReader datareader = consulta.ExecuteReader();
+
+            while (datareader.Read())
+            {
+                Usuario x = new Usuario();
+                x.Nombre = datareader["Nombre"].ToString();
+                x.Password = datareader["Contraseña"].ToString();
+                x.Mail = datareader["mail"].ToString();
+                x.Admin = Convert.ToBoolean(datareader["Administrador"]);
+                x.Puntos = Convert.ToInt32(datareader["PuntosAcumulados"]);
+                x.ID = Convert.ToInt32(datareader["ID_Usuario"]);
+                Usus.Add(x);
+            }
+            Desconectar(Conexion);
+            return Usus;
         }
 
         public static List<Personaje> ListarPersonajes()

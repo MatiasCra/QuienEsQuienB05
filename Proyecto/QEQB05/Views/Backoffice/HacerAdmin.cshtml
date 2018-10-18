@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewBag.Title = "HacerAdmin";
+}
+@model QEQB05.Models.Usuario
+<h2>HacerAdmin</h2>
+<p>Elija cuales de los siguientes usuarios quiere que se conviertan en admin</p>
+@using (Html.BeginForm("ModificarAdmin", "Backoffice", FormMethod.Post))
+{
+    <table>
+        <tr>
+            <td><strong>ID</strong></td>
+            <td><strong>Nombre</strong></td>
+            <td><strong>Mail</strong></td>
+
+        </tr>
+        @{
+            foreach (QEQB05.Models.Usuario Soos in @ViewBag.Users)
+            {
+                <tr>
+                    <td>@Html.TextBoxFor(x => Soos.ID, new { disabled = "disabled" })</td>
+                    <td>@Html.TextBoxFor(x => Soos.Nombre, new { disabled = "disabled" }) </td>
+                    <td>@Html.TextBoxFor(x => Soos.Mail, new { disabled = "disabled" }) </td>
+                    <td><input type="checkbox" name=Box value=@Soos.ID></td>
+                </tr>
+                
+            }
+        }
+    </table>
+    <input type="submit" value="Enviar" />
+}
+
