@@ -12,16 +12,27 @@
     @Html.HiddenFor(x => x.Id)
     if (ViewBag.Accion == "Ver")
     {
+        @Html.HiddenFor(x => x.Id);
         <p>Nombre: </p> @Html.TextBoxFor(x => x.Nombre, new { disabled = "disabled" })<br />
         <p>Foto: </p> @Html.TextBoxFor(x => x.Foto, new { disabled = "disabled", type = "file" })<br />
-        //@Html.DropDownListFor(x => x.Categoría, new SelectList(ViewBag.Categorias, "Seleccione una categoría"))
-        
+        @Html.DropDownListFor(x => x.Categoría.Id, new SelectList(ViewBag.Categorias, "Id", "Nombre"), new { disabled = "disabled" })
+
     }
     else
     {
-        <p>Nombre: </p> @Html.TextBoxFor(x => x.Nombre) @Html.ValidationMessageFor(x => x.Nombre) <br />
-        <p>Foto: </p> @Html.TextBoxFor(x => x.Foto, new { type = "file" }) @Html.ValidationMessageFor(x => x.Foto) <br />
+        @Html.HiddenFor(x => x.Id);
+        <p>Nombre: </p> @Html.TextBoxFor(x => x.Nombre, new { required = "required" }) @Html.ValidationMessageFor(x => x.Nombre) <br />
+        if (ViewBag.Accion == "Insertar")
+        {
+            <p>Foto: </p> @Html.TextBoxFor(x => x.Foto, new { type = "file", required = "required" }) @Html.ValidationMessageFor(x => x.Foto) <br />
+        }
+        else
+        {
+            <p>Foto: </p>@Html.TextBoxFor(x => x.Foto, new { type = "file" })<br />
+        }
+        @Html.DropDownListFor(x => x.Categoría.Id, new SelectList(ViewBag.Categorias, "Id", "Nombre"))
     }
-        <input type="hidden" name="Accion" value=@ViewBag.Accion />
-        <input type="submit" value=Finalizar />
-}
+            <input type="hidden" name="Accion" value=@ViewBag.Accion />
+            <input type="hidden" name="AuxFoto" value="@ViewBag.AuxFoto" />
+            <input type="submit" value=Finalizar />
+        }

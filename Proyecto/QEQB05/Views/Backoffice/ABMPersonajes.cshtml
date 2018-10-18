@@ -3,7 +3,7 @@
     ViewBag.Title = "ABMPersonajes";
 }
 
-<link rel="stylesheet" href="~/Content/ABM.css">
+<link rel="stylesheet" href="~/Content/AdminPers.css">
 
 
 <h2>Administrar personajes</h2>
@@ -17,9 +17,10 @@
     </tr>
     @foreach (Personaje P in ViewBag.ListaPersonajes)
     {
+        string path = "/Content/" + P.Foto;
         <tr>
             <th>@P.Nombre</th>
-            <th><img src=@P.Foto alt="@P.Nombre" /></th>
+            <th><img class="icon-prev" src=@path alt="@P.Nombre" height="40" width="40" /></th>
             <th>@Html.ActionLink("Ver", "EdicionPersonajes", "Backoffice", new { Accion = "Ver", Id = P.Id }, null)</th>
             <th>@Html.ActionLink("Editar", "EdicionPersonajes", "Backoffice", new { Accion = "Modificar", Id = P.Id }, null)</th>
             <th>@Html.ActionLink("Eliminar", "EdicionPersonajes", "Backoffice", new { Accion = "Eliminar", Id = P.Id }, null)</th>

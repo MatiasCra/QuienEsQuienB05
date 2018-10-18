@@ -8,7 +8,8 @@ namespace QEQB05.Models
 {
     public class BD
     {
-        public static string connectionString = "Server=10.128.8.16;Database=QEQB05;User Id=QEQB05; Password=QEQB05;";
+        //public static string connectionString = "Server=10.128.8.16;Database=QEQB05;User Id=QEQB05; Password=QEQB05;";
+        public static string connectionString = "Server=DESKTOP-FJ4BM8M\\SQLEXPRESS;Database=QEQB05;Trusted_Connection=True;";
         private static SqlConnection Conectar()
         {
             SqlConnection Conexion = new SqlConnection(connectionString);
@@ -69,33 +70,33 @@ namespace QEQB05.Models
             Consulta.Parameters.AddWithValue("@pId", Id);
             SqlDataReader Lector = Consulta.ExecuteReader();
             Lector.Read();
-            int id = Convert.ToInt32(Lector["IdCategoriaP"]);
+            int id = Convert.ToInt32(Lector["IdCategoría"]);
             string cat = (Lector["Categoría"]).ToString();
             CategoríaP C = new CategoríaP(id, cat);
             Desconectar(Conexion);
             return C;
         }
 
-        public static void InsertarCategoríaP(CategoríaP C, int Id)
+        public static void InsertarCategoríaP(int IdC, int IdP)
         {
             SqlConnection Conexion = Conectar();
             SqlCommand Consulta = Conexion.CreateCommand();
             Consulta.CommandText = "sp_InsertarCategoríaDePersonaje";
             Consulta.CommandType = System.Data.CommandType.StoredProcedure;
-            Consulta.Parameters.AddWithValue("@pIdP", Id);
-            Consulta.Parameters.AddWithValue("@pIdC", C.Id);
+            Consulta.Parameters.AddWithValue("@pIdP", IdP);
+            Consulta.Parameters.AddWithValue("@pIdC", IdC);
             Consulta.ExecuteNonQuery();
             Desconectar(Conexion);
         }
 
-        public static void BorrarCategoríaP(CategoríaP C, int Id)
+        public static void BorrarCategoríaP(int IdC, int IdP)
         {
             SqlConnection Conexion = Conectar();
             SqlCommand Consulta = Conexion.CreateCommand();
-            Consulta.CommandText = "sp_InsertarCategoríaDePersonaje";
+            Consulta.CommandText = "sp_DeleteCategoríaDePersonaje";
             Consulta.CommandType = System.Data.CommandType.StoredProcedure;
-            Consulta.Parameters.AddWithValue("@pIdP", Id);
-            Consulta.Parameters.AddWithValue("@pIdC", C.Id);
+            Consulta.Parameters.AddWithValue("@pIdP", IdP);
+            Consulta.Parameters.AddWithValue("@pIdC", IdC);
             Consulta.ExecuteNonQuery();
             Desconectar(Conexion);
         }
@@ -115,8 +116,23 @@ namespace QEQB05.Models
                 val = true;
             }
             Desconectar(Conexion);
-            BD.InsertarCategoríaP(P.Categoría, P.Id);
+            P.Id = BD.TraerIdP(P.Nombre);
+            BD.InsertarCategoríaP(P.Categoría.Id, P.Id);
             return val;
+        }
+
+        public static int TraerIdP(string nom)
+        {
+            SqlConnection Conexion = Conectar();
+            SqlCommand Consulta = Conexion.CreateCommand();
+            Consulta.CommandText = "sp_TraerIdPersonaje";
+            Consulta.CommandType = System.Data.CommandType.StoredProcedure;
+            Consulta.Parameters.AddWithValue("@pNombre", nom);
+            SqlDataReader Lector = Consulta.ExecuteReader();
+            Lector.Read();
+            int Id = Convert.ToInt32(Lector["IdPersonaje"]);
+            Desconectar(Conexion);
+            return Id;
         }
 
         public static bool UpdatePersonaje(Personaje P)
@@ -135,10 +151,11 @@ namespace QEQB05.Models
                 val = true;
             }
             Desconectar(Conexion);
-            if(P.Categoría != (BD.TraerCategoriaP(P.Id)))
+            CategoríaP Anterior = BD.TraerCategoriaP(P.Id);
+            if (P.Categoría != Anterior)
             {
-                BD.BorrarCategoríaP(P.Categoría, P.Id);
-                BD.InsertarCategoríaP(P.Categoría, P.Id);
+                BD.BorrarCategoríaP(Anterior.Id, P.Id);
+                BD.InsertarCategoríaP(P.Categoría.Id, P.Id);
             }
             return val;
         }
@@ -146,6 +163,7 @@ namespace QEQB05.Models
         public static bool DeletePersonaje(int Id)
         {
             bool val = false;
+            BD.BorrarCategoríaP(BD.TraerCategoriaP(Id).Id, Id);
             SqlConnection Conexion = Conectar();
             SqlCommand Consulta = Conexion.CreateCommand();
             Consulta.CommandText = "sp_PersonajeBaja";
@@ -157,7 +175,6 @@ namespace QEQB05.Models
                 val = true;
             }
             Desconectar(Conexion);
-            BD.BorrarCategoríaP(BD.TraerCategoriaP(Id), Id);
             return val;
         }
 

@@ -28,32 +28,34 @@ namespace QEQB05.Controllers
             ViewBag.Accion = Accion;
             if (Accion == "Insertar")
             {
-                if (!ModelState.IsValid)
-                {
-                    return View("FormPersonaje");
-                }
                 return View("FormPersonaje");
             }
             else
             {
                 Personaje P = BD.GetPersonaje(Id);
+                ViewBag.AuxFoto = P.Foto;
                 if (Accion == "Eliminar")
                 {
                     return View("ConfirmarEliminarPersonaje", P);
                 }
                 else
                 {
-                    if (!ModelState.IsValid)
-                    {
-                        return View("FormPersonaje", P);
-                    }
                     return View("FormPersonaje", P);
                 }
             }
         }
 
-        public ActionResult OperacionesPersonaje(Personaje P, string Accion)
+        public ActionResult OperacionesPersonaje(Personaje P, string Accion, string AuxFoto)
         {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Accion = Accion;
+                return View("FormPersonaje", P);
+            }
+            if (P.Foto == null)
+            {
+                P.Foto = AuxFoto;
+            }
             if (Accion == "Insertar")
             {
                 bool I = BD.InsertPersonaje(P);

@@ -13,7 +13,6 @@ namespace QEQB05.Models
         string _Nombre;
         [Required(ErrorMessage = "Este campo es obligatorio")]
         string _Foto;
-        [Required(ErrorMessage = "Este campo es obligatorio")]
         CategoríaP _Categoría;
 
         public int Id
