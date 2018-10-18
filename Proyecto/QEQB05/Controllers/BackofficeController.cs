@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -45,23 +46,34 @@ namespace QEQB05.Controllers
             }
         }
 
-        public ActionResult OperacionesPersonaje(Personaje P, string Accion, string AuxFoto)
+        public ActionResult OperacionesPersonaje(Personaje P, HttpPostedFileBase postedFile, string Accion, string AuxFoto)
         {
+            string path = Server.MapPath("~/Content/");
+
             if (!ModelState.IsValid)
             {
                 ViewBag.Accion = Accion;
                 return View("FormPersonaje", P);
             }
-            if (P.Foto == null)
-            {
-                P.Foto = AuxFoto;
-            }
+            
             if (Accion == "Insertar")
             {
-                bool I = BD.InsertPersonaje(P);
-                if (I == true)
+                if (!Directory.Exists(path))
                 {
+                    Directory.CreateDirectory(path);
+                }
+
+                if (postedFile != null)
+                {
+                    string fileName = Path.GetFileName(postedFile.FileName);
+                    postedFile.SaveAs(path + fileName);
+                }
+                bool I = BD.InsertPersonaje(P, postedFile.FileName);
+
+                if (I == true)
+                {     
                     return View("ExitoOp");
+
                 }
                 else
                 {

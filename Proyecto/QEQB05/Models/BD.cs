@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Data.SqlClient;
+using System.IO;
 
 namespace QEQB05.Models
 {
     public class BD
     {
-        //public static string connectionString = "Server=10.128.8.16;Database=QEQB05;User Id=QEQB05; Password=QEQB05;";
-        public static string connectionString = "Server=DESKTOP-FJ4BM8M\\SQLEXPRESS;Database=QEQB05;Trusted_Connection=True;";
+        public static string connectionString = "Server=10.128.8.16;Database=QEQB05;User Id=QEQB05; Password=QEQB05;";
         private static SqlConnection Conectar()
         {
             SqlConnection Conexion = new SqlConnection(connectionString);
@@ -101,25 +101,7 @@ namespace QEQB05.Models
             Desconectar(Conexion);
         }
 
-        public static bool InsertPersonaje(Personaje P)
-        {
-            bool val = false;
-            SqlConnection Conexion = Conectar();
-            SqlCommand Consulta = Conexion.CreateCommand();
-            Consulta.CommandText = "sp_PersonajeAlta";
-            Consulta.CommandType = System.Data.CommandType.StoredProcedure;
-            Consulta.Parameters.AddWithValue("@pNombre", P.Nombre);
-            Consulta.Parameters.AddWithValue("@pFoto", P.Foto);
-            int i = Consulta.ExecuteNonQuery();
-            if (i > 0)
-            {
-                val = true;
-            }
-            Desconectar(Conexion);
-            P.Id = BD.TraerIdP(P.Nombre);
-            BD.InsertarCategoríaP(P.Categoría.Id, P.Id);
-            return val;
-        }
+
 
         public static int TraerIdP(string nom)
         {
@@ -237,6 +219,33 @@ namespace QEQB05.Models
             {
                 val = true;
             }
+            return val;
+        }
+
+        public static bool InsertPersonaje(Personaje P, string FileName)
+        {
+            bool val;
+            val = false;
+            string archivo = "C:/Users/43447646/Desktop/QuienEsQuienB05/Proyecto/QEQB05/Content/" + FileName;
+            FileStream fs = new FileStream(archivo, FileMode.Open);
+            FileInfo fi = new FileInfo(FileName);
+            long temp = fi.Length;
+            int lung = Convert.ToInt32(temp);
+            byte[] picture = new byte[lung];
+            SqlConnection Conexion = Conectar();
+            SqlCommand Consulta = Conexion.CreateCommand();
+            Consulta.CommandText = "sp_PersonajeAlta";
+            Consulta.CommandType = System.Data.CommandType.StoredProcedure;
+            Consulta.Parameters.AddWithValue("@pNombre", P.Nombre);
+            Consulta.Parameters.AddWithValue("@pFoto", picture);
+            int i = Consulta.ExecuteNonQuery();
+            if (i > 0)
+            {
+                val = true;
+            }
+            Desconectar(Conexion);
+            P.Id = BD.TraerIdP(P.Nombre);
+            BD.InsertarCategoríaP(P.Categoría.Id, P.Id);
             return val;
         }
     }
