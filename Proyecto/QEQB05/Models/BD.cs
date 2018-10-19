@@ -87,10 +87,10 @@ namespace QEQB05.Models
             Lector.Read();
             int id = Convert.ToInt32(Lector["IdPersonaje"]);
             string Nombre = Lector["Nombre"].ToString();
-            string Foto = Lector["Foto"].ToString();
+            byte[] Foto = (byte[])dr.GetValue(0);
             Desconectar(Conexion);
             CategoríaP C = BD.TraerCategoriaP(Id);
-            Personaje P = new Personaje(id, Nombre, Foto, C);
+            Personaje P = new Personaje(id, Nombre, Foto);
             return P;
         }
 
