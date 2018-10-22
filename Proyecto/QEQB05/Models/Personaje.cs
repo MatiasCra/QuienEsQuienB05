@@ -13,7 +13,7 @@ namespace QEQB05.Models
         string _Nombre;
         [Required(ErrorMessage = "Este campo es obligatorio")]
         byte[] _Foto;
-
+        private int _idCategoría; 
         public int Id
         {
             get
@@ -50,6 +50,19 @@ namespace QEQB05.Models
             set
             {
                 _Foto = value;
+            }
+        }
+
+        public int IdCategoría
+        {
+            get
+            {
+                return _idCategoría;
+            }
+
+            set
+            {
+                _idCategoría = value;
             }
         }
 

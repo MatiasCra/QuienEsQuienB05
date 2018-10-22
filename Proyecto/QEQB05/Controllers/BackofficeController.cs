@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using QEQB05.Models;
+using System.Drawing;
 
 namespace QEQB05.Controllers
 {
@@ -49,7 +50,9 @@ namespace QEQB05.Controllers
             else
             {
                 Personaje P = BD.GetPersonaje(Id);
-                ViewBag.AuxFoto = P.Foto;
+                MemoryStream ms = new MemoryStream(P.Foto, 0, P.Foto.Length);
+                Image im = Image.FromStream(ms);
+                ViewBag.AuxFoto = im;
                 if (Accion == "Eliminar")
                 {
                     return View("ConfirmarEliminarPersonaje", P);

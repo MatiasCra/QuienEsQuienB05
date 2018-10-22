@@ -10,6 +10,8 @@ namespace QEQB05.Models
     public class BD
     {
         public static string connectionString = "Server=10.128.8.16;Database=QEQB05;User Id=QEQB05; Password=QEQB05;";
+        public static string archivo = "D:/Tareas 4IB/Programación/QEQB05/QuienEsQuienB05/Proyecto/QEQB05/Content/";
+
         private static SqlConnection Conectar()
         {
             SqlConnection Conexion = new SqlConnection(connectionString);
@@ -67,9 +69,9 @@ namespace QEQB05.Models
             {
                 int Id = Convert.ToInt32(Lector["IdPersonaje"]);
                 string Nombre = Lector["Nombre"].ToString();
-                string Foto = Lector["Foto"].ToString();
+                byte[] Foto = (byte[])Lector["Foto"];
                 CategoríaP C = BD.TraerCategoriaP(Id);
-                Personaje P = new Personaje(Id, Nombre, Foto, C);
+                Personaje P = new Personaje(Id, Nombre, Foto);
                 AuxLista.Add(P);
             }
             Desconectar(Conexion);
@@ -87,7 +89,7 @@ namespace QEQB05.Models
             Lector.Read();
             int id = Convert.ToInt32(Lector["IdPersonaje"]);
             string Nombre = Lector["Nombre"].ToString();
-            byte[] Foto = (byte[])dr.GetValue(0);
+            byte[] Foto = (byte[])Lector["Foto"];
             Desconectar(Conexion);
             CategoríaP C = BD.TraerCategoriaP(Id);
             Personaje P = new Personaje(id, Nombre, Foto);
@@ -167,11 +169,7 @@ namespace QEQB05.Models
             }
             Desconectar(Conexion);
             CategoríaP Anterior = BD.TraerCategoriaP(P.Id);
-            if (P.Categoría != Anterior)
-            {
-                BD.BorrarCategoríaP(Anterior.Id, P.Id);
-                BD.InsertarCategoríaP(P.Categoría.Id, P.Id);
-            }
+            
             return val;
         }
 
@@ -259,9 +257,10 @@ namespace QEQB05.Models
         {
             bool val;
             val = false;
-            string archivo = "C:/Users/43447646/Desktop/QuienEsQuienB05/Proyecto/QEQB05/Content/" + FileName;
+            archivo = archivo + FileName;
             FileStream fs = new FileStream(archivo, FileMode.Open);
-            FileInfo fi = new FileInfo(FileName);
+            FileInfo fi = new FileInfo(archivo);
+            
             long temp = fi.Length;
             int lung = Convert.ToInt32(temp);
             byte[] picture = new byte[lung];
@@ -271,6 +270,7 @@ namespace QEQB05.Models
             Consulta.CommandType = System.Data.CommandType.StoredProcedure;
             Consulta.Parameters.AddWithValue("@pNombre", P.Nombre);
             Consulta.Parameters.AddWithValue("@pFoto", picture);
+            BD.InsertarCategoríaP(P.IdCategoría, P.Id);
             int i = Consulta.ExecuteNonQuery();
             if (i > 0)
             {
@@ -278,7 +278,7 @@ namespace QEQB05.Models
             }
             Desconectar(Conexion);
             P.Id = BD.TraerIdP(P.Nombre);
-            BD.InsertarCategoríaP(P.Categoría.Id, P.Id);
+            BD.InsertarCategoríaP(P.IdCategoría, P.Id);
             return val;
         }
     }

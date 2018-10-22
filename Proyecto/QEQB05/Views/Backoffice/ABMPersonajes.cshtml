@@ -20,7 +20,7 @@
         string path = "/Content/" + P.Foto;
         <tr>
             <th>@P.Nombre</th>
-            <th><img class="icon-prev" src=@path alt="@P.Nombre" height="40" width="40" /></th>
+            <th><img class="icon-prev" src="@ViewBag.AuxFoto" alt="@P.Nombre" height="40" width="40" /></th>
             <th>@Html.ActionLink("Ver", "EdicionPersonajes", "Backoffice", new { Accion = "Ver", Id = P.Id }, null)</th>
             <th>@Html.ActionLink("Editar", "EdicionPersonajes", "Backoffice", new { Accion = "Modificar", Id = P.Id }, null)</th>
             <th>@Html.ActionLink("Eliminar", "EdicionPersonajes", "Backoffice", new { Accion = "Eliminar", Id = P.Id }, null)</th>

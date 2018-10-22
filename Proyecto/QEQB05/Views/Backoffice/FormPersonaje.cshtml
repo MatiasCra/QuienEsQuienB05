@@ -1,4 +1,5 @@
 ﻿@using QEQB05.Models;
+
 @model Personaje
 
 <link rel="stylesheet" href="~/Content/AdminPers.css">
@@ -17,7 +18,7 @@
         @Html.HiddenFor(x => x.Id);
         <p>Nombre: </p> @Html.TextBoxFor(x => x.Nombre, new { disabled = "disabled" })<br />
 
-        @Html.DropDownListFor(x => x.Categoría.Id, new SelectList(ViewBag.Categorias, "Id", "Nombre"), new { disabled = "disabled" })
+        @Html.DropDownListFor(x => x.IdCategoría, new SelectList(ViewBag.Categorias, "Id", "Nombre"), new { disabled = "disabled" })
 
     }
     else
@@ -32,7 +33,7 @@
         {
             <p>Foto: </p>@Html.TextBoxFor(x => x.Foto, new { type = "file" })<br />
         }
-        <lbl>Categoría: </lbl> @Html.DropDownListFor(x => x.Categoría.Id, new SelectList(ViewBag.Categorias, "Id", "Nombre")) <br /><br />
+        <lbl>Categoría: </lbl> @Html.DropDownListFor(x => x.IdCategoría, new SelectList(ViewBag.Categorias, "Id", "Nombre")) <br /><br />
 
     }
     <input type="hidden" name="Accion" value=@ViewBag.Accion />
