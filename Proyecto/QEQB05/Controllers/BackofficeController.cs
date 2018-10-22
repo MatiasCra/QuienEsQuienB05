@@ -86,9 +86,9 @@ namespace QEQB05.Controllers
                     string fileName = Path.GetFileName(postedFile.FileName);
                     postedFile.SaveAs(path + fileName);
                 }
-                bool I = BD.InsertPersonaje(P, postedFile.FileName);
+                int I = BD.InsertPersonaje(P, postedFile.FileName);
 
-                if (I == true)
+                if (I != null)
                 {     
                     return View("ExitoOp");
 

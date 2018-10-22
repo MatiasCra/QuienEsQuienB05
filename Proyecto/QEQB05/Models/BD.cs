@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Data.SqlClient;
 using System.IO;
+using System.Data;
 
 namespace QEQB05.Models
 {
@@ -253,10 +254,8 @@ namespace QEQB05.Models
             return val;
         }
 
-        public static bool InsertPersonaje(Personaje P, string FileName)
+        public static int InsertPersonaje(Personaje P, string FileName)
         {
-            bool val;
-            val = false;
             archivo = archivo + FileName;
             FileStream fs = new FileStream(archivo, FileMode.Open);
             FileInfo fi = new FileInfo(archivo);
@@ -264,22 +263,23 @@ namespace QEQB05.Models
             long temp = fi.Length;
             int lung = Convert.ToInt32(temp);
             byte[] picture = new byte[lung];
+            fs.Read(picture, 0, lung);
+            fs.Close();
+
             SqlConnection Conexion = Conectar();
             SqlCommand Consulta = Conexion.CreateCommand();
             Consulta.CommandText = "sp_PersonajeAlta";
             Consulta.CommandType = System.Data.CommandType.StoredProcedure;
             Consulta.Parameters.AddWithValue("@pNombre", P.Nombre);
-            Consulta.Parameters.AddWithValue("@pFoto", picture);
-            BD.InsertarCategoríaP(P.IdCategoría, P.Id);
+            SqlParameter pic = new SqlParameter("@pFoto", SqlDbType.Image);
+            pic.Value = picture;
+            Consulta.Parameters.Add(pic);
+            Consulta.Parameters.Add("@id", SqlDbType.Int).Direction = ParameterDirection.Output;
             int i = Consulta.ExecuteNonQuery();
-            if (i > 0)
-            {
-                val = true;
-            }
+            int idp = Convert.ToInt32(Consulta.Parameters["@id"].Value);
             Desconectar(Conexion);
-            P.Id = BD.TraerIdP(P.Nombre);
-            BD.InsertarCategoríaP(P.IdCategoría, P.Id);
-            return val;
+            BD.InsertarCategoríaP(P.IdCategoría, idp);
+            return idp;
         }
     }
 }
