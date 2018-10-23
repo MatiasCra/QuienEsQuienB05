@@ -72,8 +72,8 @@ namespace QEQB05.Models
                 int Id = Convert.ToInt32(Lector["IdPersonaje"]);
                 string Nombre = Lector["Nombre"].ToString();
                 byte[] Foto = (byte[])Lector["Foto"];
-                CategoríaP C = BD.TraerCategoriaP(Id);
-                Personaje P = new Personaje(Id, Nombre, Foto, C.Id);
+                List<CategoríaP> cat = BD.TraerCategoriaP(Id);
+                Personaje P = new Personaje(Id, Nombre, Foto, cat);
                 AuxLista.Add(P);
             }
             Desconectar(Conexion);
@@ -93,26 +93,32 @@ namespace QEQB05.Models
             string Nombre = Lector["Nombre"].ToString();
             byte[] Foto = (byte[])Lector["Foto"];
             Desconectar(Conexion);
-            CategoríaP C = BD.TraerCategoriaP(Id);
-            Personaje P = new Personaje(id, Nombre, Foto, C.Id);
+            List<CategoríaP> cat = BD.TraerCategoriaP(Id);
+            Personaje P = new Personaje(id, Nombre, Foto, cat);
             return P;
         }
 
-        public static CategoríaP TraerCategoriaP(int Id)
+        public static List<CategoríaP> TraerCategoriaP(int Id)
         {
+            List<CategoríaP> Aux = new List<CategoríaP>();
             SqlConnection Conexion = Conectar();
             SqlCommand Consulta = Conexion.CreateCommand();
             Consulta.CommandText = "sp_TraerCategoríasDePersonaje";
             Consulta.CommandType = System.Data.CommandType.StoredProcedure;
             Consulta.Parameters.AddWithValue("@pId", Id);
             SqlDataReader Lector = Consulta.ExecuteReader();
-            Lector.Read();
-            int id = Convert.ToInt32(Lector["IdCategoría"]);
-            string cat = (Lector["Categoría"]).ToString();
-            CategoríaP C = new CategoríaP(id, cat);
+            while (Lector.Read())
+            {
+                int id = Convert.ToInt32(Lector["IdCategoría"]);
+                string cat = (Lector["Categoría"]).ToString();
+                CategoríaP C = new CategoríaP(id, cat);
+                Aux.Add(C);
+            }
             Desconectar(Conexion);
-            return C;
+            return Aux;
         }
+
+
 
         public static void InsertarCategoríaP(int IdC, int IdP)
         {
@@ -170,7 +176,7 @@ namespace QEQB05.Models
                 val = true;
             }
             Desconectar(Conexion);
-            CategoríaP Anterior = BD.TraerCategoriaP(P.Id);
+            List<CategoríaP> Anterior = BD.TraerCategoriaP(P.Id);
             
             return val;
         }
@@ -255,7 +261,7 @@ namespace QEQB05.Models
             return val;
         }
 
-        public static int InsertPersonaje(Personaje P, string pathArchivo)
+        public static int InsertPersonaje(Personaje P, string pathArchivo, int[] Box)
         {
             archivo = pathArchivo;
             FileStream fs = new FileStream(archivo, FileMode.Open);
@@ -279,7 +285,13 @@ namespace QEQB05.Models
             int i = Consulta.ExecuteNonQuery();
             int idp = Convert.ToInt32(Consulta.Parameters["@id"].Value);
             Desconectar(Conexion);
-            BD.InsertarCategoríaP(P.IdCategoría, idp);
+            if(Box != null && idp != null)
+            {
+                foreach(int b in Box)
+                {
+                    BD.InsertarCategoríaP(b, idp);
+                }
+            }
             return idp;
         }
     }

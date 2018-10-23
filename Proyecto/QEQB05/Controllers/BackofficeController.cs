@@ -70,12 +70,13 @@ namespace QEQB05.Controllers
                 }
                 else
                 {
+                    ViewBag.CatsP = P.Categorías;
                     return View("FormPersonaje", P);
                 }
             }
         }
 
-        public ActionResult OperacionesPersonaje(Personaje P, HttpPostedFileBase postedFile, string Accion, string AuxFoto)
+        public ActionResult OperacionesPersonaje(Personaje P, HttpPostedFileBase postedFile, int[] Box, string Accion, string AuxFoto)
         {
             string path = Server.MapPath("~/Content/");
 
@@ -99,12 +100,11 @@ namespace QEQB05.Controllers
                     path = path + fileName;
                 }
                 
-                int I = BD.InsertPersonaje(P, path);
+                int I = BD.InsertPersonaje(P, path, Box);
 
                 if (I != null)
                 {     
                     return View("ExitoOp");
-
                 }
                 else
                 {
