@@ -17,18 +17,18 @@
     {
         @Html.HiddenFor(x => x.Id);
         <p>Nombre: </p> @Html.TextBoxFor(x => x.Nombre, new { disabled = "disabled" })<br />
-        <img class="icon-prev" src="@ViewBag.AuxFoto" alt="Personaje" height="40" width="40" />
+        <img class="imgForm" src="@ViewBag.AuxFoto" alt="Personaje" />
         foreach (CategoríaP C in ViewBag.Categorias)
         {
             foreach (CategoríaP c in ViewBag.CatsP)
             {
                 if (c.Id == C.Id)
                 {
-                    <lbl>Categoría: </lbl><input type="checkbox" name=Box value=@C.Id checked="checked" disabled="disabled">
+                    <lbl>@C.Nombre: </lbl><input type="checkbox" name="Box" value=@C.Id checked="checked" disabled="disabled">
                 }
                 else
                 {
-                    <lbl>Categoría: </lbl><input type="checkbox" name=Box value=@C.Id disabled="disabled">
+                    <lbl>@C.Nombre: </lbl><input type="checkbox" name="Box" value=@C.Id disabled="disabled">
                 }
             }
         }
@@ -42,11 +42,12 @@
             <p>Foto: </p> <input type="file" name="postedFile" id="postedFile" /> <br />
             foreach (CategoríaP C in ViewBag.Categorias)
             {
-                <lbl>Categoría: </lbl><input type="checkbox" name=Box value=@C.Id>
+                <lbl>@C.Nombre: </lbl><input type="checkbox" name="Box" value=@C.Id>
             }
         }
         else
         {
+            <img class="imgForm" src="@ViewBag.AuxFoto" alt="Personaje" />
             <p>Foto: </p>@Html.TextBoxFor(x => x.Foto, new { type = "file" })<br />
             foreach (CategoríaP C in ViewBag.Categorias)
             {
@@ -54,18 +55,17 @@
                 {
                     if (c.Id == C.Id)
                     {
-                        <lbl>Categoría: </lbl><input type="checkbox" name=Box value=@C.Id checked="checked">
+                        <lbl>@C.Nombre: </lbl><input type="checkbox" name="Box" value=@C.Id checked="checked">
                     }
                     else
                     {
-                        <lbl>Categoría: </lbl><input type="checkbox" name=Box value=@C.Id>
+                        <lbl>@C.Nombre: </lbl><input type="checkbox" name="Box" value=@C.Id>
                     }
                 }
             }
         }
     }
-}
-<input type="hidden" name="Accion" value=@ViewBag.Accion />
-<input type="hidden" name="AuxFoto" value="@ViewBag.AuxFoto" />
-<input type="submit" value=Finalizar />
+    <input type="hidden" name="Accion" value=@ViewBag.Accion />
+    <input type="hidden" name="AuxFoto" value="@ViewBag.AuxFoto" />
+    <input type="submit" value=Finalizar />
 }
