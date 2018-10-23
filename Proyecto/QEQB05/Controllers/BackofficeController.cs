@@ -42,9 +42,10 @@ namespace QEQB05.Controllers
             ViewBag.ListaPersonajes = AuxListaPersonajes;
             foreach (Personaje p in AuxListaPersonajes)
             {
-                AuxFoto = string.Format("data:image/png;base64,{0}", Convert.ToBase64String(p.Foto));
+                AuxFoto = ConversionIMG.ConvertirAURLData(p.Foto);
                 ListaUrlDataImagenes.Add(AuxFoto);
             }
+            Dictionary<Personaje, string>
             ViewBag.ListaUrlDataImagenes = ListaUrlDataImagenes;
             ViewBag.Contador = 0;
             return View();
@@ -60,10 +61,8 @@ namespace QEQB05.Controllers
             }
             else
             {
-                String AuxFoto;
                 Personaje P = BD.GetPersonaje(Id);
-                AuxFoto = string.Format("data:image/png;base64,{0}", Convert.ToBase64String(P.Foto));
-                ViewBag.AuxFoto = AuxFoto;
+                ViewBag.AuxFoto =  ConversionIMG.ConvertirAURLData(P.Foto);
                 if (Accion == "Eliminar")
                 {
                     return View("ConfirmarEliminarPersonaje", P);
@@ -96,10 +95,7 @@ namespace QEQB05.Controllers
             
             if (Accion == "Insertar")
             {
-                if (!Directory.Exists(path))
-                {
-                    Directory.CreateDirectory(path);
-                }
+                
                 
                 int? I = BD.InsertPersonaje(P, path, Box);
 

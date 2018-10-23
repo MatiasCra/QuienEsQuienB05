@@ -160,14 +160,8 @@ namespace QEQB05.Models
 
         public static bool UpdatePersonaje(Personaje P, string pathArchivo, int[] Box)
         {
-            FileStream fs = new FileStream(pathArchivo, FileMode.Open);
-            FileInfo fi = new FileInfo(pathArchivo);
-            long temp = fi.Length;
-            int lung = Convert.ToInt32(temp);
-            byte[] picture = new byte[lung];
-            fs.Read(picture, 0, lung);
-            fs.Close();
             bool val = false;
+            ConversionIMG.ConvertirAByteArray(pathArchivo);
             SqlConnection Conexion = Conectar();
             SqlCommand Consulta = Conexion.CreateCommand();
             Consulta.CommandText = "sp_PersonajeModif";
@@ -304,13 +298,7 @@ namespace QEQB05.Models
 
         public static int? InsertPersonaje(Personaje P, string pathArchivo, int[] Box)
         {
-            FileStream fs = new FileStream(pathArchivo, FileMode.Open);
-            FileInfo fi = new FileInfo(pathArchivo);
-            long temp = fi.Length;
-            int lung = Convert.ToInt32(temp);
-            byte[] picture = new byte[lung];
-            fs.Read(picture, 0, lung);
-            fs.Close();
+            ConversionIMG.ConvertirAByteArray(pathArchivo);
             SqlConnection Conexion = Conectar();
             SqlCommand Consulta = Conexion.CreateCommand();
             Consulta.CommandText = "sp_PersonajeAlta";

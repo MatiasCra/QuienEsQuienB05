@@ -12,6 +12,7 @@
 
 @using (Html.BeginForm("OperacionesPersonaje", "Backoffice", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
+    bool a;
     @Html.HiddenFor(x => x.Id)
     if (ViewBag.Accion == "Ver")
     {
@@ -20,16 +21,22 @@
         <img class="imgForm" src="@ViewBag.AuxFoto" alt="Personaje" />
         foreach (CategoríaP C in ViewBag.Categorias)
         {
+            a = false;
             foreach (CategoríaP c in ViewBag.CatsP)
             {
                 if (c.Id == C.Id)
                 {
-                    <lbl>@C.Nombre: </lbl><input type="checkbox" name="Box" value=@C.Id checked="checked" disabled="disabled">
+                    a = true;
+                    
                 }
-                else
-                {
-                    <lbl>@C.Nombre: </lbl><input type="checkbox" name="Box" value=@C.Id disabled="disabled">
-                }
+            }
+            if (a == true)
+            {
+                <lbl>@C.Nombre: </lbl><input type="checkbox" name="Box" value=@C.Id checked="checked" disabled="disabled">
+            }
+            else
+            {
+                <lbl>@C.Nombre: </lbl><input type="checkbox" name="Box" value=@C.Id disabled="disabled">
             }
         }
     }
@@ -51,16 +58,22 @@
             <p>Foto: </p>@Html.TextBoxFor(x => x.Foto, new { type = "file" })<br />
             foreach (CategoríaP C in ViewBag.Categorias)
             {
+                a = false;
                 foreach (CategoríaP c in ViewBag.CatsP)
                 {
                     if (c.Id == C.Id)
                     {
-                        <lbl>@C.Nombre: </lbl><input type="checkbox" name="Box" value=@C.Id checked="checked">
+                        a = true;
+
                     }
-                    else
-                    {
-                        <lbl>@C.Nombre: </lbl><input type="checkbox" name="Box" value=@C.Id>
-                    }
+                }
+                if (a == true)
+                {
+                    <lbl>@C.Nombre: </lbl><input type="checkbox" name="Box" value=@C.Id checked="checked">
+                }
+                else
+                {
+                    <lbl>@C.Nombre: </lbl><input type="checkbox" name="Box" value=@C.Id >
                 }
             }
         }
