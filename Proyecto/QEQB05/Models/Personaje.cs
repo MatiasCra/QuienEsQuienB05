@@ -70,14 +70,16 @@ namespace QEQB05.Models
         {
             _Id = -1;
             _Nombre = null;
-            _Foto = null;  
+            _Foto = null;
+            _idCategoría = -1;
         }
 
-        public Personaje(int id, string nom, byte[] foto)
+        public Personaje(int id, string nom, byte[] foto, int cat)
         {
             _Id = id;
             _Nombre = nom;
             _Foto = foto;
+            _idCategoría = cat;
         }
     }
 }

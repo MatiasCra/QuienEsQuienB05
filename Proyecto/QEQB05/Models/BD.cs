@@ -10,8 +10,9 @@ namespace QEQB05.Models
 {
     public class BD
     {
-        public static string connectionString = "Server=10.128.8.16;Database=QEQB05;User Id=QEQB05; Password=QEQB05;";
-        public static string archivo = "D:/Tareas 4IB/Programación/QEQB05/QuienEsQuienB05/Proyecto/QEQB05/Content/";
+        //public static string connectionString = "Server=10.128.8.16;Database=QEQB05;User Id=QEQB05; Password=QEQB05;";
+        public static string connectionString = "Server=WIN-ACKIVLEQ4MB;Database=QEQB05;Trusted_Connection=True;";
+        public static string archivo = Server.MapPath("~") + @"Content/";
 
         private static SqlConnection Conectar()
         {
@@ -72,7 +73,7 @@ namespace QEQB05.Models
                 string Nombre = Lector["Nombre"].ToString();
                 byte[] Foto = (byte[])Lector["Foto"];
                 CategoríaP C = BD.TraerCategoriaP(Id);
-                Personaje P = new Personaje(Id, Nombre, Foto);
+                Personaje P = new Personaje(Id, Nombre, Foto, C.Id);
                 AuxLista.Add(P);
             }
             Desconectar(Conexion);

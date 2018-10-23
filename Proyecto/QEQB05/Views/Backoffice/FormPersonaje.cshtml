@@ -17,7 +17,7 @@
     {
         @Html.HiddenFor(x => x.Id);
         <p>Nombre: </p> @Html.TextBoxFor(x => x.Nombre, new { disabled = "disabled" })<br />
-
+        <img class="icon-prev" src="@ViewBag.AuxFoto" alt="Personaje" height="40" width="40" />
         @Html.DropDownListFor(x => x.IdCategoría, new SelectList(ViewBag.Categorias, "Id", "Nombre"), new { disabled = "disabled" })
 
     }
