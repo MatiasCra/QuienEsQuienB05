@@ -10,9 +10,9 @@ namespace QEQB05.Models
 {
     public class BD
     {
-        //public static string connectionString = "Server=10.128.8.16;Database=QEQB05;User Id=QEQB05; Password=QEQB05;";
-        public static string connectionString = "Server=WIN-ACKIVLEQ4MB;Database=QEQB05;Trusted_Connection=True;";
-        public static string archivo = Server.MapPath("~") + @"Content/";
+        public static string connectionString = "Server=10.128.8.16;Database=QEQB05;User Id=QEQB05; Password=QEQB05;";
+        //public static string connectionString = "Server=WIN-ACKIVLEQ4MB;Database=QEQB05;Trusted_Connection=True;";
+        public static string archivo = "";
 
         private static SqlConnection Conectar()
         {
@@ -94,7 +94,7 @@ namespace QEQB05.Models
             byte[] Foto = (byte[])Lector["Foto"];
             Desconectar(Conexion);
             CategoríaP C = BD.TraerCategoriaP(Id);
-            Personaje P = new Personaje(id, Nombre, Foto);
+            Personaje P = new Personaje(id, Nombre, Foto, C.Id);
             return P;
         }
 
@@ -255,9 +255,9 @@ namespace QEQB05.Models
             return val;
         }
 
-        public static int InsertPersonaje(Personaje P, string FileName)
+        public static int InsertPersonaje(Personaje P, string pathArchivo)
         {
-            archivo = archivo + FileName;
+            archivo = pathArchivo;
             FileStream fs = new FileStream(archivo, FileMode.Open);
             FileInfo fi = new FileInfo(archivo);
             

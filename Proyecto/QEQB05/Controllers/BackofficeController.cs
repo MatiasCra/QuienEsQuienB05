@@ -96,8 +96,10 @@ namespace QEQB05.Controllers
                 {
                     string fileName = Path.GetFileName(postedFile.FileName);
                     postedFile.SaveAs(path + fileName);
+                    path = path + fileName;
                 }
-                int I = BD.InsertPersonaje(P, postedFile.FileName);
+                
+                int I = BD.InsertPersonaje(P, path);
 
                 if (I != null)
                 {     
