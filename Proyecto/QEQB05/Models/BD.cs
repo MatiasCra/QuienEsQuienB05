@@ -158,7 +158,7 @@ namespace QEQB05.Models
             return Id;
         }
 
-        public static bool UpdatePersonaje(Personaje P, string pathArchivo)
+        public static bool UpdatePersonaje(Personaje P, string pathArchivo, int[] Box)
         {
             FileStream fs = new FileStream(pathArchivo, FileMode.Open);
             FileInfo fi = new FileInfo(pathArchivo);
@@ -182,6 +182,37 @@ namespace QEQB05.Models
             }
             Desconectar(Conexion);
             List<CategoríaP> Anterior = BD.TraerCategoriaP(P.Id);
+            bool v;
+            foreach (CategoríaP C in Anterior)
+            {
+                v = true;
+                foreach (int id in Box)
+                {
+                    if (C.Id == id)
+                    {
+                        v = false;
+                    }
+                }
+                if(v == true)
+                {
+                    BD.BorrarCategoríaP(C.Id, P.Id);
+                }
+            }
+            foreach (int id in Box)
+            {
+                v = true;
+                foreach (CategoríaP C in Anterior)
+                {
+                    if (C.Id == id)
+                    {
+                        v = false;
+                    }
+                }
+                if (v == true)
+                {
+                    BD.InsertarCategoríaP(id, P.Id);
+                }
+            }
             File.Delete(pathArchivo);
             
             return val;
@@ -190,7 +221,7 @@ namespace QEQB05.Models
         public static bool DeletePersonaje(int Id)
         {
             bool val = false;
-            BD.BorrarCategoríaP(BD.TraerCategoriaP(Id).Id, Id);
+            List<CategoríaP> categorías = BD.TraerCategoriaP(Id);
             SqlConnection Conexion = Conectar();
             SqlCommand Consulta = Conexion.CreateCommand();
             Consulta.CommandText = "sp_PersonajeBaja";
@@ -202,6 +233,10 @@ namespace QEQB05.Models
                 val = true;
             }
             Desconectar(Conexion);
+            foreach (CategoríaP c in categorías)
+            {
+                BD.BorrarCategoríaP(c.Id, Id);
+            }
             return val;
         }
 

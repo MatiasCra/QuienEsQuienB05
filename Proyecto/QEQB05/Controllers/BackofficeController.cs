@@ -128,7 +128,7 @@ namespace QEQB05.Controllers
                 string fileName = Path.GetFileName(postedFile.FileName);
                 string filename = postedFile.FileName;
                 postedFile.SaveAs(path + fileName);
-                bool M = BD.UpdatePersonaje(P, fileName);
+                bool M = BD.UpdatePersonaje(P, fileName, Box);
                 if (M == true)
                 {
                     return View("ExitoOp");
