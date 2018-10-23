@@ -27,3 +27,8 @@ input[type=file] {
     font-family: 'Microsoft JhengHei UI';
     text-align: center;
 }
+.imgForm {
+    display: block;
+    width: 100%;
+    height: auto;
+}

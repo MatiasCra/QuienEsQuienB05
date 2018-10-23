@@ -190,7 +190,7 @@ namespace QEQB05.Models
         public static bool DeletePersonaje(int Id)
         {
             bool val = false;
-            BD.BorrarCategoríaP(BD.TraerCategoriaP(Id).Id, Id);
+            //BD.BorrarCategoríaP(BD.TraerCategoriaP(Id).Id, Id);
             SqlConnection Conexion = Conectar();
             SqlCommand Consulta = Conexion.CreateCommand();
             Consulta.CommandText = "sp_PersonajeBaja";

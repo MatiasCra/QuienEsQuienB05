@@ -17,7 +17,7 @@
     {
         @Html.HiddenFor(x => x.Id);
         <p>Nombre: </p> @Html.TextBoxFor(x => x.Nombre, new { disabled = "disabled" })<br />
-        <img class="icon-prev" src="@ViewBag.AuxFoto" alt="Personaje" height="40" width="40" />
+        <img class="imgForm" src="@ViewBag.AuxFoto" alt="Personaje" />
         foreach (CategoríaP C in ViewBag.Categorias)
         {
             foreach (CategoríaP c in ViewBag.CatsP)
@@ -47,6 +47,7 @@
         }
         else
         {
+            <img class="imgForm" src="@ViewBag.AuxFoto" alt="Personaje" />
             <p>Foto: </p>@Html.TextBoxFor(x => x.Foto, new { type = "file" })<br />
             foreach (CategoríaP C in ViewBag.Categorias)
             {

@@ -21,9 +21,9 @@
         <tr>
             <th>@ViewBag.ListaPersonajes[i].Nombre</th>
             <th><img class="icon-prev" src="@ViewBag.ListaUrlDataImagenes[i]" alt="@ViewBag.ListaPersonajes[i].Nombre" height="40" width="40" /></th>
-            <th>@Html.ActionLink("Ver", "EdicionPersonajes", "Backoffice", new { Accion = "Ver", Id = ViewBag.ListaPersonajes[i] }, null)</th>
-            <th>@Html.ActionLink("Editar", "EdicionPersonajes", "Backoffice", new { Accion = "Modificar", Id = ViewBag.ListaPersonajes[i] }, null)</th>
-            <th>@Html.ActionLink("Eliminar", "EdicionPersonajes", "Backoffice", new { Accion = "Eliminar", Id = ViewBag.ListaPersonajes[i] }, null)</th>
+            <th>@Html.ActionLink("Ver", "EdicionPersonajes", "Backoffice", new { Accion = "Ver", Id = ViewBag.ListaPersonajes[i].Id }, null)</th>
+            <th>@Html.ActionLink("Editar", "EdicionPersonajes", "Backoffice", new { Accion = "Modificar", Id = ViewBag.ListaPersonajes[i].Id }, null)</th>
+            <th>@Html.ActionLink("Eliminar", "EdicionPersonajes", "Backoffice", new { Accion = "Eliminar", Id = ViewBag.ListaPersonajes[i].Id }, null)</th>
         </tr>
 
     }
