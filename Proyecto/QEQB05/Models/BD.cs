@@ -192,34 +192,44 @@ namespace QEQB05.Models
             Desconectar(Conexion);
             List<CategoríaP> Anterior = BD.TraerCategoriaP(P.Id);
             bool v;
-            foreach (CategoríaP C in Anterior)
+            if (Box != null)
             {
-                v = true;
-                foreach (int id in Box)
-                {
-                    if (C.Id == id)
-                    {
-                        v = false;
-                    }
-                }
-                if(v == true)
-                {
-                    BD.BorrarCategoríaP(C.Id, P.Id);
-                }
-            }
-            foreach (int id in Box)
-            {
-                v = true;
                 foreach (CategoríaP C in Anterior)
                 {
-                    if (C.Id == id)
+                    v = true;
+                    foreach (int id in Box)
                     {
-                        v = false;
+                        if (C.Id == id)
+                        {
+                            v = false;
+                        }
+                    }
+                    if (v == true)
+                    {
+                        BD.BorrarCategoríaP(C.Id, P.Id);
                     }
                 }
-                if (v == true)
+                foreach (int id in Box)
                 {
-                    BD.InsertarCategoríaP(id, P.Id);
+                    v = true;
+                    foreach (CategoríaP C in Anterior)
+                    {
+                        if (C.Id == id)
+                        {
+                            v = false;
+                        }
+                    }
+                    if (v == true)
+                    {
+                        BD.InsertarCategoríaP(id, P.Id);
+                    }
+                }
+            }
+            if (Box==null && Anterior != null)
+            {
+                foreach (CategoríaP C in Anterior)
+                {
+                    BD.BorrarCategoríaP(C.Id, P.Id);
                 }
             }
             if (pathArchivo != null)
@@ -233,9 +243,12 @@ namespace QEQB05.Models
         {
             bool val = false;
             List<CategoríaP> categorías = BD.TraerCategoriaP(Id);
-            foreach (CategoríaP c in categorías)
+            if (categorías != null)
             {
-                BD.BorrarCategoríaP(c.Id, Id);
+                foreach (CategoríaP c in categorías)
+                {
+                    BD.BorrarCategoríaP(c.Id, Id);
+                }
             }
             SqlConnection Conexion = Conectar();
             SqlCommand Consulta = Conexion.CreateCommand();
@@ -316,6 +329,7 @@ namespace QEQB05.Models
         public static int? InsertPersonaje(Personaje P, string pathArchivo, int[] Box)
         {
             byte[] picture = null;
+            if (pathArchivo != null)
             picture = ConversionIMG.ConvertirAByteArray(pathArchivo);
             SqlConnection Conexion = Conectar();
             SqlCommand Consulta = Conexion.CreateCommand();

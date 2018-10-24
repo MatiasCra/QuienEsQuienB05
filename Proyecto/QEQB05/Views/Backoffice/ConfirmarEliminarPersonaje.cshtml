@@ -1,12 +1,12 @@
 ﻿@using QEQB05.Models;
 @model Personaje
 @{
-    ViewBag.Title = "ConfirmarEliminarPersonaje";
+    ViewBag.Title = "Confirmar";
 }
 
-<link rel="stylesheet" href="~/Content/AdminPers.css">
+<link rel="stylesheet" href="~/Content/ABMPers.css">
 
-<h2>ConfirmarEliminarPersonaje</h2>
+<h2>Confirmar eliminar personaje</h2>
 
 @using (Html.BeginForm("OperacionesPersonaje", "Backoffice", FormMethod.Post))
 {
@@ -14,7 +14,6 @@
     <h5>¿Está seguro de que quiere eliminar este personaje?</h5>
     @Html.HiddenFor(x => x.Id)
     @Html.HiddenFor(x => x.Nombre)
-    @Html.HiddenFor(x => x.UrlDataFoto)
-    <input type="hidden" name="Accion" value=@ViewBag.Accion />
-    <input type="submit" value=Finalizar />
+    <input type="hidden" name="Accion" value="@ViewBag.Accion" />
+    <input type="submit" value="Finalizar" />
 }

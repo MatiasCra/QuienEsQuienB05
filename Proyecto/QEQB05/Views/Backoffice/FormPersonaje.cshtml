@@ -2,7 +2,7 @@
 
 @model Personaje
 
-<link rel="stylesheet" href="~/Content/AdminPers.css">
+<link rel="stylesheet" href="~/Content/ABMPers.css">
 
 @{
     ViewBag.Title = "Form personaje";
@@ -18,7 +18,7 @@
     {
         @Html.HiddenFor(x => x.Id);
         <p>Nombre: </p> @Html.TextBoxFor(x => x.Nombre, new { disabled = "disabled" })<br />
-        <div class="imgForm"><img class="imgForm" src="@ViewBag.AuxFoto" alt="Personaje" /></div>
+        <img class="imgFormP" src="@ViewBag.AuxFoto" alt="Personaje" /><br />
         
         foreach (CategoríaP C in ViewBag.Categorias)
         {
@@ -47,7 +47,7 @@
         <p>Nombre: </p> @Html.TextBoxFor(x => x.Nombre, new { required = "required" }) @Html.ValidationMessageFor(x => x.Nombre) <br />
         if (ViewBag.Accion == "Insertar")
         {
-            <p>Foto: </p> <input type="file" name="postedFile" id="postedFile" /> <br />
+            <p>Foto: </p> <input type="file" name="postedFile" id="postedFile" accept="image/jpg" required/> <br />
             foreach (CategoríaP C in ViewBag.Categorias)
             {
                 <lbl>@C.Nombre: </lbl><input type="checkbox" name="Box" value=@C.Id>
@@ -55,8 +55,8 @@
         }
         else
         {
-            <img class="imgForm" src="@ViewBag.AuxFoto" alt="Personaje" />
-            <p>Foto: </p> <input type="file" name="postedFile" id="postedFile" /> <br />
+            <img class="imgFormP" src="@ViewBag.AuxFoto" alt="Personaje" /><br />
+            <p>Foto: </p> <input type="file" name="postedFile" id="postedFile" accept="image/jpg"/> <br />
             foreach (CategoríaP C in ViewBag.Categorias)
             {
                 a = false;
@@ -81,5 +81,5 @@
     }
     <input type="hidden" name="Accion" value=@ViewBag.Accion />
     <input type="hidden" name="AuxFoto" value="@ViewBag.AuxFoto" />
-    <input type="submit" value=Finalizar />
+    <br /><input type="submit" value=Finalizar />
 }

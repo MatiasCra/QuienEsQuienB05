@@ -67,10 +67,11 @@ namespace QEQB05.Controllers
 
         public ActionResult OperacionesPersonaje(Personaje P, HttpPostedFileBase postedFile, int[] Box, string Accion, string AuxFoto)
         {
-            string path = Server.MapPath("~/Content/");
+            string path = null;
             string fileName = null;
             if (postedFile != null)
             {
+                path = Server.MapPath("~/Content/");
                 fileName = Path.GetFileName(postedFile.FileName);
                 string filename = postedFile.FileName;
                 postedFile.SaveAs(path + fileName);
@@ -106,7 +107,7 @@ namespace QEQB05.Controllers
             if (Accion == "Modificar")
             {
                 
-                bool M = BD.UpdatePersonaje(P, fileName, Box);
+                bool M = BD.UpdatePersonaje(P, path, Box);
                 if (M == true)
                 {
                     return View("ExitoOp");

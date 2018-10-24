@@ -1,8 +1,8 @@
-﻿body{
+﻿body {
     background-color: antiquewhite;
 }
 
-h2{
+h2 {
     text-align: center;
 }
 
@@ -11,24 +11,24 @@ th {
 }
 
 .center {
-
 }
+
 form {
     text-align: center;
     font-family: 'Microsoft JhengHei UI';
 }
 
-input{
+input {
     text-align: center;
 }
 
-input[type=file] {
-    margin: 0 auto;
-    font-family: 'Microsoft JhengHei UI';
-    text-align: center;
-}
-.imgForm {
-    display: block;
-    width: 100%;
-    height: auto;
+    input[type=file] {
+        margin: 0 auto;
+        font-family: 'Microsoft JhengHei UI';
+        text-align: center;
+    }
+
+.imgFormP {
+    max-height: 200px;
+    max-width: 200px;
 }
