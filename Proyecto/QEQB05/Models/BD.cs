@@ -10,8 +10,8 @@ namespace QEQB05.Models
 {
     public class BD
     {
-        public static string connectionString = "Server=10.128.8.16;Database=QEQB05;User Id=QEQB05; Password=QEQB05;";
-        //public static string connectionString = "Server=WIN-ACKIVLEQ4MB;Database=QEQB05;Trusted_Connection=True;";
+        private static string connectionString = "Server=10.128.8.16;Database=QEQB05;User Id=QEQB05; Password=QEQB05;";
+        //private static string connectionString = "Server=WIN-ACKIVLEQ4MB;Database=QEQB05;Trusted_Connection=True;";
 
         private static SqlConnection Conectar()
         {
@@ -61,6 +61,7 @@ namespace QEQB05.Models
         public static List<Personaje> ListarPersonajes()
         {
             List<Personaje> AuxLista = new List<Personaje>();
+            string Foto = null;
             SqlConnection Conexion = Conectar();
             SqlCommand Consulta = Conexion.CreateCommand();
             Consulta.CommandText = "sp_ListarTodosLosPersonajes";
@@ -70,7 +71,8 @@ namespace QEQB05.Models
             {
                 int Id = Convert.ToInt32(Lector["IdPersonaje"]);
                 string Nombre = Lector["Nombre"].ToString();
-                byte[] Foto = (byte[])Lector["Foto"];
+                byte[] AuxFoto = (byte[])Lector["Foto"];
+                Foto = ConversionIMG.ConvertirAURLData(AuxFoto);
                 List<CategoríaP> cat = BD.TraerCategoriaP(Id);
                 Personaje P = new Personaje(Id, Nombre, Foto, cat);
                 AuxLista.Add(P);
@@ -81,6 +83,7 @@ namespace QEQB05.Models
 
         public static Personaje GetPersonaje(int Id)
         {
+            string Foto = null;
             SqlConnection Conexion = Conectar();
             SqlCommand Consulta = Conexion.CreateCommand();
             Consulta.CommandText = "sp_Traer1Personaje";
@@ -90,7 +93,8 @@ namespace QEQB05.Models
             Lector.Read();
             int id = Convert.ToInt32(Lector["IdPersonaje"]);
             string Nombre = Lector["Nombre"].ToString();
-            byte[] Foto = (byte[])Lector["Foto"];
+            byte[] AuxFoto = (byte[])Lector["Foto"];
+            Foto = ConversionIMG.ConvertirAURLData(AuxFoto);
             Desconectar(Conexion);
             List<CategoríaP> cat = BD.TraerCategoriaP(Id);
             Personaje P = new Personaje(id, Nombre, Foto, cat);
@@ -161,7 +165,8 @@ namespace QEQB05.Models
         public static bool UpdatePersonaje(Personaje P, string pathArchivo, int[] Box)
         {
             bool val = false;
-            ConversionIMG.ConvertirAByteArray(pathArchivo);
+            byte[] picture = null;
+            picture = ConversionIMG.ConvertirAByteArray(pathArchivo);
             SqlConnection Conexion = Conectar();
             SqlCommand Consulta = Conexion.CreateCommand();
             Consulta.CommandText = "sp_PersonajeModif";
@@ -298,7 +303,8 @@ namespace QEQB05.Models
 
         public static int? InsertPersonaje(Personaje P, string pathArchivo, int[] Box)
         {
-            ConversionIMG.ConvertirAByteArray(pathArchivo);
+            byte[] picture = null;
+            picture = ConversionIMG.ConvertirAByteArray(pathArchivo);
             SqlConnection Conexion = Conectar();
             SqlCommand Consulta = Conexion.CreateCommand();
             Consulta.CommandText = "sp_PersonajeAlta";

@@ -35,19 +35,9 @@ namespace QEQB05.Controllers
         }
         public ActionResult ABMPersonajes()
         {
-            List<string> ListaUrlDataImagenes = new List<string>();
-            string AuxFoto;
             List<Personaje> AuxListaPersonajes = new List<Personaje>();
             AuxListaPersonajes = BD.ListarPersonajes();
             ViewBag.ListaPersonajes = AuxListaPersonajes;
-            foreach (Personaje p in AuxListaPersonajes)
-            {
-                AuxFoto = ConversionIMG.ConvertirAURLData(p.Foto);
-                ListaUrlDataImagenes.Add(AuxFoto);
-            }
-            Dictionary<Personaje, string>
-            ViewBag.ListaUrlDataImagenes = ListaUrlDataImagenes;
-            ViewBag.Contador = 0;
             return View();
         }
 
@@ -62,13 +52,13 @@ namespace QEQB05.Controllers
             else
             {
                 Personaje P = BD.GetPersonaje(Id);
-                ViewBag.AuxFoto =  ConversionIMG.ConvertirAURLData(P.Foto);
                 if (Accion == "Eliminar")
                 {
                     return View("ConfirmarEliminarPersonaje", P);
                 }
                 else
                 {
+                    ViewBag.AuxFoto = P.UrlDataFoto;
                     ViewBag.CatsP = P.Categorías;
                     return View("FormPersonaje", P);
                 }

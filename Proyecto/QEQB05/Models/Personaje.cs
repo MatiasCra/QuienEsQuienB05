@@ -8,12 +8,13 @@ namespace QEQB05.Models
 {
     public class Personaje
     {
-        int _Id;
+        private int _Id;
         [Required(ErrorMessage = "Este campo es obligatorio")]
-        string _Nombre;
+        private string _Nombre;
         [Required(ErrorMessage = "Este campo es obligatorio")]
-        byte[] _Foto;
+        private string _UrlDataFoto;
         List<CategoríaP> _Categorías; 
+
         public int Id
         {
             get
@@ -40,16 +41,16 @@ namespace QEQB05.Models
             }
         }
 
-        public byte[] Foto
+        public string UrlDataFoto
         {
             get
             {
-                return _Foto;
+                return _UrlDataFoto;
             }
 
             set
             {
-                _Foto = value;
+                _UrlDataFoto = value;
             }
         }
 
@@ -70,15 +71,15 @@ namespace QEQB05.Models
         {
             _Id = -1;
             _Nombre = null;
-            _Foto = null;
+            _UrlDataFoto = null;
             _Categorías = null;
         }
 
-        public Personaje(int id, string nom, byte[] foto, List<CategoríaP> cat)
+        public Personaje(int id, string nom, string foto, List<CategoríaP> cat)
         {
             _Id = id;
             _Nombre = nom;
-            _Foto = foto;
+            _UrlDataFoto = foto;
             _Categorías = cat;
         }
     }

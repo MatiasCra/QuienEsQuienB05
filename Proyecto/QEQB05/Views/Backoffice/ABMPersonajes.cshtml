@@ -15,15 +15,15 @@
         <th>Foto</th>
 
     </tr>
-    @for (int i = 0; i < ViewBag.ListaPersonajes.Count; i++)
+    @foreach (Personaje p in ViewBag.ListaPersonajes)
     {
 
         <tr>
-            <th>@ViewBag.ListaPersonajes[i].Nombre</th>
-            <th><img class="icon-prev" src="@ViewBag.ListaUrlDataImagenes[i]" alt="@ViewBag.ListaPersonajes[i].Nombre" height="40" width="40" /></th>
-            <th>@Html.ActionLink("Ver", "EdicionPersonajes", "Backoffice", new { Accion = "Ver", Id = ViewBag.ListaPersonajes[i].Id }, null)</th>
-            <th>@Html.ActionLink("Editar", "EdicionPersonajes", "Backoffice", new { Accion = "Modificar", Id = ViewBag.ListaPersonajes[i].Id }, null)</th>
-            <th>@Html.ActionLink("Eliminar", "EdicionPersonajes", "Backoffice", new { Accion = "Eliminar", Id = ViewBag.ListaPersonajes[i].Id }, null)</th>
+            <th>@p.Nombre</th>
+            <th><img class="icon-prev" src="@p.UrlDataFoto" alt="@p.Nombre" height="40" width="40" /></th>
+            <th>@Html.ActionLink("Ver", "EdicionPersonajes", "Backoffice", new { Accion = "Ver" }, null)</th>
+            <th>@Html.ActionLink("Editar", "EdicionPersonajes", "Backoffice", new { Accion = "Modificar" }, null)</th>
+            <th>@Html.ActionLink("Eliminar", "EdicionPersonajes", "Backoffice", new { Accion = "Eliminar" }, null)</th>
         </tr>
 
     }
