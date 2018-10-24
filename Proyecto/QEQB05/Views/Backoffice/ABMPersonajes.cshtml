@@ -21,9 +21,9 @@
         <tr>
             <th>@p.Nombre</th>
             <th><img class="icon-prev" src="@p.UrlDataFoto" alt="@p.Nombre" height="40" width="40" /></th>
-            <th>@Html.ActionLink("Ver", "EdicionPersonajes", "Backoffice", new { Accion = "Ver" }, null)</th>
-            <th>@Html.ActionLink("Editar", "EdicionPersonajes", "Backoffice", new { Accion = "Modificar" }, null)</th>
-            <th>@Html.ActionLink("Eliminar", "EdicionPersonajes", "Backoffice", new { Accion = "Eliminar" }, null)</th>
+            <th>@Html.ActionLink("Ver", "EdicionPersonajes", "Backoffice", new { Accion = "Ver", Id = p.Id }, null)</th>
+            <th>@Html.ActionLink("Editar", "EdicionPersonajes", "Backoffice", new { Accion = "Modificar", Id = p.Id }, null)</th>
+            <th>@Html.ActionLink("Eliminar", "EdicionPersonajes", "Backoffice", new { Accion = "Eliminar", Id = p.Id }, null)</th>
         </tr>
 
     }

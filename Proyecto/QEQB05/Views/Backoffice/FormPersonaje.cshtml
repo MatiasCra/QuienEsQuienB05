@@ -55,7 +55,7 @@
         else
         {
             <img class="imgForm" src="@ViewBag.AuxFoto" alt="Personaje" />
-            <p>Foto: </p>@Html.TextBoxFor(x => x.Foto, new { type = "file" })<br />
+            <p>Foto: </p> <input type="file" name="postedFile" id="postedFile" /> <br />
             foreach (CategoríaP C in ViewBag.Categorias)
             {
                 a = false;

@@ -166,14 +166,21 @@ namespace QEQB05.Models
         {
             bool val = false;
             byte[] picture = null;
-            picture = ConversionIMG.ConvertirAByteArray(pathArchivo);
+            if (pathArchivo != null)
+            {
+                picture = ConversionIMG.ConvertirAByteArray(pathArchivo);
+            } 
             SqlConnection Conexion = Conectar();
             SqlCommand Consulta = Conexion.CreateCommand();
             Consulta.CommandText = "sp_PersonajeModif";
             Consulta.CommandType = System.Data.CommandType.StoredProcedure;
             Consulta.Parameters.AddWithValue("@pId", P.Id);
             Consulta.Parameters.AddWithValue("@pNombre", P.Nombre);
-            Consulta.Parameters.AddWithValue("@pFoto", picture);
+            if (pathArchivo != null)
+            {
+                Consulta.Parameters.AddWithValue("@pFoto", picture);
+            }
+            Consulta.Parameters.AddWithValue("@pFoto", null);
             int i = Consulta.ExecuteNonQuery();
             if (i > 0)
             {
