@@ -180,7 +180,10 @@ namespace QEQB05.Models
             {
                 Consulta.Parameters.AddWithValue("@pFoto", picture);
             }
-            Consulta.Parameters.AddWithValue("@pFoto", null);
+            else
+            {
+                Consulta.CommandText = "sp_PersonajeModifSinImg";
+            }
             int i = Consulta.ExecuteNonQuery();
             if (i > 0)
             {
@@ -219,8 +222,10 @@ namespace QEQB05.Models
                     BD.InsertarCategoríaP(id, P.Id);
                 }
             }
-            File.Delete(pathArchivo);
-            
+            if (pathArchivo != null)
+            {
+                File.Delete(pathArchivo);
+            }
             return val;
         }
 
@@ -228,6 +233,10 @@ namespace QEQB05.Models
         {
             bool val = false;
             List<CategoríaP> categorías = BD.TraerCategoriaP(Id);
+            foreach (CategoríaP c in categorías)
+            {
+                BD.BorrarCategoríaP(c.Id, Id);
+            }
             SqlConnection Conexion = Conectar();
             SqlCommand Consulta = Conexion.CreateCommand();
             Consulta.CommandText = "sp_PersonajeBaja";
@@ -239,10 +248,6 @@ namespace QEQB05.Models
                 val = true;
             }
             Desconectar(Conexion);
-            foreach (CategoríaP c in categorías)
-            {
-                BD.BorrarCategoríaP(c.Id, Id);
-            }
             return val;
         }
 

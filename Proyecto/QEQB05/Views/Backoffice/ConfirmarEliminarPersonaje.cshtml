@@ -14,7 +14,7 @@
     <h5>¿Está seguro de que quiere eliminar este personaje?</h5>
     @Html.HiddenFor(x => x.Id)
     @Html.HiddenFor(x => x.Nombre)
-    @Html.HiddenFor(x => x.Foto)
+    @Html.HiddenFor(x => x.UrlDataFoto)
     <input type="hidden" name="Accion" value=@ViewBag.Accion />
     <input type="submit" value=Finalizar />
 }

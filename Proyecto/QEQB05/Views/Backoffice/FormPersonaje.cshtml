@@ -18,7 +18,8 @@
     {
         @Html.HiddenFor(x => x.Id);
         <p>Nombre: </p> @Html.TextBoxFor(x => x.Nombre, new { disabled = "disabled" })<br />
-        <img class="imgForm" src="@ViewBag.AuxFoto" alt="Personaje" />
+        <div class="imgForm"><img class="imgForm" src="@ViewBag.AuxFoto" alt="Personaje" /></div>
+        
         foreach (CategoríaP C in ViewBag.Categorias)
         {
             a = false;
