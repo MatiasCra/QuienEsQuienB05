@@ -22,10 +22,11 @@
                 {
                     <p><a href="@Url.Action("Index", "Backoffice")" class="btn btn-primary btn-lg">Menú Backoffice &raquo;</a></p>
                 }
+                <p><a href="@Url.Action("LogOut", "Home")" class="btn btn-primary btn-lg">Log out &raquo;</a></p>
             }
 
             <p><a href="http://asp.net" class="btn btn-primary btn-lg">Jugar como invitado &raquo;</a></p>
-            <p><a href="http://asp.net" class="btn btn-primary btn-lg">About us &raquo;</a></p>
+            <p><a href="@Url.Action("About", "Home")" class="btn btn-primary btn-lg">About us &raquo;</a></p>
         </div>
         <div align="right" id="tapa" class="col-md-6"  >
             <img src="~/Content/Logo.jpg" style="width:400px; height:350px " alt="Logo" />

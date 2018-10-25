@@ -17,6 +17,11 @@ namespace QEQB05.Controllers
         {
             return View();
         }
+        public ActionResult LogOut()
+        {
+            Session.Clear();
+            return View("Index");
+        }
         [HttpPost]
         public ActionResult CargarDatos(Usuario x)
         {
@@ -56,7 +61,7 @@ namespace QEQB05.Controllers
         {
             ViewBag.Message = "Your application description page.";
 
-            return View();
+            return View("AboutUs");
         }
 
         public ActionResult Contact()

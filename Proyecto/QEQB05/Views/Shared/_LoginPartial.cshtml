@@ -25,8 +25,9 @@ else
         }
         else
         {
-            <li>@Html.Label((string)Session["Nombre"], htmlAttributes: new { id="Nombre"})</li>
+            <li>@Html.Label((string)Session["Nombre"], htmlAttributes: new { id = "Nombre" })</li>
+            <li>@Html.ActionLink("Log Out", "LogOut", "Home", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
         }
 
-</ul>
+    </ul>
 }
