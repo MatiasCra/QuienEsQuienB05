@@ -45,13 +45,15 @@ namespace QEQB05.Models
 
             while (datareader.Read())
             {
-                Usuario x = new Usuario();
-                x.Nombre = datareader["Nombre"].ToString();
-                x.Password = datareader["Contraseña"].ToString();
-                x.Mail = datareader["mail"].ToString();
-                x.Admin = Convert.ToBoolean(datareader["Administrador"]);
-                x.Puntos = Convert.ToInt32(datareader["PuntosAcumulados"]);
-                x.ID = Convert.ToInt32(datareader["ID_Usuario"]);
+                Usuario x = new Usuario
+                {
+                    Nombre = datareader["Nombre"].ToString(),
+                    Password = datareader["Contraseña"].ToString(),
+                    Mail = datareader["mail"].ToString(),
+                    Admin = Convert.ToBoolean(datareader["Administrador"]),
+                    Puntos = Convert.ToInt32(datareader["PuntosAcumulados"]),
+                    ID = Convert.ToInt32(datareader["ID_Usuario"])
+                };
                 Usus.Add(x);
             }
             Desconectar(Conexion);
@@ -350,6 +352,26 @@ namespace QEQB05.Models
             }
             File.Delete(pathArchivo);
             return idp;
+        }
+
+        public static List<CategoríaP> ListarCategoriasPersonajes ()
+        {
+            List<CategoríaP> AuxLista = new List<CategoríaP>();
+            CategoríaP AuxC = new CategoríaP();
+            SqlConnection Conexion = Conectar();
+            SqlCommand consulta = Conexion.CreateCommand();
+            consulta.CommandText = "sp_TraerTodasCategoríasPersonaje";
+            consulta.CommandType = System.Data.CommandType.StoredProcedure;
+            SqlDataReader datareader = consulta.ExecuteReader();
+
+            while (datareader.Read())
+            {
+                AuxC.Nombre = datareader["Categoría"].ToString();
+                AuxC.Id = Convert.ToInt32(datareader["IDCategoríaP"]);
+                AuxLista.Add(AuxC);
+            }
+            Desconectar(Conexion);
+            return AuxLista;
         }
     }
 }

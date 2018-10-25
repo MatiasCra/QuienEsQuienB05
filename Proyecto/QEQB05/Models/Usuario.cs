@@ -10,9 +10,7 @@ namespace QEQB05.Models
     {
         private int _ID;
         private string _Nombre;
-        [Required(ErrorMessage = "Ingrese su contraseña para poder continuar")]
         private string _password;
-        [Required(ErrorMessage = "Ingrese su mail para poder continuar")]
         private string _mail;
         private bool _Admin;
         private int _puntos;
@@ -47,6 +45,7 @@ namespace QEQB05.Models
                 _Nombre = value;
             }
         }
+        [Required(ErrorMessage = "Ingrese su contraseña para poder continuar")]
         public string Password {
             get
             {
@@ -58,6 +57,7 @@ namespace QEQB05.Models
                 _password = value;
             }
         }
+        [Required(ErrorMessage = "Ingrese su mail para poder continuar")]
         public string Mail {
             get
             {

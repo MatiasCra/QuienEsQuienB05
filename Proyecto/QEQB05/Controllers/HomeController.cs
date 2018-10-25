@@ -87,6 +87,8 @@ namespace QEQB05.Controllers
                 y.Admin = false;
                 BD.RegistrarUsuario(y);
                 Session["UsuarioActivo"] = y;
+                Session["Admin"] = y.Admin;
+                Session["Nombre"] = y.Nombre;
                 return View("Index");
                 }
             }
