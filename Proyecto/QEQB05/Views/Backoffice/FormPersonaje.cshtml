@@ -2,7 +2,7 @@
 
 @model Personaje
 
-<link rel="stylesheet" href="~/Content/ABMPers.css">
+<link rel="stylesheet" href="~/Content/ABMPerso.css">
 
 @{
     ViewBag.Title = "Form personaje";
@@ -17,7 +17,7 @@
     if (ViewBag.Accion == "Ver")
     {
         @Html.HiddenFor(x => x.Id);
-        <p>Nombre: </p> @Html.TextBoxFor(x => x.Nombre, new { disabled = "disabled" })<br />
+        <p>Nombre: </p> @Html.TextBoxFor(x => x.Nombre, new { disabled = "disabled", id="inputText"})<br />
         <img class="imgFormP" src="@ViewBag.AuxFoto" alt="Personaje" /><br />
         
         foreach (CategoríaP C in ViewBag.Categorias)
@@ -44,7 +44,7 @@
     else
     {
         @Html.HiddenFor(x => x.Id);
-        <p>Nombre: </p> @Html.TextBoxFor(x => x.Nombre, new { required = "required" }) @Html.ValidationMessageFor(x => x.Nombre) <br />
+        <p>Nombre: </p> @Html.TextBoxFor(x => x.Nombre, new { required = "required", id = "inputText" }) @Html.ValidationMessageFor(x => x.Nombre) <br />
         if (ViewBag.Accion == "Insertar")
         {
             <p>Foto: </p> <input type="file" name="postedFile" id="postedFile" accept="image/jpg" required/> <br />

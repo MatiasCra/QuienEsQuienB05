@@ -22,13 +22,20 @@ input {
     text-align: center;
 }
 
-    input[type=file] {
-        margin: 0 auto;
-        font-family: 'Microsoft JhengHei UI';
-        text-align: center;
-    }
+input[type=file] {
+    margin: 0 auto;
+    font-family: 'Microsoft JhengHei UI';
+    text-align: center;
+}
 
 .imgFormP {
     max-height: 200px;
     max-width: 200px;
+}
+
+#inputText {
+    margin: 0 auto;
+    font-family: 'Microsoft JhengHei UI';
+    text-align: center;
+    color: black;
 }
