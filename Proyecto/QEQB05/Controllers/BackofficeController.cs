@@ -132,5 +132,13 @@ namespace QEQB05.Controllers
             return View("ErrorOp");
         }
 
+        public ActionResult ABMCatPersonajes()
+        {
+            List<CategoríaP> AuxListaCat = new List<CategoríaP>();
+            AuxListaCat = BD.ListarCategoriasPersonajes();
+            ViewBag.ListaCatPers= AuxListaCat;
+            return View();
+        }
+
     }
 }
