@@ -28,12 +28,12 @@ namespace QEQB05.Models
         }
         public Usuario()
         {
-            _Nombre = "";
-            _password = "";
-            _mail = "";
+            _Nombre = null;
+            _password = null;
+            _mail = null;
             _Admin = false;
             _puntos = 0;
-            _ID = 0;
+            _ID = -1;
         }
 
         public string Nombre {

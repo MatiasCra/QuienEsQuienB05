@@ -27,14 +27,28 @@ namespace QEQB05.Controllers
             else
             {
                 Usuario usu = BD.VerificarLogin(x);
-                Session["UsuarioActivo"] = usu;
-                if (usu.Admin == false)
+                if (usu.Nombre != null)
                 {
-                    return View("Bienvenido");
+                    Session["Nombre"] = usu.Nombre;
+                    if (usu.Admin==true)
+                    {
+                        Session["Admin"] = true;
+                    }
+                    Session["UsuarioActivo"] = usu;
+                    if (usu.Admin == false)
+                    {
+                        Session["Admin"] = false;
+                        return View("Index");
+                    }
+                    else
+                    {
+                        return View("../BackOffice/Index");
+                    }
                 }
                 else
                 {
-                    return View("../BackOffice/Index");
+                    ViewBag.Error = "Contraseña o usuario incorrectos";
+                    return View("Login");
                 }
             }
         }
