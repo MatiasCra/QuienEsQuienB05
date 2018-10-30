@@ -171,7 +171,7 @@ namespace QEQB05.Models
             if (pathArchivo != null)
             {
                 picture = ConversionIMG.ConvertirAByteArray(pathArchivo);
-            } 
+            }
             SqlConnection Conexion = Conectar();
             SqlCommand Consulta = Conexion.CreateCommand();
             Consulta.CommandText = "sp_PersonajeModif";
@@ -227,7 +227,7 @@ namespace QEQB05.Models
                     }
                 }
             }
-            if (Box==null && Anterior != null)
+            if (Box == null && Anterior != null)
             {
                 foreach (CategoríaP C in Anterior)
                 {
@@ -332,7 +332,7 @@ namespace QEQB05.Models
         {
             byte[] picture = null;
             if (pathArchivo != null)
-            picture = ConversionIMG.ConvertirAByteArray(pathArchivo);
+                picture = ConversionIMG.ConvertirAByteArray(pathArchivo);
             SqlConnection Conexion = Conectar();
             SqlCommand Consulta = Conexion.CreateCommand();
             Consulta.CommandText = "sp_PersonajeAlta";
@@ -343,9 +343,9 @@ namespace QEQB05.Models
             int i = Consulta.ExecuteNonQuery();
             int? idp = Convert.ToInt32(Consulta.Parameters["@id"].Value);
             Desconectar(Conexion);
-            if(Box != null && idp != null)
+            if (Box != null && idp != null)
             {
-                foreach(int b in Box)
+                foreach (int b in Box)
                 {
                     BD.InsertarCategoríaP(b, idp);
                 }
@@ -354,7 +354,7 @@ namespace QEQB05.Models
             return idp;
         }
 
-        public static List<CategoríaP> ListarCategoriasPersonajes ()
+        public static List<CategoríaP> ListarCategoriasPersonajes()
         {
             List<CategoríaP> AuxLista = new List<CategoríaP>();
             CategoríaP AuxC = new CategoríaP();
@@ -373,5 +373,56 @@ namespace QEQB05.Models
             Desconectar(Conexion);
             return AuxLista;
         }
+        public static void InsertPregunta(string pregunta)
+        {
+            SqlConnection Conexion = Conectar();
+            SqlCommand Consulta = Conexion.CreateCommand();
+            Consulta.CommandText = "sp_PreguntasAlta";
+            Consulta.CommandType = System.Data.CommandType.StoredProcedure;
+            Consulta.Parameters.AddWithValue("@pTexto", pregunta);
+            Consulta.ExecuteNonQuery();
+            Desconectar(Conexion);
+        }
+        public static void ModificarPregunta(Pregunta pregunta)
+        {
+            SqlConnection Conexion = Conectar();
+            SqlCommand Consulta = Conexion.CreateCommand();
+            Consulta.CommandText = "sp_PreguntasModif";
+            Consulta.CommandType = System.Data.CommandType.StoredProcedure;
+            Consulta.Parameters.AddWithValue("@pTexto", pregunta.TextoPreg);
+            Consulta.Parameters.AddWithValue("@pIdPreg", pregunta.IdPreg);
+            Consulta.ExecuteNonQuery();
+            Desconectar(Conexion);
+        }
+        public static void EliminarPregunta(int idPreg)
+        {
+            SqlConnection Conexion = Conectar();
+            SqlCommand Consulta = Conexion.CreateCommand();
+            Consulta.CommandText = "sp_PreguntasBaja";
+            Consulta.CommandType = System.Data.CommandType.StoredProcedure;
+            Consulta.Parameters.AddWithValue("@pIdPreg", idPreg);
+            Consulta.ExecuteNonQuery();
+            Desconectar(Conexion);
+        }
+        public static List<Pregunta> ListarPreguntas()
+        {
+            List<Pregunta> preguntas = new List<Pregunta>();
+            Pregunta AuxP = new Pregunta();
+            SqlConnection Conexion = Conectar();
+            SqlCommand consulta = Conexion.CreateCommand();
+            consulta.CommandText = "sp_ListarTodasLasPreguntas";
+            consulta.CommandType = System.Data.CommandType.StoredProcedure;
+            SqlDataReader datareader = consulta.ExecuteReader();
+
+            while (datareader.Read())
+            {
+                AuxP.TextoPreg = datareader["Texto"].ToString();
+                AuxP.IdPreg = Convert.ToInt32(datareader["IDPregunta"]);
+                preguntas.Add(AuxP);
+            }
+            Desconectar(Conexion);
+            return preguntas;
+        }
+            
     }
 }

@@ -10,7 +10,6 @@
 
 @using (Html.BeginForm("CargarDatos", "Home", FormMethod.Post))
 {
-
     <p>ingrese su Mail:</p>@Html.TextBoxFor(x => x.Mail, new { required = "required" })@Html.ValidationMessageFor(x => x.Mail) <br />
     <p>ingrese su nueva Contraseña:</p> @Html.PasswordFor(x => x.Password, new { required = "required" })@Html.ValidationMessageFor(x => x.Password) <br />
     <input type="submit" value="Enviar" />

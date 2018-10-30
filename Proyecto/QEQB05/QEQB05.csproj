@@ -212,6 +212,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Personaje.cs" />
+    <Compile Include="Models\Pregunta.cs" />
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -292,6 +293,8 @@
     <Content Include="Views\Home\Registro.cshtml" />
     <Content Include="Views\Backoffice\HacerAdmin.cshtml" />
     <Content Include="Views\Home\OlvidoContraseña.cshtml" />
+    <Content Include="Views\Backoffice\ABMPreguntas.cshtml" />
+    <Content Include="Views\Backoffice\FormPregunta.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

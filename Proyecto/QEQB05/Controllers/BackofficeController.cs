@@ -210,6 +210,98 @@ namespace QEQB05.Controllers
             ViewBag.ListaCatPers= AuxListaCat;
             return View();
         }
+        public ActionResult ABMPreguntas()
+        {
+            int v = ValidarUsuario();
+            if (v == 1)
+            {
+                return View("../Home/Index");
+            }
+            if (v == 2)
+            {
+                return View("../Home/Login");
+            }
+
+            ViewBag.ListaPreguntas = BD.ListarPreguntas();
+            return View();
+        }
+        public ActionResult EdicionPreguntas(int Id, string Accion)
+        {
+            int v = ValidarUsuario();
+            if (v == 1)
+            {
+                return View("../Home/Index");
+            }
+            if (v == 2)
+            {
+                return View("../Home/Login");
+            }
+            
+            ViewBag.Accion = Accion;
+            if (Accion == "Insertar")
+            {
+                return View("FormPregunta");
+            }
+            else
+            {
+                Personaje P = BD.GetPersonaje(Id);
+                if (Accion == "Eliminar")
+                {
+                    return View("ConfirmarEliminarPregunta", P);
+                }
+                else
+                {
+                    return View("FormPregunta", P);
+                }
+            }
+        }
+        public ActionResult OperacionesPregunta (Pregunta P, string Accion)
+        {
+            int v = ValidarUsuario();
+            if (v == 1)
+            {
+                return View("../Home/Index");
+            }
+            if (v == 2)
+            {
+                return View("../Home/Login");
+            }
+            string path = null;
+            string fileName = null;
+            
+
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Accion = Accion;
+                return View("FormPersonaje", P);
+            }
+
+            if (Accion == "Insertar")
+            {
+                BD.InsertPregunta(P.TextoPreg);
+            }
+            
+            if (Accion == "Modificar")
+            {
+
+                BD.ModificarPregunta(P);
+                
+            }
+            if (Accion == "Eliminar")
+            {
+                /*
+                bool E = BD.DeletePersonaje(P.Id);
+                if (E == true)
+                {
+                    return View("ExitoOp");
+                }
+                else
+                {
+                    return View("ErrorOp");
+                }*/
+            }
+            return View("ErrorOp");
+        }
 
     }
 }
