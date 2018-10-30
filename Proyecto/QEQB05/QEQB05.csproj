@@ -225,7 +225,7 @@
     <Content Include="Content\Estilos.css" />
     <Content Include="Content\Logo.jpg" />
     <Content Include="Content\LogoCompania.jpg" />
-    <Content Include="Content\Nombre.css" />
+    <Content Include="Content\Nomb.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

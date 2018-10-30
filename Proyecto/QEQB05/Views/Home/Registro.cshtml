@@ -7,9 +7,16 @@
 
 @using (Html.BeginForm("RegistrarUsuario", "Home", FormMethod.Post))
 {
+    if (ViewBag.Error != null)
+    {
+        <p>@ViewBag.Error</p><br />
+    }
+    if (ViewBag.Error2 != null)
+    {
+        <p>@ViewBag.Error2</p><br />
+    }
     <p>Nombre:</p>@Html.TextBoxFor(y => y.Nombre, new { required = "required" })@Html.ValidationMessageFor(y => y.Nombre) <br />
-    <p>Mail:</p>@Html.TextBoxFor(y => y.Mail, new { required = "required" })@Html.ValidationMessageFor(y => y.Mail) <br />
+    <p>Mail:</p>@Html.TextBoxFor(y => y.Mail, new { type = "email", required = "required" })@Html.ValidationMessageFor(y => y.Mail) <br />
     <p>Contraseña:</p> @Html.PasswordFor(y => y.Password, new { required = "required" })@Html.ValidationMessageFor(y => y.Password) <br />
     <input type="submit" value="Registrarse" />
-
 }

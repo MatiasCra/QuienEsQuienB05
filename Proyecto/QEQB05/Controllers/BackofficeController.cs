@@ -148,7 +148,6 @@ namespace QEQB05.Controllers
                 postedFile.SaveAs(path + fileName);
                 path = path + fileName;
             }
-
             if (!ModelState.IsValid)
             {
                 ViewBag.Accion = Accion;
@@ -156,9 +155,7 @@ namespace QEQB05.Controllers
             }
             
             if (Accion == "Insertar")
-            {
-                
-                
+            {        
                 int? I = BD.InsertPersonaje(P, path, Box);
 
                 if (I != null)
@@ -205,6 +202,15 @@ namespace QEQB05.Controllers
 
         public ActionResult ABMCatPersonajes()
         {
+            int v = ValidarUsuario();
+            if (v == 1)
+            {
+                return View("../Home/Index");
+            }
+            if (v == 2)
+            {
+                return View("../Home/Login");
+            }
             List<CategoríaP> AuxListaCat = new List<CategoríaP>();
             AuxListaCat = BD.ListarCategoriasPersonajes();
             ViewBag.ListaCatPers= AuxListaCat;
