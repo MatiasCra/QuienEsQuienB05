@@ -1,6 +1,6 @@
 ﻿@using Microsoft.AspNet.Identity
 @using QEQB05.Models;
-<link rel="stylesheet" href="~/Content/Nombre.css">
+<link rel="stylesheet" href="~/Content/Nomb.css">
 @if (Request.IsAuthenticated)
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
@@ -25,7 +25,7 @@ else
         }
         else
         {
-            <li>@Html.Label((string)Session["Nombre"], htmlAttributes: new { id = "Nombre" })</li>
+            <li>@Html.Label((string)Session["Nombre"], htmlAttributes: new { id = "Nomb" })</li>
             <li>@Html.ActionLink("Log Out", "LogOut", "Home", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
         }
 

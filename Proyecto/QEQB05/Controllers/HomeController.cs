@@ -84,6 +84,20 @@ namespace QEQB05.Controllers
             }
             else
             {
+                bool m = BD.ValidarMail(y.Mail);
+                bool n = BD.ValidarNombre(y.Nombre);
+                if (m == true)
+                {
+                    ViewBag.Error = "Este mail ya está registrado";
+                }
+                if (n == true)
+                {
+                    ViewBag.Error2 = "Este nombre ya existe, elija otro";
+                }
+                if(n == true || m == true)
+                {
+                    return View("Registro");
+                }
                 y.Admin = false;
                 BD.RegistrarUsuario(y);
                 Session["UsuarioActivo"] = y;

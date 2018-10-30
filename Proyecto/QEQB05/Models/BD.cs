@@ -285,6 +285,40 @@ namespace QEQB05.Models
             return AuxLista;
         }
 
+        public static bool ValidarMail(string Mail)
+        {
+            bool existe = false;
+            SqlConnection Conexion = Conectar();
+            SqlCommand consulta = Conexion.CreateCommand();
+            consulta.CommandText = "sp_ValidarMail";
+            consulta.CommandType = System.Data.CommandType.StoredProcedure;
+            consulta.Parameters.AddWithValue("@pMail", Mail);
+            SqlDataReader datareader = consulta.ExecuteReader();
+            datareader.Read();
+            if(Mail == (datareader["mail"].ToString()))
+            {
+                existe = true;
+            }
+            return existe;
+        }
+
+        public static bool ValidarNombre(string Nombre)
+        {
+            bool existe = false;
+            SqlConnection Conexion = Conectar();
+            SqlCommand consulta = Conexion.CreateCommand();
+            consulta.CommandText = "sp_ValidarNom";
+            consulta.CommandType = System.Data.CommandType.StoredProcedure;
+            consulta.Parameters.AddWithValue("@pNom", Nombre);
+            SqlDataReader datareader = consulta.ExecuteReader();
+            datareader.Read();
+            if (Nombre == (datareader["Nombre"].ToString()))
+            {
+                existe = true;
+            }
+            return existe;
+        }
+
         public static Usuario VerificarLogin(Usuario usu)
         {
             Usuario x = new Usuario();
