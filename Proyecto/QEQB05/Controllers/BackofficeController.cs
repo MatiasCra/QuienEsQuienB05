@@ -216,6 +216,100 @@ namespace QEQB05.Controllers
             ViewBag.ListaCatPers= AuxListaCat;
             return View();
         }
+
+        public ActionResult EdicionCatPers(int Id, string Accion)
+        {
+            int v = ValidarUsuario();
+            if (v == 1)
+            {
+                return View("../Home/Index");
+            }
+            if (v == 2)
+            {
+                return View("../Home/Login");
+            }
+            ViewBag.Accion = Accion;
+            if (Accion == "Insertar")
+            {
+                return View("FormCatPers");
+            }
+            else
+            {
+                CategoríaP C = BD.TraerCategoriaP(Id);
+                if (Accion == "Eliminar")
+                {
+                    return View("ConfirmarEliminarPersonaje", C);
+                }
+                else
+                {
+                    return View("FormCatPers", C);
+                }
+            }
+        }
+
+        public ActionResult OperacionesCatPers(CategoríaP C, string Accion)
+        {
+            int v = ValidarUsuario();
+            if (v == 1)
+            {
+                return View("../Home/Index");
+            }
+            if (v == 2)
+            {
+                return View("../Home/Login");
+            }
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Accion = Accion;
+                return View("FormCatersonaje", C);
+            }
+
+            if (Accion == "Insertar")
+            {
+                int? I = BD.InsertarCategoría(C.Nombre);
+
+                if (I != null)
+                {
+                    return View("ExitoOp");
+                }
+                else
+                {
+                    return View("ErrorOp");
+                }
+            }
+            if (Accion == "Ver")
+            {
+                ViewBag.ListaPersonajes = BD.ListarPersonajes();
+                return View("ABMPersonajes");
+            }
+            if (Accion == "Modificar")
+            {
+
+                bool M = BD.UpdatePersonaje(P, path, Box);
+                if (M == true)
+                {
+                    return View("ExitoOp");
+                }
+                else
+                {
+                    return View("ErrorOp");
+                }
+            }
+            if (Accion == "Eliminar")
+            {
+                bool E = BD.DeletePersonaje(P.Id);
+                if (E == true)
+                {
+                    return View("ExitoOp");
+                }
+                else
+                {
+                    return View("ErrorOp");
+                }
+            }
+            return View("ErrorOp");
+        }
+
         public ActionResult ABMPreguntas()
         {
             int v = ValidarUsuario();
@@ -231,6 +325,7 @@ namespace QEQB05.Controllers
             ViewBag.ListaPreguntas = BD.ListarPreguntas();
             return View();
         }
+
         public ActionResult EdicionPreguntas(int Id, string Accion)
         {
             int v = ValidarUsuario();

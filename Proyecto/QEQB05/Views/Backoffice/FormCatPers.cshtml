@@ -1,0 +1,19 @@
+﻿
+@using QEQB05.Models;
+
+@model CategoríaP
+@{
+    ViewBag.Title = "FormPregunta";
+}
+
+<h2>Form Cat. Pers</h2>
+
+@using (Html.BeginForm("OperacionesCatPers", "Backoffice", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+    @Html.HiddenFor(x => x.Id)
+
+    <p>Texto: </p> @Html.TextBoxFor(x => x.Nombre, new { required = "required", id = "inputText" }) @Html.ValidationMessageFor(x => x.TextoPreg) <br />
+    <input type="hidden" name="Accion" value=@ViewBag.Accion />
+    <br /><input type="submit" value=Finalizar />
+}

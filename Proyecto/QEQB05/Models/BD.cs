@@ -103,6 +103,34 @@ namespace QEQB05.Models
             return P;
         }
 
+        public static CategoríaP GetCategoria(int Id)
+        {
+            SqlConnection Conexion = Conectar();
+            SqlCommand Consulta = Conexion.CreateCommand();
+            Consulta.CommandText = "sp_TraerCategoria";
+            Consulta.CommandType = System.Data.CommandType.StoredProcedure;
+            Consulta.Parameters.AddWithValue("@pId", Id);
+            SqlDataReader Lector = Consulta.ExecuteReader();
+            Lector.Read();
+            int id = Convert.ToInt32(Lector["IdCategoriaP"]);
+            string Nombre = Lector["Categoría"].ToString();
+            Desconectar(Conexion);
+            CategoríaP C = new CategoríaP(id, Nombre);
+            return C;
+        }
+
+        public static void InsertarCategoríaP(string Cat)
+        {
+            SqlConnection Conexion = Conectar();
+            SqlCommand Consulta = Conexion.CreateCommand();
+            Consulta.CommandText = "sp_CategoriasPersAlta";
+            Consulta.CommandType = System.Data.CommandType.StoredProcedure;
+            Consulta.Parameters.AddWithValue("@pCat", Cat);
+            Consulta.ExecuteNonQuery();
+            Desconectar(Conexion);
+        }
+
+
         public static List<CategoríaP> TraerCategoriaP(int Id)
         {
             List<CategoríaP> Aux = new List<CategoríaP>();
