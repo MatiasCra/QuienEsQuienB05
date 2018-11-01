@@ -1,0 +1,21 @@
+﻿@using QEQB05.Models
+@{
+    ViewBag.Title = "CargarRespuestas";
+}
+
+<h2>CargarRespuestas</h2>
+
+<table style="width:100%">
+    <tr>
+        <th>Pregunta</th>
+    </tr>
+    @foreach (Pregunta p in ViewBag.ListaPreg)
+    {
+
+        <tr>
+            <th>@p.TextoPreg</th>
+            <th>@Html.ActionLink("Cargar", "FormRespuestas", "Backoffice", new { Texto = p.TextoPreg, Id = p.IdPreg }, null)</th>
+        </tr>
+
+    }
+</table>

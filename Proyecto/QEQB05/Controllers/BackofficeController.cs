@@ -322,5 +322,40 @@ namespace QEQB05.Controllers
             return View("ErrorOp");
         }
 
+        public ActionResult CargarRespuestas()
+        {
+            /*int v = ValidarUsuario();
+            if (v == 1)
+            {
+                return View("../Home/Index");
+            }
+            if (v == 2)
+            {
+                return View("../Home/Login");
+            }*/
+            List<Pregunta> preguntas = BD.ListarPreguntas();
+            ViewBag.ListaPreg = preguntas;
+            return View();
+        }
+
+        public ActionResult FormRespuestas(string Texto, int Id)
+        {
+            /*int v = ValidarUsuario();
+            if (v == 1)
+            {
+                return View("../Home/Index");
+            }
+            if (v == 2)
+            {
+                return View("../Home/Login");
+            }*/
+            Pregunta Preg = new Pregunta(Id, Texto);
+            List<Personaje> ListaTodosPers = BD.ListarPersonajes();
+            ViewBag.ListaTodosPers = ListaTodosPers;
+            List<Personaje> ListaPersPreg = BD.ListarPersonajesXRespuesta(Id);
+            ViewBag.ListaPersPreg = ListaPersPreg;
+            return View("FormRespuestas", Preg);
+        }
+
     }
 }

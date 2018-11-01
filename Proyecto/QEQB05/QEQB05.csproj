@@ -295,6 +295,8 @@
     <Content Include="Views\Home\OlvidoContraseña.cshtml" />
     <Content Include="Views\Backoffice\ABMPreguntas.cshtml" />
     <Content Include="Views\Backoffice\FormPregunta.cshtml" />
+    <Content Include="Views\Backoffice\CargarRespuestas.cshtml" />
+    <Content Include="Views\Backoffice\FormRespuestas.cshtml" />
     <Content Include="Views\Backoffice\ConfirmarEliminarPreguntas.cshtml" />
   </ItemGroup>
   <ItemGroup>
