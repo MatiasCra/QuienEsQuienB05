@@ -407,41 +407,58 @@ namespace QEQB05.Models
             Desconectar(Conexion);
             return AuxLista;
         }
-        public static void InsertPregunta(string pregunta)
+        public static bool InsertPregunta(string pregunta)
         {
+            bool val = new bool();
             SqlConnection Conexion = Conectar();
             SqlCommand Consulta = Conexion.CreateCommand();
             Consulta.CommandText = "sp_PreguntasAlta";
             Consulta.CommandType = System.Data.CommandType.StoredProcedure;
             Consulta.Parameters.AddWithValue("@pTexto", pregunta);
-            Consulta.ExecuteNonQuery();
+            int i = Consulta.ExecuteNonQuery();
+            if (i > 0)
+            {
+                val = true;
+            }
             Desconectar(Conexion);
+            return val;
         }
-        public static void ModificarPregunta(Pregunta pregunta)
+        public static bool ModificarPregunta(Pregunta pregunta)
         {
+            bool val = new bool();
             SqlConnection Conexion = Conectar();
             SqlCommand Consulta = Conexion.CreateCommand();
             Consulta.CommandText = "sp_PreguntasModif";
             Consulta.CommandType = System.Data.CommandType.StoredProcedure;
             Consulta.Parameters.AddWithValue("@pTexto", pregunta.TextoPreg);
             Consulta.Parameters.AddWithValue("@pIdPreg", pregunta.IdPreg);
-            Consulta.ExecuteNonQuery();
+            int i = Consulta.ExecuteNonQuery();
+            if (i > 0)
+            {
+                val = true;
+            }
             Desconectar(Conexion);
+            return val;
         }
-        public static void EliminarPregunta(int idPreg)
+        public static bool EliminarPregunta(int idPreg)
         {
+            bool val=new bool();
             SqlConnection Conexion = Conectar();
             SqlCommand Consulta = Conexion.CreateCommand();
             Consulta.CommandText = "sp_PreguntasBaja";
             Consulta.CommandType = System.Data.CommandType.StoredProcedure;
             Consulta.Parameters.AddWithValue("@pIdPreg", idPreg);
-            Consulta.ExecuteNonQuery();
+            int i = Consulta.ExecuteNonQuery();
+            if (i > 0)
+            {
+                val = true;
+            }
             Desconectar(Conexion);
+            return val;
         }
         public static List<Pregunta> ListarPreguntas()
         {
             List<Pregunta> preguntas = new List<Pregunta>();
-            Pregunta AuxP = new Pregunta();
             SqlConnection Conexion = Conectar();
             SqlCommand consulta = Conexion.CreateCommand();
             consulta.CommandText = "sp_ListarTodasLasPreguntas";
@@ -450,6 +467,7 @@ namespace QEQB05.Models
 
             while (datareader.Read())
             {
+                Pregunta AuxP = new Pregunta();
                 AuxP.TextoPreg = datareader["Texto"].ToString();
                 AuxP.IdPreg = Convert.ToInt32(datareader["IDPregunta"]);
                 preguntas.Add(AuxP);
@@ -457,6 +475,31 @@ namespace QEQB05.Models
             Desconectar(Conexion);
             return preguntas;
         }
-            
+        public static void CambiarContraseña(Usuario usu)
+        {
+            SqlConnection Conexion = Conectar();
+            SqlCommand Consulta = Conexion.CreateCommand();
+            Consulta.CommandText = "sp_OlvideContraseña";
+            Consulta.CommandType = System.Data.CommandType.StoredProcedure;
+            Consulta.Parameters.AddWithValue("@Mail", usu.Mail);
+            Consulta.Parameters.AddWithValue("@Contraseña", usu.Password);
+            Consulta.ExecuteNonQuery();
+            Desconectar(Conexion);
+        }
+        public static Pregunta GetPregunta(int Id)
+        {
+            SqlConnection Conexion = Conectar();
+            SqlCommand Consulta = Conexion.CreateCommand();
+            Consulta.CommandText = "sp_TraerPregunta1";
+            Consulta.CommandType = System.Data.CommandType.StoredProcedure;
+            Consulta.Parameters.AddWithValue("@idPreg", Id);
+            SqlDataReader Lector = Consulta.ExecuteReader();
+            Lector.Read();
+            int id = Convert.ToInt32(Lector["IDPregunta"]);
+            string texto = Lector["Texto"].ToString();
+            Desconectar(Conexion);
+            Pregunta P = new Pregunta(id, texto);
+            return P;
+        }
     }
 }

@@ -57,6 +57,36 @@ namespace QEQB05.Controllers
                 }
             }
         }
+        public ActionResult CargarDatos2(Usuario x)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("OlvidoContraseña", x);
+            }
+            else
+            {
+                BD.CambiarContraseña(x);
+                Usuario usu = BD.VerificarLogin(x);
+               
+                    Session["Nombre"] = usu.Nombre;
+                    if (usu.Admin == true)
+                    {
+                        Session["Admin"] = true;
+                    }
+                    Session["UsuarioActivo"] = usu;
+                    if (usu.Admin == false)
+                    {
+                        Session["Admin"] = false;
+                        return View("Index");
+                    }
+                    else
+                    {
+                        return View("../BackOffice/Index");
+                    }
+                
+               
+            }
+        }
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
@@ -104,8 +134,8 @@ namespace QEQB05.Controllers
                 Session["Admin"] = y.Admin;
                 Session["Nombre"] = y.Nombre;
                 return View("Index");
-                }
             }
+        }
         
 
         public ActionResult Registro()

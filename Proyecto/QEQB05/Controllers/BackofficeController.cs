@@ -250,14 +250,14 @@ namespace QEQB05.Controllers
             }
             else
             {
-                Personaje P = BD.GetPersonaje(Id);
+                Pregunta Pre= BD.GetPregunta(Id);
                 if (Accion == "Eliminar")
                 {
-                    return View("ConfirmarEliminarPregunta", P);
+                    return View("ConfirmarEliminarPregunta", Pre);
                 }
                 else
                 {
-                    return View("FormPregunta", P);
+                    return View("FormPregunta", Pre);
                 }
             }
         }
@@ -272,10 +272,6 @@ namespace QEQB05.Controllers
             {
                 return View("../Home/Login");
             }
-            string path = null;
-            string fileName = null;
-            
-
             if (!ModelState.IsValid)
             {
                 ViewBag.Accion = Accion;
@@ -284,19 +280,8 @@ namespace QEQB05.Controllers
 
             if (Accion == "Insertar")
             {
-                BD.InsertPregunta(P.TextoPreg);
-            }
-            
-            if (Accion == "Modificar")
-            {
 
-                BD.ModificarPregunta(P);
-                
-            }
-            if (Accion == "Eliminar")
-            {
-                /*
-                bool E = BD.DeletePersonaje(P.Id);
+                bool E = BD.InsertPregunta(P.TextoPreg);
                 if (E == true)
                 {
                     return View("ExitoOp");
@@ -304,7 +289,35 @@ namespace QEQB05.Controllers
                 else
                 {
                     return View("ErrorOp");
-                }*/
+                }
+            }
+            
+            if (Accion == "Modificar")
+            {
+                bool E = BD.ModificarPregunta(P);
+                if (E == true)
+                {
+                    return View("ExitoOp");
+                }
+                else
+                {
+                    return View("ErrorOp");
+                }
+               
+                
+            }
+            if (Accion == "Eliminar")
+            {
+                
+                bool E = BD.EliminarPregunta(P.IdPreg);
+                if (E == true)
+                {
+                    return View("ExitoOp");
+                }
+                else
+                {
+                    return View("ErrorOp");
+                }
             }
             return View("ErrorOp");
         }
