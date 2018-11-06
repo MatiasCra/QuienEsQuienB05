@@ -348,7 +348,7 @@ namespace QEQB05.Controllers
                 Pregunta Pre= BD.GetPregunta(Id);
                 if (Accion == "Eliminar")
                 {
-                    return View("ConfirmarEliminarPregunta", Pre);
+                    return View("ConfirmarEliminarPreguntas", Pre);
                 }
                 else
                 {
@@ -367,10 +367,10 @@ namespace QEQB05.Controllers
             {
                 return View("../Home/Login");
             }
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValidField("TextoPreg"))
             {
                 ViewBag.Accion = Accion;
-                return View("FormPersonaje", P);
+                return View("FormPregunta", P);
             }
 
             if (Accion == "Insertar")
@@ -379,11 +379,13 @@ namespace QEQB05.Controllers
                 bool E = BD.InsertPregunta(P.TextoPreg);
                 if (E == true)
                 {
-                    return View("ExitoOp");
+                    ViewBag.Estado = "Exitosa";
+                    return View("ResultadoOp");
                 }
                 else
                 {
-                    return View("ErrorOp");
+                    ViewBag.Estado = "Erronea";
+                    return View("ResultadoOp");
                 }
             }
             
@@ -392,11 +394,13 @@ namespace QEQB05.Controllers
                 bool E = BD.ModificarPregunta(P);
                 if (E == true)
                 {
-                    return View("ExitoOp");
+                    ViewBag.Estado = "Exitosa";
+                    return View("ResultadoOp");
                 }
                 else
                 {
-                    return View("ErrorOp");
+                    ViewBag.Estado = "Erronea";
+                    return View("ResultadoOp");
                 }
                
                 
@@ -407,19 +411,22 @@ namespace QEQB05.Controllers
                 bool E = BD.EliminarPregunta(P.IdPreg);
                 if (E == true)
                 {
-                    return View("ExitoOp");
+                    ViewBag.Estado = "Exitosa";
+                    return View("ResultadoOp");
                 }
                 else
                 {
-                    return View("ErrorOp");
+                    ViewBag.Estado = "Erronea";
+                    return View("ResultadoOp");
                 }
             }
-            return View("ErrorOp");
+            ViewBag.Estado = "Erronea";
+            return View("ResultadoOp");
         }
 
         public ActionResult CargarRespuestas()
         {
-            /*int v = ValidarUsuario();
+            int v = ValidarUsuario();
             if (v == 1)
             {
                 return View("../Home/Index");
@@ -427,7 +434,7 @@ namespace QEQB05.Controllers
             if (v == 2)
             {
                 return View("../Home/Login");
-            }*/
+            }
             List<Pregunta> preguntas = BD.ListarPreguntas();
             ViewBag.ListaPreg = preguntas;
             return View();
@@ -435,7 +442,7 @@ namespace QEQB05.Controllers
 
         public ActionResult FormRespuestas(string Texto, int Id)
         {
-            /*int v = ValidarUsuario();
+            int v = ValidarUsuario();
             if (v == 1)
             {
                 return View("../Home/Index");
@@ -443,7 +450,7 @@ namespace QEQB05.Controllers
             if (v == 2)
             {
                 return View("../Home/Login");
-            }*/
+            }
             Pregunta Preg = new Pregunta(Id, Texto);
             List<Personaje> ListaTodosPers = BD.ListarPersonajes();
             ViewBag.ListaTodosPers = ListaTodosPers;

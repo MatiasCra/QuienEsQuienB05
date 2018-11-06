@@ -9,7 +9,7 @@ namespace QEQB05.Models
     public class Pregunta
     {
         private int _IdPreg;
-        [Required(ErrorMessage = "Este campo es obligatorio")]
+       
         private string _TextoPreg;
 
         public Pregunta(int IdPreg, string TextoPreg)
@@ -19,7 +19,7 @@ namespace QEQB05.Models
         }
         public Pregunta()
         {
-            _IdPreg = -1;
+            _IdPreg = 0;
             _TextoPreg = null;
         }
         public int IdPreg {
@@ -33,6 +33,7 @@ namespace QEQB05.Models
                 _IdPreg = value;
             }
         }
+        [Required(ErrorMessage = "Este campo es obligatorio")]
         public string TextoPreg
         {
             get

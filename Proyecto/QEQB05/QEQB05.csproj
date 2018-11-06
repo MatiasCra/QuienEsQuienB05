@@ -300,6 +300,7 @@
     <Content Include="Views\Backoffice\FormRespuestas.cshtml" />
     <Content Include="Views\Backoffice\ConfirmarEliminarPreguntas.cshtml" />
     <Content Include="Views\Backoffice\OpRespuestas.cshtml" />
+    <Content Include="Views\Backoffice\ResultadoOp.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

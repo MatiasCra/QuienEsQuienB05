@@ -1,7 +1,19 @@
-﻿
+﻿@using QEQB05.Models;
+@model Pregunta
 @{
     ViewBag.Title = "ConfirmarEliminarPreguntas";
 }
 
-<h2>ConfirmarEliminarPreguntas</h2>
+<h3>ConfirmarEliminarPreguntas</h3>
 
+<link rel="stylesheet" href="~/Content/ABMPerso.css">
+
+@using (Html.BeginForm("OperacionesPregunta", "Backoffice", FormMethod.Post))
+{
+
+    <h5>¿Está seguro de que quiere eliminar esta pregunta?</h5>
+    @Html.HiddenFor(x =>x.IdPreg)
+    @Html.HiddenFor(x => x.TextoPreg)
+    <input type="hidden" name="Accion" value="@ViewBag.Accion" />
+    <input type="submit" value="Finalizar" />
+}
