@@ -293,9 +293,12 @@
     <Content Include="Views\Home\OlvidoContraseña.cshtml" />
     <Content Include="Views\Backoffice\ABMPreguntas.cshtml" />
     <Content Include="Views\Backoffice\FormPregunta.cshtml" />
+
     <Content Include="Views\Backoffice\ABMCatPersonajes.cshtml" />
     <Content Include="Views\FormCatPers.cshtml" />
     <Content Include="Views\Backoffice\FormCatPers.cshtml" />
+
+    <Content Include="Views\Backoffice\ConfirmarEliminarPreguntas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

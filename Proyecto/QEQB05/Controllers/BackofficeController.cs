@@ -235,7 +235,7 @@ namespace QEQB05.Controllers
             }
             else
             {
-                CategoríaP C = BD.TraerCategoriaP(Id);
+                CategoríaP C = BD.GetCategoria(Id);
                 if (Accion == "Eliminar")
                 {
                     return View("ConfirmarEliminarPersonaje", C);
@@ -261,14 +261,14 @@ namespace QEQB05.Controllers
             if (!ModelState.IsValid)
             {
                 ViewBag.Accion = Accion;
-                return View("FormCatersonaje", C);
+                return View("FormCatPers", C);
             }
 
             if (Accion == "Insertar")
             {
-                int? I = BD.InsertarCategoría(C.Nombre);
+                bool val = BD.InsertarCategoría(C.Nombre);
 
-                if (I != null)
+                if (val != false)
                 {
                     return View("ExitoOp");
                 }
@@ -279,13 +279,13 @@ namespace QEQB05.Controllers
             }
             if (Accion == "Ver")
             {
-                ViewBag.ListaPersonajes = BD.ListarPersonajes();
-                return View("ABMPersonajes");
+                ViewBag.ListaCatPers = BD.ListarCategoriasPersonajes();
+                return View("ABMCatPers");
             }
             if (Accion == "Modificar")
             {
 
-                bool M = BD.UpdatePersonaje(P, path, Box);
+                bool M = BD.UpdateCategoría(C.Id, C.Nombre);
                 if (M == true)
                 {
                     return View("ExitoOp");
@@ -297,7 +297,7 @@ namespace QEQB05.Controllers
             }
             if (Accion == "Eliminar")
             {
-                bool E = BD.DeletePersonaje(P.Id);
+                bool E = BD.DeleteCategoría(C.Id);
                 if (E == true)
                 {
                     return View("ExitoOp");
@@ -345,14 +345,14 @@ namespace QEQB05.Controllers
             }
             else
             {
-                Personaje P = BD.GetPersonaje(Id);
+                Pregunta Pre= BD.GetPregunta(Id);
                 if (Accion == "Eliminar")
                 {
-                    return View("ConfirmarEliminarPregunta", P);
+                    return View("ConfirmarEliminarPregunta", Pre);
                 }
                 else
                 {
-                    return View("FormPregunta", P);
+                    return View("FormPregunta", Pre);
                 }
             }
         }
@@ -367,10 +367,6 @@ namespace QEQB05.Controllers
             {
                 return View("../Home/Login");
             }
-            string path = null;
-            string fileName = null;
-            
-
             if (!ModelState.IsValid)
             {
                 ViewBag.Accion = Accion;
@@ -379,19 +375,8 @@ namespace QEQB05.Controllers
 
             if (Accion == "Insertar")
             {
-                BD.InsertPregunta(P.TextoPreg);
-            }
-            
-            if (Accion == "Modificar")
-            {
 
-                BD.ModificarPregunta(P);
-                
-            }
-            if (Accion == "Eliminar")
-            {
-                /*
-                bool E = BD.DeletePersonaje(P.Id);
+                bool E = BD.InsertPregunta(P.TextoPreg);
                 if (E == true)
                 {
                     return View("ExitoOp");
@@ -399,7 +384,35 @@ namespace QEQB05.Controllers
                 else
                 {
                     return View("ErrorOp");
-                }*/
+                }
+            }
+            
+            if (Accion == "Modificar")
+            {
+                bool E = BD.ModificarPregunta(P);
+                if (E == true)
+                {
+                    return View("ExitoOp");
+                }
+                else
+                {
+                    return View("ErrorOp");
+                }
+               
+                
+            }
+            if (Accion == "Eliminar")
+            {
+                
+                bool E = BD.EliminarPregunta(P.IdPreg);
+                if (E == true)
+                {
+                    return View("ExitoOp");
+                }
+                else
+                {
+                    return View("ErrorOp");
+                }
             }
             return View("ErrorOp");
         }
