@@ -103,6 +103,74 @@ namespace QEQB05.Models
             return P;
         }
 
+        public static CategoríaP GetCategoria(int Id)
+        {
+            SqlConnection Conexion = Conectar();
+            SqlCommand Consulta = Conexion.CreateCommand();
+            Consulta.CommandText = "sp_TraerCategoria";
+            Consulta.CommandType = System.Data.CommandType.StoredProcedure;
+            Consulta.Parameters.AddWithValue("@pId", Id);
+            SqlDataReader Lector = Consulta.ExecuteReader();
+            Lector.Read();
+            int id = Convert.ToInt32(Lector["IdCategoriaP"]);
+            string Nombre = Lector["Categoría"].ToString();
+            Desconectar(Conexion);
+            CategoríaP C = new CategoríaP(id, Nombre);
+            return C;
+        }
+
+        public static bool InsertarCategoría(string Cat)
+        {
+            bool aux = false;
+            SqlConnection Conexion = Conectar();
+            SqlCommand Consulta = Conexion.CreateCommand();
+            Consulta.CommandText = "sp_CategoriasPersAlta";
+            Consulta.CommandType = System.Data.CommandType.StoredProcedure;
+            Consulta.Parameters.AddWithValue("@pCat", Cat);
+            int i = Consulta.ExecuteNonQuery();
+            if (i > 0)
+            {
+                aux = true;
+            }
+            Desconectar(Conexion);
+            return aux;
+        }
+
+        public static bool UpdateCategoría(int id, string Cat)
+        {
+            bool aux = false;
+            SqlConnection Conexion = Conectar();
+            SqlCommand Consulta = Conexion.CreateCommand();
+            Consulta.CommandText = "sp_CategoriasPersModif";
+            Consulta.CommandType = System.Data.CommandType.StoredProcedure;
+            Consulta.Parameters.AddWithValue("@pID", id);
+            Consulta.Parameters.AddWithValue("@pCat", Cat);
+            int i = Consulta.ExecuteNonQuery();
+            if (i > 0)
+            {
+                aux = true;
+            }
+            Desconectar(Conexion);
+            return aux;
+        }
+
+        public static bool DeleteCategoría(int Id)
+        {
+            bool val = false;
+            SqlConnection Conexion = Conectar();
+            SqlCommand Consulta = Conexion.CreateCommand();
+            Consulta.CommandText = "sp_CategoriasPersBaja";
+            Consulta.CommandType = System.Data.CommandType.StoredProcedure;
+            Consulta.Parameters.AddWithValue("@pID", Id);
+            int i = Consulta.ExecuteNonQuery();
+            if (i > 0)
+            {
+                val = true;
+            }
+            Desconectar(Conexion);
+            return val;
+        }
+
         public static List<CategoríaP> TraerCategoriaP(int Id)
         {
             List<CategoríaP> Aux = new List<CategoríaP>();
