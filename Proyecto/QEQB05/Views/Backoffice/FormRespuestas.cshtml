@@ -1,0 +1,34 @@
+﻿@using QEQB05.Models
+@model Pregunta
+@{
+
+                ViewBag.Title = "FormRespuestas";
+}
+
+<h2>FormRespuestas</h2>
+
+@using (Html.BeginForm("OperacionesRespuestas", "Backoffice", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <lbl>@Model.TextoPreg</lbl>
+    <p>Elija los personajes cuya respuesta es SÍ</p>
+    foreach (Personaje P in ViewBag.ListaTodosPers)
+    {
+        bool v = false;
+        foreach (Personaje p in ViewBag.ListaPersPreg)
+        {
+            if (P.Id == p.Id)
+            {
+                v = true;
+                <input type="checkbox" name="Box" value=@p.Id checked="checked"><br />
+            }
+        }
+        if (v == false)
+        {
+            <input type="checkbox" name="Box" value=@P.Id><br />
+        }
+        <img src="@P.UrlDataFoto" alt="Personaje" /><br />
+        <p>@P.Nombre</p>
+    }
+    <input type="hidden" name="IdPreg" value=@Model.IdPreg />
+    <br /><input type="submit" value=Finalizar />
+}

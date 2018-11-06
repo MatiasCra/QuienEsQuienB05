@@ -293,11 +293,11 @@
     <Content Include="Views\Home\OlvidoContraseña.cshtml" />
     <Content Include="Views\Backoffice\ABMPreguntas.cshtml" />
     <Content Include="Views\Backoffice\FormPregunta.cshtml" />
-
     <Content Include="Views\Backoffice\ABMCatPersonajes.cshtml" />
     <Content Include="Views\FormCatPers.cshtml" />
     <Content Include="Views\Backoffice\FormCatPers.cshtml" />
-
+    <Content Include="Views\Backoffice\CargarRespuestas.cshtml" />
+    <Content Include="Views\Backoffice\FormRespuestas.cshtml" />
     <Content Include="Views\Backoffice\ConfirmarEliminarPreguntas.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -346,10 +346,4 @@
     <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
   </Target>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target> -->
 </Project>

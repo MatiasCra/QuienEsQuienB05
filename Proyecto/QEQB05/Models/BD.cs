@@ -532,7 +532,6 @@ namespace QEQB05.Models
             consulta.CommandText = "sp_ListarTodasLasPreguntas";
             consulta.CommandType = System.Data.CommandType.StoredProcedure;
             SqlDataReader datareader = consulta.ExecuteReader();
-
             while (datareader.Read())
             {
                 Pregunta AuxP = new Pregunta();
@@ -543,6 +542,31 @@ namespace QEQB05.Models
             Desconectar(Conexion);
             return preguntas;
         }
+
+        public static List<Personaje> ListarPersonajesXRespuesta(int IdPreg)
+        {
+            string Foto = null;
+            List<Personaje> Lista = new List<Personaje>();
+            SqlConnection Conexion = Conectar();
+            SqlCommand Consulta = Conexion.CreateCommand();
+            Consulta.CommandText = "sp_ListarPersonajesXRespuesta";
+            Consulta.CommandType = System.Data.CommandType.StoredProcedure;
+            Consulta.Parameters.AddWithValue("@pIdPreg", IdPreg);
+            SqlDataReader Lector = Consulta.ExecuteReader();
+            while (Lector.Read())
+            {
+                int Id = Convert.ToInt32(Lector["IdPersonaje"]);
+                string Nombre = Lector["Nombre"].ToString();
+                byte[] AuxFoto = (byte[])Lector["Foto"];
+                Foto = ConversionIMG.ConvertirAURLData(AuxFoto);
+                List<CategoríaP> cat = BD.TraerCategoriaP(Id);
+                Personaje P = new Personaje(Id, Nombre, Foto, cat);
+                Lista.Add(P);
+            }
+            Desconectar(Conexion);
+            return Lista;
+        }
+            
         public static void CambiarContraseña(Usuario usu)
         {
             SqlConnection Conexion = Conectar();
