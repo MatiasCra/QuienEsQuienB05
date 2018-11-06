@@ -299,6 +299,7 @@
     <Content Include="Views\Backoffice\CargarRespuestas.cshtml" />
     <Content Include="Views\Backoffice\FormRespuestas.cshtml" />
     <Content Include="Views\Backoffice\ConfirmarEliminarPreguntas.cshtml" />
+    <Content Include="Views\Backoffice\OpRespuestas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

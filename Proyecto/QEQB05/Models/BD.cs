@@ -566,7 +566,34 @@ namespace QEQB05.Models
             Desconectar(Conexion);
             return Lista;
         }
-            
+
+        public static bool InsertarPersonajesXRespuesta(int IdPreg, int[] Box)
+        {
+            bool val;
+            int cont = 0;
+            foreach (int I in Box)
+            {
+                SqlConnection Conexion = Conectar();
+                SqlCommand Consulta = Conexion.CreateCommand();
+                Consulta.CommandText = "sp_InsertarPersonajesXPreguntas";
+                Consulta.CommandType = System.Data.CommandType.StoredProcedure;
+                Consulta.Parameters.AddWithValue("@pIdPreg", IdPreg);
+                Consulta.Parameters.AddWithValue("@pIdPers", I);
+                int v = Consulta.ExecuteNonQuery();
+                Desconectar(Conexion);
+                cont = cont + v;
+            }
+            if(cont == 0)
+            {
+                val = false;
+            }
+            else
+            {
+                val = true;
+            }
+            return val;
+        }
+           
         public static void CambiarContraseña(Usuario usu)
         {
             SqlConnection Conexion = Conectar();

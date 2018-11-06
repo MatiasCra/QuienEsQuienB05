@@ -452,9 +452,20 @@ namespace QEQB05.Controllers
             return View("FormRespuestas", Preg);
         }
 
-        public ActionResult OperacionesRespuestas(int[] Box)
+        public ActionResult OperacionesRespuestas(int[] Box, int Id)
         {
-
+            /*int v = ValidarUsuario();
+            if (v == 1)
+            {
+                return View("../Home/Index");
+            }
+            if (v == 2)
+            {
+                return View("../Home/Login");
+            }*/
+            bool val = BD.InsertarPersonajesXRespuesta(Id, Box);
+            ViewBag.val = val;
+            return View("OpRespuestas");
         }
     }
 }
