@@ -3,17 +3,23 @@
 
 @model CategoríaP
 @{
-    ViewBag.Title = "FormPregunta";
+    ViewBag.Title = "FormCatPers";
 }
 
 <h2>Form Cat. Pers</h2>
-
+<link rel="stylesheet" href="~/Content/ABMPerso.css">
 @using (Html.BeginForm("OperacionesCatPers", "Backoffice", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-
-    @Html.HiddenFor(x => x.Id)
-
-    <p>Texto: </p> @Html.TextBoxFor(x => x.Nombre, new { required = "required", id = "inputText" }) @Html.ValidationMessageFor(x => x.TextoPreg) <br />
+    if (ViewBag.Accion == "Ver")
+    {
+        @Html.HiddenFor(x => x.Id);
+        <p>Nombre: </p> @Html.TextBoxFor(x => x.Nombre, new { disabled = "disabled", id = "inputText" })<br />
+    }
+    else
+    {
+        @Html.HiddenFor(x => x.Id);
+        <p>Nombre: </p> @Html.TextBoxFor(x => x.Nombre, new { required = "required", id = "inputText" }) @Html.ValidationMessageFor(x => x.Nombre) <br />
+    }
     <input type="hidden" name="Accion" value=@ViewBag.Accion />
     <br /><input type="submit" value=Finalizar />
 }

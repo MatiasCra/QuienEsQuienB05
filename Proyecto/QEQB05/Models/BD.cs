@@ -459,7 +459,7 @@ namespace QEQB05.Models
         public static List<CategoríaP> ListarCategoriasPersonajes()
         {
             List<CategoríaP> AuxLista = new List<CategoríaP>();
-            CategoríaP AuxC = new CategoríaP();
+   
             SqlConnection Conexion = Conectar();
             SqlCommand consulta = Conexion.CreateCommand();
             consulta.CommandText = "sp_TraerTodasCategoríasPersonaje";
@@ -468,8 +468,9 @@ namespace QEQB05.Models
 
             while (datareader.Read())
             {
+                CategoríaP AuxC = new CategoríaP();
+                AuxC.Id = Convert.ToInt32(datareader["IdCategoriaP"]);
                 AuxC.Nombre = datareader["Categoría"].ToString();
-                AuxC.Id = Convert.ToInt32(datareader["IDCategoríaP"]);
                 AuxLista.Add(AuxC);
             }
             Desconectar(Conexion);

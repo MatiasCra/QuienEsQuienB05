@@ -27,7 +27,7 @@ namespace QEQB05.Controllers
         }
         public ActionResult Index()
         {
-            int v = ValidarUsuario();
+            /*int v = ValidarUsuario();
             if(v == 0)
             {
                 return View();
@@ -39,13 +39,13 @@ namespace QEQB05.Controllers
             if(v == 2)
             {
                 return View("../Home/Login");
-            }
+            }*/
             return View();
         }
         [HttpPost]
         public ActionResult ModificarAdmin(int[] Box)
         {
-            int v = ValidarUsuario();
+            /*int v = ValidarUsuario();
             if (v == 1)
             {
                 return View("../Home/Index");
@@ -53,7 +53,7 @@ namespace QEQB05.Controllers
             if (v == 2)
             {
                 return View("../Home/Login");
-            }
+            }*/
             if (Box != null)
             {
                 foreach (int i in Box)
@@ -65,7 +65,7 @@ namespace QEQB05.Controllers
         }
         public ActionResult HacerAdmin()
         {
-            int v = ValidarUsuario();
+            /*int v = ValidarUsuario();
             if (v == 1)
             {
                 return View("../Home/Index");
@@ -73,13 +73,13 @@ namespace QEQB05.Controllers
             if (v == 2)
             {
                 return View("../Home/Login");
-            }
+            }*/
             ViewBag.Users = BD.TraerUsuarios();
             return View();
         }
         public ActionResult ABMPersonajes()
         {
-            int v = ValidarUsuario();
+            /*int v = ValidarUsuario();
             if (v == 1)
             {
                 return View("../Home/Index");
@@ -87,7 +87,7 @@ namespace QEQB05.Controllers
             if (v == 2)
             {
                 return View("../Home/Login");
-            }
+            }*/
             List<Personaje> AuxListaPersonajes = new List<Personaje>();
             AuxListaPersonajes = BD.ListarPersonajes();
             ViewBag.ListaPersonajes = AuxListaPersonajes;
@@ -96,7 +96,7 @@ namespace QEQB05.Controllers
 
         public ActionResult EdicionPersonajes(int Id, string Accion)
         {
-            int v = ValidarUsuario();
+            /*int v = ValidarUsuario();
             if (v == 1)
             {
                 return View("../Home/Index");
@@ -104,7 +104,7 @@ namespace QEQB05.Controllers
             if (v == 2)
             {
                 return View("../Home/Login");
-            }
+            }*/
             ViewBag.Categorias = BD.ListarTodasCategoriasP();
             ViewBag.Accion = Accion;
             if (Accion == "Insertar")
@@ -129,7 +129,7 @@ namespace QEQB05.Controllers
 
         public ActionResult OperacionesPersonaje(Personaje P, HttpPostedFileBase postedFile, int[] Box, string Accion, string AuxFoto)
         {
-            int v = ValidarUsuario();
+            /*int v = ValidarUsuario();
             if (v == 1)
             {
                 return View("../Home/Index");
@@ -137,7 +137,7 @@ namespace QEQB05.Controllers
             if (v == 2)
             {
                 return View("../Home/Login");
-            }
+            }*/
             string path = null;
             string fileName = null;
             if (postedFile != null)
@@ -159,7 +159,8 @@ namespace QEQB05.Controllers
                 int? I = BD.InsertPersonaje(P, path, Box);
 
                 if (I != null)
-                {     
+                {
+
                     return View("ExitoOp");
                 }
                 else
@@ -178,6 +179,7 @@ namespace QEQB05.Controllers
                 bool M = BD.UpdatePersonaje(P, path, Box);
                 if (M == true)
                 {
+
                     return View("ExitoOp");
                 }
                 else
@@ -190,6 +192,7 @@ namespace QEQB05.Controllers
                 bool E = BD.DeletePersonaje(P.Id);
                 if (E == true)
                 {
+
                     return View("ExitoOp");
                 }
                 else
@@ -202,7 +205,7 @@ namespace QEQB05.Controllers
 
         public ActionResult ABMCatPersonajes()
         {
-            int v = ValidarUsuario();
+            /*int v = ValidarUsuario();
             if (v == 1)
             {
                 return View("../Home/Index");
@@ -210,7 +213,7 @@ namespace QEQB05.Controllers
             if (v == 2)
             {
                 return View("../Home/Login");
-            }
+            }*/
             List<CategoríaP> AuxListaCat = new List<CategoríaP>();
             AuxListaCat = BD.ListarCategoriasPersonajes();
             ViewBag.ListaCatPers= AuxListaCat;
@@ -219,7 +222,7 @@ namespace QEQB05.Controllers
 
         public ActionResult EdicionCatPers(int Id, string Accion)
         {
-            int v = ValidarUsuario();
+            /*int v = ValidarUsuario();
             if (v == 1)
             {
                 return View("../Home/Index");
@@ -227,7 +230,7 @@ namespace QEQB05.Controllers
             if (v == 2)
             {
                 return View("../Home/Login");
-            }
+            }*/
             ViewBag.Accion = Accion;
             if (Accion == "Insertar")
             {
@@ -249,7 +252,7 @@ namespace QEQB05.Controllers
 
         public ActionResult OperacionesCatPers(CategoríaP C, string Accion)
         {
-            int v = ValidarUsuario();
+            /*int v = ValidarUsuario();
             if (v == 1)
             {
                 return View("../Home/Index");
@@ -257,7 +260,7 @@ namespace QEQB05.Controllers
             if (v == 2)
             {
                 return View("../Home/Login");
-            }
+            }*/
             if (!ModelState.IsValid)
             {
                 ViewBag.Accion = Accion;
@@ -270,6 +273,7 @@ namespace QEQB05.Controllers
 
                 if (val != false)
                 {
+
                     return View("ExitoOp");
                 }
                 else
@@ -280,7 +284,7 @@ namespace QEQB05.Controllers
             if (Accion == "Ver")
             {
                 ViewBag.ListaCatPers = BD.ListarCategoriasPersonajes();
-                return View("ABMCatPers");
+                return View("ABMCatPersonajes");
             }
             if (Accion == "Modificar")
             {
@@ -288,6 +292,7 @@ namespace QEQB05.Controllers
                 bool M = BD.UpdateCategoría(C.Id, C.Nombre);
                 if (M == true)
                 {
+
                     return View("ExitoOp");
                 }
                 else
@@ -300,6 +305,7 @@ namespace QEQB05.Controllers
                 bool E = BD.DeleteCategoría(C.Id);
                 if (E == true)
                 {
+
                     return View("ExitoOp");
                 }
                 else
@@ -312,7 +318,7 @@ namespace QEQB05.Controllers
 
         public ActionResult ABMPreguntas()
         {
-            int v = ValidarUsuario();
+            /*int v = ValidarUsuario();
             if (v == 1)
             {
                 return View("../Home/Index");
@@ -320,7 +326,7 @@ namespace QEQB05.Controllers
             if (v == 2)
             {
                 return View("../Home/Login");
-            }
+            }*/
 
             ViewBag.ListaPreguntas = BD.ListarPreguntas();
             return View();
@@ -328,7 +334,7 @@ namespace QEQB05.Controllers
 
         public ActionResult EdicionPreguntas(int Id, string Accion)
         {
-            int v = ValidarUsuario();
+            /*int v = ValidarUsuario();
             if (v == 1)
             {
                 return View("../Home/Index");
@@ -336,7 +342,7 @@ namespace QEQB05.Controllers
             if (v == 2)
             {
                 return View("../Home/Login");
-            }
+            }*/
             
             ViewBag.Accion = Accion;
             if (Accion == "Insertar")
@@ -358,7 +364,7 @@ namespace QEQB05.Controllers
         }
         public ActionResult OperacionesPregunta (Pregunta P, string Accion)
         {
-            int v = ValidarUsuario();
+            /*int v = ValidarUsuario();
             if (v == 1)
             {
                 return View("../Home/Index");
@@ -366,7 +372,7 @@ namespace QEQB05.Controllers
             if (v == 2)
             {
                 return View("../Home/Login");
-            }
+            }*/
             if (!ModelState.IsValid)
             {
                 ViewBag.Accion = Accion;
