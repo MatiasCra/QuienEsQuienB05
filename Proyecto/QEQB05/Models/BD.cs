@@ -422,6 +422,8 @@ namespace QEQB05.Models
             Consulta.Parameters.AddWithValue("@pContraseña", U.Password);
             Consulta.Parameters.AddWithValue("@pAdmin", U.Admin);
             Consulta.Parameters.AddWithValue("@pPuntosAcum", 0);
+            Consulta.Parameters.AddWithValue("@PreguntaDeSeguridad", U.Pregunta);
+            Consulta.Parameters.AddWithValue("@respuesta", U.respuesta);
             int i = Consulta.ExecuteNonQuery();
             if (i > 0)
             {
