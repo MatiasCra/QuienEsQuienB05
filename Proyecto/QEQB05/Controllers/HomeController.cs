@@ -59,7 +59,19 @@ namespace QEQB05.Controllers
         }
         public ActionResult CargarDatos2(Usuario x)
         {
-            if (!ModelState.IsValid)
+            ViewBag.mensaje = "Los datos ingresados son incorrectos";
+            bool veracidad =new bool();
+            veracidad = false;
+            List<Usuario> u = BD.TraerTodosUsuarios();
+            foreach(Usuario usu in u)
+            {
+                if(usu.Mail==x.Mail&&usu.Pregunta==x.Pregunta&&usu.respuesta==x.respuesta)
+                {
+                    veracidad = true;
+                }
+            }
+            ViewBag.veracidad = veracidad;
+            if (!ModelState.IsValid||veracidad==false)
             {
                 return View("OlvidoContraseña", x);
             }
