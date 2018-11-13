@@ -1,14 +1,16 @@
 ﻿@using QEQB05.Models
 @model Pregunta
 @{
-    ViewBag.Title = "FormRespuestas";
+    ViewBag.Title = "Formulario";
 }
 
-<h2>FormRespuestas</h2>
+<link rel="stylesheet" href="~/Content/CargResp.css">
+
+<h2>Formulario</h2>
 
 @using (Html.BeginForm("OperacionesRespuestas", "Backoffice", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-    <lbl>@Model.TextoPreg</lbl>
+    <h3>@Model.TextoPreg</h3>
     <p>Elija los personajes cuya respuesta es SÍ</p>
     foreach (Personaje P in ViewBag.ListaTodosPers)
     {

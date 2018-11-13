@@ -426,7 +426,7 @@ namespace QEQB05.Controllers
 
         public ActionResult CargarRespuestas()
         {
-            /*int v = ValidarUsuario();
+            int v = ValidarUsuario();
             if (v == 1)
             {
                 return View("../Home/Index");
@@ -434,7 +434,7 @@ namespace QEQB05.Controllers
             if (v == 2)
             {
                 return View("../Home/Login");
-            }*/
+            }
             List<Pregunta> preguntas = BD.ListarPreguntas();
             ViewBag.ListaPreg = preguntas;
             return View();
@@ -442,7 +442,7 @@ namespace QEQB05.Controllers
 
         public ActionResult FormRespuestas(string Texto, int Id)
         {
-            /*int v = ValidarUsuario();
+            int v = ValidarUsuario();
             if (v == 1)
             {
                 return View("../Home/Index");
@@ -450,7 +450,7 @@ namespace QEQB05.Controllers
             if (v == 2)
             {
                 return View("../Home/Login");
-            }*/
+            }
             Pregunta Preg = new Pregunta(Id, Texto);
             List<Personaje> ListaTodosPers = BD.ListarPersonajes();
             ViewBag.ListaTodosPers = ListaTodosPers;
@@ -461,7 +461,7 @@ namespace QEQB05.Controllers
 
         public ActionResult OperacionesRespuestas(int[] Box, int Id)
         {
-            /*int v = ValidarUsuario();
+            int v = ValidarUsuario();
             if (v == 1)
             {
                 return View("../Home/Index");
@@ -469,7 +469,7 @@ namespace QEQB05.Controllers
             if (v == 2)
             {
                 return View("../Home/Login");
-            }*/
+            }
             bool val = BD.UpdatePersonajesXPregunta(Id, Box);
             ViewBag.val = val;
             return View("OpRespuestas");
