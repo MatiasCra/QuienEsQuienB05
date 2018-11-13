@@ -339,7 +339,7 @@ namespace QEQB05.Models
             List<CategoríaP> AuxLista = new List<CategoríaP>();
             SqlConnection Conexion = Conectar();
             SqlCommand Consulta = Conexion.CreateCommand();
-            Consulta.CommandText = "sp_TraerTodasCategoríasP";
+            Consulta.CommandText = "sp_TraerTodasCategoríasPersonaje";
             Consulta.CommandType = System.Data.CommandType.StoredProcedure;
             SqlDataReader Lector = Consulta.ExecuteReader();
             while (Lector.Read())
