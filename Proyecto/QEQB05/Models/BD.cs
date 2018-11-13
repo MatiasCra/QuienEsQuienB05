@@ -52,14 +52,42 @@ namespace QEQB05.Models
                     Mail = datareader["mail"].ToString(),
                     Admin = Convert.ToBoolean(datareader["Administrador"]),
                     Puntos = Convert.ToInt32(datareader["PuntosAcumulados"]),
-                    ID = Convert.ToInt32(datareader["ID_Usuario"])
+                    ID = Convert.ToInt32(datareader["ID_Usuario"]),
+                    Pregunta = datareader["PreguntaDeSeguridad"].ToString(),
+                    respuesta = datareader["RespuestaPregSeg"].ToString()
                 };
                 Usus.Add(x);
             }
             Desconectar(Conexion);
             return Usus;
         }
+        public static List<Usuario> TraerTodosUsuarios()
+        {
+            List<Usuario> Usus = new List<Usuario>();
+            SqlConnection Conexion = Conectar();
+            SqlCommand consulta = Conexion.CreateCommand();
+            consulta.CommandText = "sp_TraerUsuarios";
+            consulta.CommandType = System.Data.CommandType.StoredProcedure;
+            SqlDataReader datareader = consulta.ExecuteReader();
 
+            while (datareader.Read())
+            {
+                Usuario x = new Usuario
+                {
+                    Nombre = datareader["Nombre"].ToString(),
+                    Password = datareader["Contraseña"].ToString(),
+                    Mail = datareader["mail"].ToString(),
+                    Admin = Convert.ToBoolean(datareader["Administrador"]),
+                    Puntos = Convert.ToInt32(datareader["PuntosAcumulados"]),
+                    ID = Convert.ToInt32(datareader["ID_Usuario"]),
+                    Pregunta = datareader["PreguntaDeSeguridad"].ToString(),
+                    respuesta=datareader["RespuestaPregSeg"].ToString()
+                };
+                Usus.Add(x);
+            }
+            Desconectar(Conexion);
+            return Usus;
+        }
         public static List<Personaje> ListarPersonajes()
         {
             List<Personaje> AuxLista = new List<Personaje>();

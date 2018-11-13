@@ -6,7 +6,10 @@
 
 
 @model  QEQB05.Models.Usuario
-
+@if(ViewBag.veracidad==false)
+{
+    @ViewBag.mensaje;
+}
 
 @using (Html.BeginForm("CargarDatos2", "Home", FormMethod.Post))
 {

@@ -36,8 +36,8 @@ namespace QEQB05.Models
             _Admin = false;
             _puntos = 0;
             _ID = -1;
-            _Pregunta = "a";
-            _respuesta = "a";
+            _Pregunta = null;
+            _respuesta = null;
         }
 
         public string Nombre {
