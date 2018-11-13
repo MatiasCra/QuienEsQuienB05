@@ -18,5 +18,7 @@
     <p>Nombre:</p>@Html.TextBoxFor(y => y.Nombre, new { required = "required" })@Html.ValidationMessageFor(y => y.Nombre) <br />
     <p>Mail:</p>@Html.TextBoxFor(y => y.Mail, new { type = "email", required = "required" })@Html.ValidationMessageFor(y => y.Mail) <br />
     <p>Contraseña:</p> @Html.PasswordFor(y => y.Password, new { required = "required" })@Html.ValidationMessageFor(y => y.Password) <br />
+    <p>Pregunta de seguridad:</p>@Html.TextBoxFor(y => y.Pregunta, new { required = "required" })@Html.ValidationMessageFor(y => y.Pregunta) <br />
+    <p>Respuesta:</p>@Html.TextBoxFor(y => y.respuesta, new {required = "required" })@Html.ValidationMessageFor(y => y.respuesta) <br />
     <input type="submit" value="Registrarse" />
 }

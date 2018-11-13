@@ -14,8 +14,10 @@ namespace QEQB05.Models
         private string _mail;
         private bool _Admin;
         private int _puntos;
+        private string _Pregunta;
+        private string _respuesta;
 
-        public Usuario(string Nombre, string password, string mail, bool Admin, int puntos,int id)
+        public Usuario(string Nombre, string password, string mail, bool Admin, int puntos,int id,string preg,string resp)
         {
             _Nombre = Nombre;
             _password = password;
@@ -23,6 +25,8 @@ namespace QEQB05.Models
             _Admin = Admin;
             _puntos = puntos;
             _ID = id;
+            _Pregunta = preg;
+            _respuesta = resp;
         }
         public Usuario()
         {
@@ -32,6 +36,8 @@ namespace QEQB05.Models
             _Admin = false;
             _puntos = 0;
             _ID = -1;
+            _Pregunta = "a";
+            _respuesta = "a";
         }
 
         public string Nombre {
@@ -100,6 +106,30 @@ namespace QEQB05.Models
             set
             {
                 _ID = value;
+            }
+        }
+        public string Pregunta
+        {
+            get
+            {
+                return _Pregunta;
+            }
+
+            set
+            {
+                _Pregunta = value;
+            }
+        }
+        public string respuesta
+        {
+            get
+            {
+                return _respuesta;
+            }
+
+            set
+            {
+                _respuesta = value;
             }
         }
     }

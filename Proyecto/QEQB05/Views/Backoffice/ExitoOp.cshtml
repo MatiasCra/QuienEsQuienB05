@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "Exito operacion";
 }
+@Request.Params["x"]
 
 <link rel="stylesheet" href="~/Content/ABMPerso.css">
 
@@ -9,4 +10,4 @@
 
 Operación exitosa
 
-@Html.ActionLink("Volver",  , "Backoffice")
+@Html.ActionLink("Volver", (string)ViewBag.View, "Backoffice")

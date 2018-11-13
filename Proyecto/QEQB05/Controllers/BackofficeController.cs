@@ -27,7 +27,7 @@ namespace QEQB05.Controllers
         }
         public ActionResult Index()
         {
-            /*int v = ValidarUsuario();
+            int v = ValidarUsuario();
             if(v == 0)
             {
                 return View();
@@ -39,13 +39,13 @@ namespace QEQB05.Controllers
             if(v == 2)
             {
                 return View("../Home/Login");
-            }*/
+            }
             return View();
         }
         [HttpPost]
         public ActionResult ModificarAdmin(int[] Box)
         {
-            /*int v = ValidarUsuario();
+            int v = ValidarUsuario();
             if (v == 1)
             {
                 return View("../Home/Index");
@@ -53,7 +53,7 @@ namespace QEQB05.Controllers
             if (v == 2)
             {
                 return View("../Home/Login");
-            }*/
+            }
             if (Box != null)
             {
                 foreach (int i in Box)
@@ -65,7 +65,7 @@ namespace QEQB05.Controllers
         }
         public ActionResult HacerAdmin()
         {
-            /*int v = ValidarUsuario();
+            int v = ValidarUsuario();
             if (v == 1)
             {
                 return View("../Home/Index");
@@ -73,13 +73,13 @@ namespace QEQB05.Controllers
             if (v == 2)
             {
                 return View("../Home/Login");
-            }*/
+            }
             ViewBag.Users = BD.TraerUsuarios();
             return View();
         }
         public ActionResult ABMPersonajes()
         {
-            /*int v = ValidarUsuario();
+            int v = ValidarUsuario();
             if (v == 1)
             {
                 return View("../Home/Index");
@@ -87,7 +87,7 @@ namespace QEQB05.Controllers
             if (v == 2)
             {
                 return View("../Home/Login");
-            }*/
+            }
             List<Personaje> AuxListaPersonajes = new List<Personaje>();
             AuxListaPersonajes = BD.ListarPersonajes();
             ViewBag.ListaPersonajes = AuxListaPersonajes;
@@ -96,7 +96,7 @@ namespace QEQB05.Controllers
 
         public ActionResult EdicionPersonajes(int Id, string Accion)
         {
-            /*int v = ValidarUsuario();
+            int v = ValidarUsuario();
             if (v == 1)
             {
                 return View("../Home/Index");
@@ -104,7 +104,7 @@ namespace QEQB05.Controllers
             if (v == 2)
             {
                 return View("../Home/Login");
-            }*/
+            }
             ViewBag.Categorias = BD.ListarTodasCategoriasP();
             ViewBag.Accion = Accion;
             if (Accion == "Insertar")
@@ -129,7 +129,7 @@ namespace QEQB05.Controllers
 
         public ActionResult OperacionesPersonaje(Personaje P, HttpPostedFileBase postedFile, int[] Box, string Accion, string AuxFoto)
         {
-            /*int v = ValidarUsuario();
+            int v = ValidarUsuario();
             if (v == 1)
             {
                 return View("../Home/Index");
@@ -137,7 +137,7 @@ namespace QEQB05.Controllers
             if (v == 2)
             {
                 return View("../Home/Login");
-            }*/
+            }
             string path = null;
             string fileName = null;
             if (postedFile != null)
@@ -205,7 +205,7 @@ namespace QEQB05.Controllers
 
         public ActionResult ABMCatPersonajes()
         {
-            /*int v = ValidarUsuario();
+            int v = ValidarUsuario();
             if (v == 1)
             {
                 return View("../Home/Index");
@@ -213,7 +213,7 @@ namespace QEQB05.Controllers
             if (v == 2)
             {
                 return View("../Home/Login");
-            }*/
+            }
             List<CategoríaP> AuxListaCat = new List<CategoríaP>();
             AuxListaCat = BD.ListarCategoriasPersonajes();
             ViewBag.ListaCatPers= AuxListaCat;
@@ -222,7 +222,7 @@ namespace QEQB05.Controllers
 
         public ActionResult EdicionCatPers(int Id, string Accion)
         {
-            /*int v = ValidarUsuario();
+            int v = ValidarUsuario();
             if (v == 1)
             {
                 return View("../Home/Index");
@@ -230,7 +230,7 @@ namespace QEQB05.Controllers
             if (v == 2)
             {
                 return View("../Home/Login");
-            }*/
+            }
             ViewBag.Accion = Accion;
             if (Accion == "Insertar")
             {
@@ -241,7 +241,7 @@ namespace QEQB05.Controllers
                 CategoríaP C = BD.GetCategoria(Id);
                 if (Accion == "Eliminar")
                 {
-                    return View("ConfirmarEliminarPersonaje", C);
+                    return View("ConfirmarEliminarCategoria", C);
                 }
                 else
                 {
@@ -252,7 +252,7 @@ namespace QEQB05.Controllers
 
         public ActionResult OperacionesCatPers(CategoríaP C, string Accion)
         {
-            /*int v = ValidarUsuario();
+            int v = ValidarUsuario();
             if (v == 1)
             {
                 return View("../Home/Index");
@@ -260,65 +260,69 @@ namespace QEQB05.Controllers
             if (v == 2)
             {
                 return View("../Home/Login");
-            }*/
+            }
             if (!ModelState.IsValid)
             {
                 ViewBag.Accion = Accion;
                 return View("FormCatPers", C);
             }
-
-            if (Accion == "Insertar")
+            else
             {
-                bool val = BD.InsertarCategoría(C.Nombre);
-
-                if (val != false)
+                ViewBag.View = "ABMCatPersonajes";
+                if (Accion == "Insertar")
                 {
+                    bool val = BD.InsertarCategoría(C.Nombre);
 
-                    return View("ExitoOp");
+                    if (val != false)
+                    {
+
+                        return View("ExitoOp");
+                    }
+                    else
+                    {
+                        return View("ErrorOp");
+                    }
                 }
-                else
+                if (Accion == "Ver")
                 {
-                    return View("ErrorOp");
+                    ViewBag.ListaCatPers = BD.ListarCategoriasPersonajes();
+                    return View("ABMCatPersonajes");
+                }
+                if (Accion == "Modificar")
+                {
+
+                    bool M = BD.UpdateCategoría(C.Id, C.Nombre);
+                    if (M == true)
+                    {
+
+                        return View("ExitoOp");
+                    }
+                    else
+                    {
+                        return View("ErrorOp");
+                    }
+                }
+                if (Accion == "Eliminar")
+                {
+                    bool E = BD.DeleteCategoría(C.Id);
+                    if (E == true)
+                    {
+
+                        return View("ExitoOp");
+                    }
+                    else
+                    {
+                        return View("ErrorOp");
+                    }
                 }
             }
-            if (Accion == "Ver")
-            {
-                ViewBag.ListaCatPers = BD.ListarCategoriasPersonajes();
-                return View("ABMCatPersonajes");
-            }
-            if (Accion == "Modificar")
-            {
 
-                bool M = BD.UpdateCategoría(C.Id, C.Nombre);
-                if (M == true)
-                {
-
-                    return View("ExitoOp");
-                }
-                else
-                {
-                    return View("ErrorOp");
-                }
-            }
-            if (Accion == "Eliminar")
-            {
-                bool E = BD.DeleteCategoría(C.Id);
-                if (E == true)
-                {
-
-                    return View("ExitoOp");
-                }
-                else
-                {
-                    return View("ErrorOp");
-                }
-            }
             return View("ErrorOp");
         }
 
         public ActionResult ABMPreguntas()
         {
-            /*int v = ValidarUsuario();
+            int v = ValidarUsuario();
             if (v == 1)
             {
                 return View("../Home/Index");
@@ -326,7 +330,7 @@ namespace QEQB05.Controllers
             if (v == 2)
             {
                 return View("../Home/Login");
-            }*/
+            }
 
             ViewBag.ListaPreguntas = BD.ListarPreguntas();
             return View();
@@ -334,7 +338,7 @@ namespace QEQB05.Controllers
 
         public ActionResult EdicionPreguntas(int Id, string Accion)
         {
-            /*int v = ValidarUsuario();
+            int v = ValidarUsuario();
             if (v == 1)
             {
                 return View("../Home/Index");
@@ -342,7 +346,7 @@ namespace QEQB05.Controllers
             if (v == 2)
             {
                 return View("../Home/Login");
-            }*/
+            }
             
             ViewBag.Accion = Accion;
             if (Accion == "Insertar")
@@ -354,7 +358,7 @@ namespace QEQB05.Controllers
                 Pregunta Pre= BD.GetPregunta(Id);
                 if (Accion == "Eliminar")
                 {
-                    return View("ConfirmarEliminarPregunta", Pre);
+                    return View("ConfirmarEliminarPreguntas", Pre);
                 }
                 else
                 {
@@ -364,7 +368,7 @@ namespace QEQB05.Controllers
         }
         public ActionResult OperacionesPregunta (Pregunta P, string Accion)
         {
-            /*int v = ValidarUsuario();
+            int v = ValidarUsuario();
             if (v == 1)
             {
                 return View("../Home/Index");
@@ -372,11 +376,18 @@ namespace QEQB05.Controllers
             if (v == 2)
             {
                 return View("../Home/Login");
-            }*/
+            }
             if (!ModelState.IsValid)
             {
+                return View("FormPregunta", P);
+            }
+
+            
+            if (!ModelState.IsValidField("TextoPreg"))
+
+            {
                 ViewBag.Accion = Accion;
-                return View("FormPersonaje", P);
+                return View("FormPregunta", P);
             }
 
             if (Accion == "Insertar")
@@ -385,11 +396,13 @@ namespace QEQB05.Controllers
                 bool E = BD.InsertPregunta(P.TextoPreg);
                 if (E == true)
                 {
-                    return View("ExitoOp");
+                    ViewBag.Estado = "Exitosa";
+                    return View("ResultadoOp");
                 }
                 else
                 {
-                    return View("ErrorOp");
+                    ViewBag.Estado = "Erronea";
+                    return View("ResultadoOp");
                 }
             }
             
@@ -398,11 +411,13 @@ namespace QEQB05.Controllers
                 bool E = BD.ModificarPregunta(P);
                 if (E == true)
                 {
-                    return View("ExitoOp");
+                    ViewBag.Estado = "Exitosa";
+                    return View("ResultadoOp");
                 }
                 else
                 {
-                    return View("ErrorOp");
+                    ViewBag.Estado = "Erronea";
+                    return View("ResultadoOp");
                 }
                
                 
@@ -413,19 +428,22 @@ namespace QEQB05.Controllers
                 bool E = BD.EliminarPregunta(P.IdPreg);
                 if (E == true)
                 {
-                    return View("ExitoOp");
+                    ViewBag.Estado = "Exitosa";
+                    return View("ResultadoOp");
                 }
                 else
                 {
-                    return View("ErrorOp");
+                    ViewBag.Estado = "Erronea";
+                    return View("ResultadoOp");
                 }
             }
-            return View("ErrorOp");
+            ViewBag.Estado = "Erronea";
+            return View("ResultadoOp");
         }
 
         public ActionResult CargarRespuestas()
         {
-            /*int v = ValidarUsuario();
+            int v = ValidarUsuario();
             if (v == 1)
             {
                 return View("../Home/Index");
@@ -433,7 +451,7 @@ namespace QEQB05.Controllers
             if (v == 2)
             {
                 return View("../Home/Login");
-            }*/
+            }
             List<Pregunta> preguntas = BD.ListarPreguntas();
             ViewBag.ListaPreg = preguntas;
             return View();
@@ -441,7 +459,7 @@ namespace QEQB05.Controllers
 
         public ActionResult FormRespuestas(string Texto, int Id)
         {
-            /*int v = ValidarUsuario();
+            int v = ValidarUsuario();
             if (v == 1)
             {
                 return View("../Home/Index");
@@ -449,7 +467,7 @@ namespace QEQB05.Controllers
             if (v == 2)
             {
                 return View("../Home/Login");
-            }*/
+            }
             Pregunta Preg = new Pregunta(Id, Texto);
             List<Personaje> ListaTodosPers = BD.ListarPersonajes();
             ViewBag.ListaTodosPers = ListaTodosPers;
@@ -458,5 +476,20 @@ namespace QEQB05.Controllers
             return View("FormRespuestas", Preg);
         }
 
+        public ActionResult OperacionesRespuestas(int[] Box, int Id)
+        {
+            int v = ValidarUsuario();
+            if (v == 1)
+            {
+                return View("../Home/Index");
+            }
+            if (v == 2)
+            {
+                return View("../Home/Login");
+            }
+            bool val = BD.UpdatePersonajesXPregunta(Id, Box);
+            ViewBag.val = val;
+            return View("OpRespuestas");
+        }
     }
 }

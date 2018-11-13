@@ -1,0 +1,21 @@
+﻿
+@if (ViewBag.val == true)
+{
+    {
+        ViewBag.Title = "Exito";
+    }
+
+    <h2>Operación exitosa</h2>
+
+    @Html.ActionLink("Volver", "CargarRespuestas", "Backoffice")
+}
+else
+{
+    {
+        ViewBag.Title = "Sin cambios";
+    }
+
+    <h2>No se realizó ningún cambio</h2>
+
+    @Html.ActionLink("Volver", "CargarRespuestas", "Backoffice")
+}

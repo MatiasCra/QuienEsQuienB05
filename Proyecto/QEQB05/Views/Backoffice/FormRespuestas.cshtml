@@ -1,8 +1,7 @@
 ﻿@using QEQB05.Models
 @model Pregunta
 @{
-
-                ViewBag.Title = "FormRespuestas";
+    ViewBag.Title = "FormRespuestas";
 }
 
 <h2>FormRespuestas</h2>
@@ -19,16 +18,16 @@
             if (P.Id == p.Id)
             {
                 v = true;
-                <input type="checkbox" name="Box" value=@p.Id checked="checked"><br />
+                <input type="checkbox" name="Box" value=@p.Id checked="checked">
             }
         }
         if (v == false)
         {
-            <input type="checkbox" name="Box" value=@P.Id><br />
+            <input type="checkbox" name="Box" value=@P.Id>
         }
-        <img src="@P.UrlDataFoto" alt="Personaje" /><br />
-        <p>@P.Nombre</p>
+        <img class="icon-prev" src="@P.UrlDataFoto" alt="Personaje" height="50" width="50" >
+        @P.Nombre<br />
     }
-    <input type="hidden" name="IdPreg" value=@Model.IdPreg />
+    <input type="hidden" name="Id" value=@Model.IdPreg />
     <br /><input type="submit" value=Finalizar />
 }

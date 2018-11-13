@@ -339,7 +339,7 @@ namespace QEQB05.Models
             List<CategoríaP> AuxLista = new List<CategoríaP>();
             SqlConnection Conexion = Conectar();
             SqlCommand Consulta = Conexion.CreateCommand();
-            Consulta.CommandText = "sp_TraerTodasCategoríasP";
+            Consulta.CommandText = "sp_TraerTodasCategoríasPersonaje";
             Consulta.CommandType = System.Data.CommandType.StoredProcedure;
             SqlDataReader Lector = Consulta.ExecuteReader();
             while (Lector.Read())
@@ -422,6 +422,8 @@ namespace QEQB05.Models
             Consulta.Parameters.AddWithValue("@pContraseña", U.Password);
             Consulta.Parameters.AddWithValue("@pAdmin", U.Admin);
             Consulta.Parameters.AddWithValue("@pPuntosAcum", 0);
+            Consulta.Parameters.AddWithValue("@PreguntaDeSeguridad", U.Pregunta);
+            Consulta.Parameters.AddWithValue("@respuesta", U.respuesta);
             int i = Consulta.ExecuteNonQuery();
             if (i > 0)
             {
@@ -567,7 +569,67 @@ namespace QEQB05.Models
             Desconectar(Conexion);
             return Lista;
         }
-            
+
+        public static bool UpdatePersonajesXPregunta(int IdPreg, int[] Box)
+        {
+            bool val;
+            bool operar;
+            int cont = 0;
+            List<Personaje> Anteriores = BD.ListarPersonajesXRespuesta(IdPreg); 
+            foreach (int I in Box)
+            {
+                operar = true;
+                foreach (Personaje P in Anteriores)
+                {
+                    if(I == P.Id)
+                    {
+                        operar = false;
+                    }
+                }
+                if(operar == true)
+                {
+                    SqlConnection Conexion = Conectar();
+                    SqlCommand Consulta = Conexion.CreateCommand();
+                    Consulta.CommandText = "sp_InsertarPersonajesXPreguntas";
+                    Consulta.CommandType = System.Data.CommandType.StoredProcedure;
+                    Consulta.Parameters.AddWithValue("@pIdPreg", IdPreg);
+                    Consulta.Parameters.AddWithValue("@pIdPers", I);
+                    int v = Consulta.ExecuteNonQuery();
+                    Desconectar(Conexion);
+                    cont = cont + v;
+                }
+            }
+            foreach(Personaje P in Anteriores)
+            {
+                operar = true;
+                foreach(int I in Box)
+                {
+                    operar = false;
+                }
+                if (operar == true)
+                {
+                    SqlConnection Conexion = Conectar();
+                    SqlCommand Consulta = Conexion.CreateCommand();
+                    Consulta.CommandText = "sp_EliminarPersonajesXPreguntas";
+                    Consulta.CommandType = System.Data.CommandType.StoredProcedure;
+                    Consulta.Parameters.AddWithValue("@pIdPreg", IdPreg);
+                    Consulta.Parameters.AddWithValue("@pIdPers", P.Id);
+                    int v = Consulta.ExecuteNonQuery();
+                    Desconectar(Conexion);
+                    cont = cont + v;
+                }
+            }
+            if(cont == 0)
+            {
+                val = false;
+            }
+            else
+            {
+                val = true;
+            }
+            return val;
+        }
+           
         public static void CambiarContraseña(Usuario usu)
         {
             SqlConnection Conexion = Conectar();
