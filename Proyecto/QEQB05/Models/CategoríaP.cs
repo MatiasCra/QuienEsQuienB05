@@ -7,8 +7,8 @@ namespace QEQB05.Models
 {
     public class CategoríaP
     {
-        int _Id;
-        string _Nombre;
+        private int _Id;
+        private string _Nombre;
 
         public int Id {
             get

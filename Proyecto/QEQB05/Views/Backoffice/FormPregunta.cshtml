@@ -9,10 +9,10 @@
 
 @using (Html.BeginForm("OperacionesPregunta", "Backoffice", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-    
+
     @Html.HiddenFor(x => x.IdPreg)
 
-    <p>Texto: </p> @Html.TextBoxFor(x => x.TextoPreg, new { required = "required", id = "inputText" }) @Html.ValidationMessageFor(x => x.TextoPreg) <br />
+    <p>Texto: </p> @Html.TextBoxFor(x => x.TextoPreg, new { required = "required" }) @Html.ValidationMessageFor(x => x.TextoPreg) <br />
     <input type="hidden" name="Accion" value=@ViewBag.Accion />
     <br /><input type="submit" value=Finalizar />
 }

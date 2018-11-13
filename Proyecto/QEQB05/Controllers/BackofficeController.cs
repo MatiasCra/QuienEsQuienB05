@@ -160,11 +160,12 @@ namespace QEQB05.Controllers
 
                 if (I != null)
                 {
-
+                    ViewBag.View = "ABMPersonajes";
                     return View("ExitoOp");
                 }
                 else
                 {
+                    ViewBag.View = "ABMPersonajes";
                     return View("ErrorOp");
                 }
             }
@@ -179,11 +180,12 @@ namespace QEQB05.Controllers
                 bool M = BD.UpdatePersonaje(P, path, Box);
                 if (M == true)
                 {
-
+                    ViewBag.View = "ABMPersonajes";
                     return View("ExitoOp");
                 }
                 else
                 {
+                    ViewBag.View = "ABMPersonajes";
                     return View("ErrorOp");
                 }
             }
@@ -192,11 +194,12 @@ namespace QEQB05.Controllers
                 bool E = BD.DeletePersonaje(P.Id);
                 if (E == true)
                 {
-
+                    ViewBag.View = "ABMPersonajes";
                     return View("ExitoOp");
                 }
                 else
                 {
+                    ViewBag.View = "ABMPersonajes";
                     return View("ErrorOp");
                 }
             }
@@ -263,7 +266,6 @@ namespace QEQB05.Controllers
             }
             if (!ModelState.IsValid)
             {
-                ViewBag.Accion = Accion;
                 return View("FormCatPers", C);
             }
             else
@@ -351,7 +353,8 @@ namespace QEQB05.Controllers
             ViewBag.Accion = Accion;
             if (Accion == "Insertar")
             {
-                return View("FormPregunta");
+                Pregunta p = new Pregunta();
+                return View("FormPregunta", p);
             }
             else
             {
@@ -396,13 +399,13 @@ namespace QEQB05.Controllers
                 bool E = BD.InsertPregunta(P.TextoPreg);
                 if (E == true)
                 {
-                    ViewBag.Estado = "Exitosa";
-                    return View("ResultadoOp");
+                    ViewBag.View = "ABMPreguntas";
+                    return View("ExitoOp");
                 }
                 else
                 {
-                    ViewBag.Estado = "Erronea";
-                    return View("ResultadoOp");
+                    ViewBag.View = "ABMPreguntas";
+                    return View("ErrorOp");
                 }
             }
             
@@ -411,16 +414,16 @@ namespace QEQB05.Controllers
                 bool E = BD.ModificarPregunta(P);
                 if (E == true)
                 {
-                    ViewBag.Estado = "Exitosa";
-                    return View("ResultadoOp");
+                    ViewBag.View = "ABMPreguntas";
+                    return View("ExitoOp");
                 }
                 else
                 {
-                    ViewBag.Estado = "Erronea";
-                    return View("ResultadoOp");
+                    ViewBag.View = "ABMPreguntas";
+                    return View("ErrorOp");
                 }
-               
-                
+
+
             }
             if (Accion == "Eliminar")
             {
@@ -428,13 +431,13 @@ namespace QEQB05.Controllers
                 bool E = BD.EliminarPregunta(P.IdPreg);
                 if (E == true)
                 {
-                    ViewBag.Estado = "Exitosa";
-                    return View("ResultadoOp");
+                    ViewBag.View = "ABMPreguntas";
+                    return View("ExitoOp");
                 }
                 else
                 {
-                    ViewBag.Estado = "Erronea";
-                    return View("ResultadoOp");
+                    ViewBag.View = "ABMPreguntas";
+                    return View("ErrorOp");
                 }
             }
             ViewBag.Estado = "Erronea";
