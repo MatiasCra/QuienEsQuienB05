@@ -34,11 +34,11 @@ namespace QEQB05.Controllers
             }
             if(v == 1)
             {
-                return View("../Home/Index");
+                return View("../Home/Login");
             }
             if(v == 2)
             {
-                return View("../Home/Login");
+                return View("../Home/Index");
             }
             return View();
         }
@@ -48,11 +48,11 @@ namespace QEQB05.Controllers
             int v = ValidarUsuario();
             if (v == 1)
             {
-                return View("../Home/Index");
+                return View("../Home/Login");
             }
             if (v == 2)
             {
-                return View("../Home/Login");
+                return View("../Home/Index");
             }
             if (Box != null)
             {
@@ -68,11 +68,11 @@ namespace QEQB05.Controllers
             int v = ValidarUsuario();
             if (v == 1)
             {
-                return View("../Home/Index");
+                return View("../Home/Login");
             }
             if (v == 2)
             {
-                return View("../Home/Login");
+                return View("../Home/Index");
             }
             ViewBag.Users = BD.TraerUsuarios();
             return View();
@@ -82,11 +82,11 @@ namespace QEQB05.Controllers
             int v = ValidarUsuario();
             if (v == 1)
             {
-                return View("../Home/Index");
+                return View("../Home/Login");
             }
             if (v == 2)
             {
-                return View("../Home/Login");
+                return View("../Home/Index");
             }
             List<Personaje> AuxListaPersonajes = new List<Personaje>();
             AuxListaPersonajes = BD.ListarPersonajes();
@@ -99,11 +99,11 @@ namespace QEQB05.Controllers
             int v = ValidarUsuario();
             if (v == 1)
             {
-                return View("../Home/Index");
+                return View("../Home/Login");
             }
             if (v == 2)
             {
-                return View("../Home/Login");
+                return View("../Home/Index");
             }
             ViewBag.Categorias = BD.ListarTodasCategoriasP();
             ViewBag.Accion = Accion;
@@ -132,11 +132,11 @@ namespace QEQB05.Controllers
             int v = ValidarUsuario();
             if (v == 1)
             {
-                return View("../Home/Index");
+                return View("../Home/Login");
             }
             if (v == 2)
             {
-                return View("../Home/Login");
+                return View("../Home/Index");
             }
             string path = null;
             string fileName = null;
@@ -211,11 +211,11 @@ namespace QEQB05.Controllers
             int v = ValidarUsuario();
             if (v == 1)
             {
-                return View("../Home/Index");
+                return View("../Home/Login");
             }
             if (v == 2)
             {
-                return View("../Home/Login");
+                return View("../Home/Index");
             }
             List<CategoríaP> AuxListaCat = new List<CategoríaP>();
             AuxListaCat = BD.ListarCategoriasPersonajes();
@@ -228,11 +228,11 @@ namespace QEQB05.Controllers
             int v = ValidarUsuario();
             if (v == 1)
             {
-                return View("../Home/Index");
+                return View("../Home/Login");
             }
             if (v == 2)
             {
-                return View("../Home/Login");
+                return View("../Home/Index");
             }
             ViewBag.Accion = Accion;
             if (Accion == "Insertar")
@@ -258,11 +258,11 @@ namespace QEQB05.Controllers
             int v = ValidarUsuario();
             if (v == 1)
             {
-                return View("../Home/Index");
+                return View("../Home/Login");
             }
             if (v == 2)
             {
-                return View("../Home/Login");
+                return View("../Home/Index");
             }
             if (!ModelState.IsValid)
             {
@@ -327,11 +327,11 @@ namespace QEQB05.Controllers
             int v = ValidarUsuario();
             if (v == 1)
             {
-                return View("../Home/Index");
+                return View("../Home/Login");
             }
             if (v == 2)
             {
-                return View("../Home/Login");
+                return View("../Home/Index");
             }
 
             ViewBag.ListaPreguntas = BD.ListarPreguntas();
@@ -343,11 +343,11 @@ namespace QEQB05.Controllers
             int v = ValidarUsuario();
             if (v == 1)
             {
-                return View("../Home/Index");
+                return View("../Home/Login");
             }
             if (v == 2)
             {
-                return View("../Home/Login");
+                return View("../Home/Index");
             }
             
             ViewBag.Accion = Accion;
@@ -374,11 +374,11 @@ namespace QEQB05.Controllers
             int v = ValidarUsuario();
             if (v == 1)
             {
-                return View("../Home/Index");
+                return View("../Home/Login");
             }
             if (v == 2)
             {
-                return View("../Home/Login");
+                return View("../Home/Index");
             }
             if (!ModelState.IsValid)
             {
@@ -449,11 +449,11 @@ namespace QEQB05.Controllers
             int v = ValidarUsuario();
             if (v == 1)
             {
-                return View("../Home/Index");
+                return View("../Home/Login");
             }
             if (v == 2)
             {
-                return View("../Home/Login");
+                return View("../Home/Index");
             }
             List<Pregunta> preguntas = BD.ListarPreguntas();
             ViewBag.ListaPreg = preguntas;
@@ -465,11 +465,11 @@ namespace QEQB05.Controllers
             int v = ValidarUsuario();
             if (v == 1)
             {
-                return View("../Home/Index");
+                return View("../Home/Login");
             }
             if (v == 2)
             {
-                return View("../Home/Login");
+                return View("../Home/Index");
             }
             Pregunta Preg = new Pregunta(Id, Texto);
             List<Personaje> ListaTodosPers = BD.ListarPersonajes();
@@ -484,11 +484,11 @@ namespace QEQB05.Controllers
             int v = ValidarUsuario();
             if (v == 1)
             {
-                return View("../Home/Index");
+                return View("../Home/Login");
             }
             if (v == 2)
             {
-                return View("../Home/Login");
+                return View("../Home/Index");
             }
             bool val = BD.UpdatePersonajesXPregunta(Id, Box);
             ViewBag.val = val;

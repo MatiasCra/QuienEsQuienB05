@@ -222,6 +222,7 @@
     <Content Include="Content\CargResp.css" />
     <Content Include="Content\CartoonAvatar1424630447242.png" />
     <Content Include="Content\Estilos.css" />
+    <Content Include="Content\Inst.css" />
     <Content Include="Content\Logo.jpg" />
     <Content Include="Content\LogoCompania.jpg" />
     <Content Include="Content\Nomb.css" />
@@ -287,7 +288,6 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Backoffice\Index.cshtml" />
-    <Content Include="Views\Home\InfoJuego.cshtml" />
     <Content Include="Views\Home\AboutUs.cshtml" />
     <Content Include="Views\Home\Registro.cshtml" />
     <Content Include="Views\Backoffice\HacerAdmin.cshtml" />
@@ -303,6 +303,7 @@
     <Content Include="Views\Backoffice\OpRespuestas.cshtml" />
     <Content Include="Views\Backoffice\ResultadoOp.cshtml" />
     <Content Include="Views\Backoffice\ConfirmarEliminarCategoria.cshtml" />
+    <Content Include="Views\Home\Instrucciones.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

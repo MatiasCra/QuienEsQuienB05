@@ -154,5 +154,10 @@ namespace QEQB05.Controllers
         {
             return View();
         }
+
+        public ActionResult Instrucciones()
+        {
+            return View();
+        }
     }
 }

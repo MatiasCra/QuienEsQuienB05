@@ -15,6 +15,8 @@
             {
                 <p><a href="@Url.Action("Login", "Home")" class="btn btn-primary btn-lg">Login &raquo;</a></p>
                 <p><a href="@Url.Action("Registro", "Home")" class="btn btn-primary btn-lg">Registrarse &raquo;</a></p>
+                <p><a href="http://asp.net" class="btn btn-primary btn-lg">Jugar como invitado &raquo;</a></p>
+
             }
             else
             {
@@ -22,34 +24,15 @@
                 {
                     <p><a href="@Url.Action("Index", "Backoffice")" class="btn btn-primary btn-lg">Menú Backoffice &raquo;</a></p>
                 }
+                <p><a href="http://asp.net" class="btn btn-primary btn-lg">Jugar &raquo;</a></p>
                 <p><a href="@Url.Action("LogOut", "Home")" class="btn btn-primary btn-lg">Log out &raquo;</a></p>
             }
 
-            <p><a href="http://asp.net" class="btn btn-primary btn-lg">Jugar como invitado &raquo;</a></p>
             <p><a href="@Url.Action("About", "Home")" class="btn btn-primary btn-lg">About us &raquo;</a></p>
+            <p><a href="@Url.Action("Instrucciones", "Home")" class="btn btn-primary btn-lg">Instrucciones &raquo;</a></p>
         </div>
         <div align="right" id="tapa" class="col-md-6"  >
             <img src="~/Content/Logo.jpg" style="width:400px; height:350px " alt="Logo" />
         </div>
     </div>
 </div>
-
-        <div class="row">
-            <div class="col-md-4">
-                <h2>Informacion basica</h2>
-                <p>
-                    La maquina seleccionar un personaje de la base de datos y usted tendra que averiguar quien es haciendo distintas preguntas.
-                </p>
-            </div>
-            <div class="col-md-4">
-                <h2>Puntos y preguntas</h2>
-                <p>
-                    Se le dara 1000000 bitcoins, con los cuales podra hacer preguntas y ariesgar a personajes.
-                    Cada pregunta descontará 10000 bitcoins,Se podrá arriesgar ​en cualquier momento. Al fallar, se descontará 50000 bitcoins​. Si quedan 5 personajes o menos, arriesgar costará la mitad de tu botín disponible.
-                </p>
-            </div>
-            <div class="col-md-4">
-                <h2>Lista de personajes</h2>
-                <p>El listado de personajes se mostrará al inicio del juego. Luego quedarán ocultos. Si en la mitad del juego, se desea ver de nuevo la lista de personajes restantes, se descontarán 5000 bitcoins ​por cada vez que se consulte.</p>
-            </div>
-        </div>
