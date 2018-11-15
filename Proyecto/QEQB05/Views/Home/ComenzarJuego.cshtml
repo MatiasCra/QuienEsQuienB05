@@ -1,0 +1,14 @@
+﻿@using QEQB05.Models
+@{
+    ViewBag.Title = "ComenzarJuego";
+}
+<h2>Las categorias entre las que puede elegir son:</h2>
+
+<input type="hidden" name="puntaje" value=@ViewBag.puntaje />
+
+@{
+    foreach (CategoríaP categoría in ViewBag.categorias)
+    {
+        @Html.ActionLink(categoría.Nombre, "VerPersonajes", "HomeController", new { categorías=categoría.Nombre }, null)<br />
+    }
+}

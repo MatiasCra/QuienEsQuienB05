@@ -7,10 +7,17 @@ using QEQB05.Models;
 
 namespace QEQB05.Controllers
 {
+    
     public class HomeController : Controller
     {
         public ActionResult Index()
         {
+            return View();
+        }
+        public ActionResult ComenzarJuego()
+        {
+            ViewBag.puntaje = 1000000;
+            ViewBag.categorias = BD.ListarTodasCategoriasP();
             return View();
         }
         public ActionResult Login()

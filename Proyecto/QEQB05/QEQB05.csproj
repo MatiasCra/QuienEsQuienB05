@@ -19,8 +19,10 @@
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
-    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
-    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
+    <IISExpressAnonymousAuthentication>
+    </IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>
+    </IISExpressWindowsAuthentication>
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
@@ -222,6 +224,7 @@
     <Content Include="Content\CargResp.css" />
     <Content Include="Content\CartoonAvatar1424630447242.png" />
     <Content Include="Content\Estilos.css" />
+    <Content Include="Content\fondo.jpg" />
     <Content Include="Content\Inst.css" />
     <Content Include="Content\Logo.jpg" />
     <Content Include="Content\LogoCompania.jpg" />
@@ -304,6 +307,7 @@
     <Content Include="Views\Backoffice\ResultadoOp.cshtml" />
     <Content Include="Views\Backoffice\ConfirmarEliminarCategoria.cshtml" />
     <Content Include="Views\Home\Instrucciones.cshtml" />
+    <Content Include="Views\Home\ComenzarJuego.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

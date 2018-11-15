@@ -1,13 +1,15 @@
 ﻿body {
+    background-image: url('~/Content/fondo.jpg');
 }
 
 #Nomb {
-    color: #999999;
+    color:white;
     line-height: 20px;
     padding-top: 15px;
     padding-bottom: 15px;
     position: relative;
     display: block;
+
 }
 
 #Fondo {
@@ -16,19 +18,23 @@
     font-size: 21px;
     font-weight: 200;
     line-height: 2.1428571435;
-    color: white;
-    background-color: white;
+    color:white;
+  
+    
 }
 
 .Negro{
-    color: black;
+    color: white;
 }
 
 .Negro2 {
-    color: black;
+    color: white;
     font-size: 21px;
     margin-bottom: 20px;
     font-size: 16.099999999999998px;
     font-weight: 200;
     line-height: 1.4;
+}
+#useless {
+    color: white;
 }
