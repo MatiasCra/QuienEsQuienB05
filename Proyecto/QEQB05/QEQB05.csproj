@@ -304,6 +304,7 @@
     <Content Include="Views\Backoffice\ResultadoOp.cshtml" />
     <Content Include="Views\Backoffice\ConfirmarEliminarCategoria.cshtml" />
     <Content Include="Views\Home\Instrucciones.cshtml" />
+    <Content Include="Views\Home\TodosPersonajes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
