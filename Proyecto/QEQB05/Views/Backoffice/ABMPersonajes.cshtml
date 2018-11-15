@@ -18,13 +18,14 @@
     @foreach (Personaje p in ViewBag.ListaPersonajes)
     {
 
-        <tr>
-            <th>@p.Nombre</th>
-            <th><img class="icon-prev" src="@p.UrlDataFoto" alt="@p.Nombre" height="40" width="40" /></th>
-            <th>@Html.ActionLink("Ver", "EdicionPersonajes", "Backoffice", new { Accion = "Ver", Id = p.Id }, null)</th>
-            <th>@Html.ActionLink("Editar", "EdicionPersonajes", "Backoffice", new { Accion = "Modificar", Id = p.Id }, null)</th>
-            <th>@Html.ActionLink("Eliminar", "EdicionPersonajes", "Backoffice", new { Accion = "Eliminar", Id = p.Id }, null)</th>
-        </tr>
+    <tr>
+        <th>@p.Nombre</th>
+        <th><img class="icon-prev" src="@p.UrlDataFoto" alt="@p.Nombre" height="40" width="40" /></th>
+        <th>@Html.ActionLink("Ver", "EdicionPersonajes", "Backoffice", new { Accion = "Ver", Id = p.Id }, null)</th>
+        <th>@Html.ActionLink("Editar", "EdicionPersonajes", "Backoffice", new { Accion = "Modificar", Id = p.Id }, null)</th>
+        <th>@Html.ActionLink("Eliminar", "EdicionPersonajes", "Backoffice", new { Accion = "Eliminar", Id = p.Id }, null)</th>
+        <th>@Html.ActionLink("Cargar respuestas", "EdicionPersonajes", "Backoffice", new { Accion = "Respuestas", Id = p.Id }, null)</th>
+    </tr>
 
     }
 </table>
