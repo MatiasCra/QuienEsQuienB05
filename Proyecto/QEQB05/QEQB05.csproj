@@ -306,6 +306,7 @@
     <Content Include="Views\Home\Instrucciones.cshtml" />
     <Content Include="Views\Backoffice\FormRespuestasXPers.cshtml" />
     <Content Include="Views\Backoffice\OpRespuestas2.cshtml" />
+    <Content Include="Views\Home\TodosPersonajes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
