@@ -1,14 +1,16 @@
 ﻿@using QEQB05.Models
+@model CategoríaP
 @{
     ViewBag.Title = "ComenzarJuego";
 }
-<h2>Las categorias entre las que puede elegir son:</h2>
 
-<input type="hidden" name="puntaje" value=@ViewBag.puntaje />
-
-@{
-    foreach (CategoríaP categoría in ViewBag.categorias)
-    {
-        @Html.ActionLink(categoría.Nombre, "VerPersonajes", "HomeController", new { categorías=categoría.Nombre }, null)<br />
-    }
+<h2>ComenzarJuego</h2>
+@using (Html.BeginForm("MostrarTodosPersonajes", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @{ foreach (CategoríaP cate in ViewBag.categorias)
+        {
+            @Html.RadioButtonFor(x => x.Id, cate.Nombre)
+        }
+    }<input type="hidden" name="puntaje" value=@ViewBag.puntaje />
+    <br /><input type="submit" value=Finalizar />
 }
