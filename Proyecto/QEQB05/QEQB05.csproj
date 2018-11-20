@@ -307,12 +307,9 @@
     <Content Include="Views\Backoffice\ResultadoOp.cshtml" />
     <Content Include="Views\Backoffice\ConfirmarEliminarCategoria.cshtml" />
     <Content Include="Views\Home\Instrucciones.cshtml" />
-<<<<<<< HEAD
-=======
     <Content Include="Views\Backoffice\FormRespuestasXPers.cshtml" />
     <Content Include="Views\Backoffice\OpRespuestas2.cshtml" />
     <Content Include="Views\Home\TodosPersonajes.cshtml" />
->>>>>>> a17b03ad1ed0963a662dc7e17003c78defdc416d
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
