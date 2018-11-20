@@ -155,7 +155,12 @@ namespace QEQB05.Controllers
                 return View("Index");
             }
         }
-        
+        public ActionResult MostrarTodosPersonajes()
+        {
+            List<Personaje> personajes = BD.ListarPersonajes();
+            ViewBag.ListaPersonajes = personajes;
+            return View();
+        }
 
         public ActionResult Registro()
         {

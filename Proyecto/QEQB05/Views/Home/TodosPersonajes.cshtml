@@ -1,0 +1,23 @@
+﻿@using QEQB05.Models;
+@{
+    ViewBag.Title = "TodosPersonajes";
+}
+<link rel="stylesheet" href="~/Content/ABMPerso.css">
+<h2>Lista de todos los personajes</h2>
+
+<table style="width:100%">
+    <tr>
+        <th>Nombre</th>
+        <th>Foto</th>
+
+    </tr>
+    @foreach (Personaje p in ViewBag.ListaPersonajes)
+    {
+
+        <tr>
+            <th>@p.Nombre</th>
+            <th><img class="icon-prev" src="@p.UrlDataFoto" alt="@p.Nombre" height="40" width="40" /></th>
+        </tr>
+
+    }
+</table>
