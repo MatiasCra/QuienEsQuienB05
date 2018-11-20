@@ -121,8 +121,19 @@ namespace QEQB05.Controllers
                 else
                 {
                     ViewBag.AuxFoto = P.UrlDataFoto;
-                    ViewBag.CatsP = P.Categorías;
-                    return View("FormPersonaje", P);
+                    if (Accion == "Respuestas")
+                    {
+                        List <Pregunta> ListaPreg = BD.ListarPreguntaXPersonajes(Id);
+                        ViewBag.ListaPregPers = ListaPreg;
+                        List<Pregunta> ListaTodasPregs = BD.ListarPreguntas();
+                        ViewBag.ListaTodasPregs = ListaTodasPregs;
+                        return View("FormRespuestasXPers", P);
+                    }
+                    else
+                    {
+                        ViewBag.CatsP = P.Categorías;
+                        return View("FormPersonaje", P);
+                    }
                 }
             }
         }
@@ -493,6 +504,22 @@ namespace QEQB05.Controllers
             bool val = BD.UpdatePersonajesXPregunta(Id, Box);
             ViewBag.val = val;
             return View("OpRespuestas");
+        }
+
+        public ActionResult OperacionesRespuestas2(int[] Box, int Id)
+        {
+            int v = ValidarUsuario();
+            if (v == 1)
+            {
+                return View("../Home/Login");
+            }
+            if (v == 2)
+            {
+                return View("../Home/Index");
+            }
+            bool val = BD.UpdatePreguntasXPersonaje(Id, Box);
+            ViewBag.val = val;
+            return View("OpRespuestas2");
         }
     }
 }

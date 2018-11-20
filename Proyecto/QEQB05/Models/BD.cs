@@ -705,5 +705,125 @@ namespace QEQB05.Models
             Pregunta P = new Pregunta(id, texto);
             return P;
         }
+
+        public static List<Pregunta> ListarPreguntaXPersonajes(int IdPers)
+        {
+            List<Pregunta> Lista = new List<Pregunta>();
+            SqlConnection Conexion = Conectar();
+            SqlCommand Consulta = Conexion.CreateCommand();
+            Consulta.CommandText = "sp_ListarPreguntaXPersonajes";
+            Consulta.CommandType = System.Data.CommandType.StoredProcedure;
+            Consulta.Parameters.AddWithValue("@pIdPers", IdPers);
+            SqlDataReader Lector = Consulta.ExecuteReader();
+            while (Lector.Read())
+            {
+                int Id = Convert.ToInt32(Lector["IdPregunta"]);
+                string Texto = Lector["Texto"].ToString();
+                Pregunta Pr = new Pregunta(Id, Texto);
+                Lista.Add(Pr);
+            }
+            Desconectar(Conexion);
+            return Lista;
+        }
+
+        public static bool UpdatePreguntasXPersonaje(int IdPers, int[] Box)
+        {
+            bool val;
+            bool operar;
+            int cont = 0;
+            List<Pregunta> Anteriores = BD.ListarRespuestaXPersonaje(IdPers);
+            if (Box == null)
+            {
+                foreach (Pregunta P in Anteriores)
+                {
+                    SqlConnection Conexion = Conectar();
+                    SqlCommand Consulta = Conexion.CreateCommand();
+                    Consulta.CommandText = "sp_DeletePersonajesXPreguntas";
+                    Consulta.CommandType = System.Data.CommandType.StoredProcedure;
+                    Consulta.Parameters.AddWithValue("@pIdPreg", P.IdPreg);
+                    Consulta.Parameters.AddWithValue("@pIdPers", IdPers);
+                    int v = Consulta.ExecuteNonQuery();
+                    Desconectar(Conexion);
+                    cont = cont + v;
+                }
+            }
+            else
+            {
+                foreach (int I in Box)
+                {
+                    operar = true;
+                    foreach (Pregunta P in Anteriores)
+                    {
+                        if (I == P.IdPreg)
+                        {
+                            operar = false;
+                        }
+                    }
+                    if (operar == true)
+                    {
+                        SqlConnection Conexion = Conectar();
+                        SqlCommand Consulta = Conexion.CreateCommand();
+                        Consulta.CommandText = "sp_InsertarPersonajesXPreguntas";
+                        Consulta.CommandType = System.Data.CommandType.StoredProcedure;
+                        Consulta.Parameters.AddWithValue("@pIdPreg", I);
+                        Consulta.Parameters.AddWithValue("@pIdPers", IdPers);
+                        int v = Consulta.ExecuteNonQuery();
+                        Desconectar(Conexion);
+                        cont = cont + v;
+                    }
+                }
+                foreach (Pregunta P in Anteriores)
+                {
+                    operar = true;
+                    foreach (int I in Box)
+                    {
+                        if (P.IdPreg == I)
+                        {
+                            operar = false;
+                        }
+                    }
+                    if (operar == true)
+                    {
+                        SqlConnection Conexion = Conectar();
+                        SqlCommand Consulta = Conexion.CreateCommand();
+                        Consulta.CommandText = "sp_DeletePersonajesXPreguntas";
+                        Consulta.CommandType = System.Data.CommandType.StoredProcedure;
+                        Consulta.Parameters.AddWithValue("@pIdPreg", P.IdPreg);
+                        Consulta.Parameters.AddWithValue("@pIdPers", IdPers);
+                        int v = Consulta.ExecuteNonQuery();
+                        Desconectar(Conexion);
+                        cont = cont + v;
+                    }
+                }
+            }
+            if (cont == 0)
+            {
+                val = false;
+            }
+            else
+            {
+                val = true;
+            }
+            return val;
+        }
+        public static List<Pregunta> ListarRespuestaXPersonaje(int IdPers)
+        {
+            List<Pregunta> Lista = new List<Pregunta>();
+            SqlConnection Conexion = Conectar();
+            SqlCommand Consulta = Conexion.CreateCommand();
+            Consulta.CommandText = "sp_ListarPreguntaXPersonajes";
+            Consulta.CommandType = System.Data.CommandType.StoredProcedure;
+            Consulta.Parameters.AddWithValue("@pIdPers", IdPers);
+            SqlDataReader Lector = Consulta.ExecuteReader();
+            while (Lector.Read())
+            {
+                int Id = Convert.ToInt32(Lector["IDPregunta"]);
+                string Texto = Lector["Texto"].ToString();
+                Pregunta P = new Pregunta (Id, Texto);
+                Lista.Add(P);
+            }
+            Desconectar(Conexion);
+            return Lista;
+        }
     }
 }
