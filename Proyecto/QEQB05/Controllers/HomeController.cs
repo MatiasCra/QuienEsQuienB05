@@ -156,22 +156,29 @@ namespace QEQB05.Controllers
             }
         }
         [HttpPost]
-        public ActionResult MostrarTodosPersonajes(int puntaje,CategoríaP x)
+        public ActionResult MostrarTodosPersonajes(int IdC, int puntaje)
         {
             List<Personaje> personajes = BD.ListarPersonajes();
             List<Personaje> elegidos = new List<Personaje>();
-            foreach(Personaje per in personajes)
+            if (IdC == -1)
             {
-                foreach(CategoríaP cat in per.Categorías)
+                elegidos = personajes;
+            }
+            else
+            {
+                foreach (Personaje per in personajes)
                 {
-                    if (x.Nombre==cat.Nombre)
+                    foreach (CategoríaP cat in per.Categorías)
                     {
-                        elegidos.Add(per);
+                        if (IdC == cat.Id)
+                        {
+                            elegidos.Add(per);
+                        }
                     }
                 }
             }
             ViewBag.ListaPersonajes = elegidos;
-            return View();
+            return View("TodosPersonajes");
         }
 
         public ActionResult Registro()
