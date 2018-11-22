@@ -2,13 +2,17 @@
 @{
     ViewBag.Title = "ComenzarJuego";
 }
-<h2>Las categorias entre las que puede elegir son:</h2>
 
-<input type="hidden" name="puntaje" value=@ViewBag.puntaje />
-
-@{
-    foreach (CategoríaP categoría in ViewBag.categorias)
+<h2>ComenzarJuego</h2>
+@using (Html.BeginForm("MostrarTodosPersonajes", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <input type="radio" name="IdC" value="-1" /> @Html.Label("Todos")<br />
     {
-        @Html.ActionLink(categoría.Nombre, "VerPersonajes", "HomeController", new { categorías=categoría.Nombre }, null)<br />
+        foreach (CategoríaP cate in ViewBag.categorias)
+        {
+            <input type="radio" name="IdC" value="@cate.Id" /> @Html.Label(cate.Nombre)<br />
+        }
     }
+    <input type="hidden" name="puntaje" value=@ViewBag.puntaje />
+    <br /><input type="submit" value=Finalizar />
 }

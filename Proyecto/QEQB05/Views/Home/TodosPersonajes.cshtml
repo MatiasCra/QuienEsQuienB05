@@ -1,23 +1,34 @@
 ﻿@using QEQB05.Models;
 @{
     ViewBag.Title = "TodosPersonajes";
+    int cont = ViewBag.ListaPersonajes.Count;
+    int cont2 = cont;
+    bool esImpar = Convert.ToBoolean(cont % 2);
 }
 <link rel="stylesheet" href="~/Content/ABMPerso.css">
 <h2>Lista de todos los personajes</h2>
 
-<table style="width:100%">
+<table align="center">
     <tr>
+        <th>Foto</th>
         <th>Nombre</th>
         <th>Foto</th>
-
+        <th>Nombre</th>
     </tr>
-    @foreach (Personaje p in ViewBag.ListaPersonajes)
-    {
 
-        <tr>
-            <th>@p.Nombre</th>
-            <th><img class="icon-prev" src="@p.UrlDataFoto" alt="@p.Nombre" height="40" width="40" /></th>
-        </tr>
-
-    }
+        @for (int i = 0; i < cont; i++)
+        {
+            <tr>
+                <th><img src=@ViewBag.ListaPersonajes[i].UrlDataFoto alt=@ViewBag.ListaPersonajes[i].Nombre height="100" width="100"/></th>
+                <th><label> @ViewBag.ListaPersonajes[i].Nombre </label></th>
+                @if (cont2 != 1)
+                {
+                    
+                    i++;
+                    <th><img src=@ViewBag.ListaPersonajes[i].UrlDataFoto alt=@ViewBag.ListaPersonajes[i].Nombre height="100" width="100"/></th>
+                    <th><label> @ViewBag.ListaPersonajes[i].Nombre </label></th>
+                    cont2 = cont2 - 2;
+                }
+            </tr>
+        }
 </table>

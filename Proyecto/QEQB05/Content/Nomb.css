@@ -1,5 +1,5 @@
 ﻿body {
-    background-image: url('~/Content/fondo.jpg');
+    background-image: url('/Content/fondo.jpg');
 }
 
 #Nomb {
@@ -9,6 +9,7 @@
     padding-bottom: 15px;
     position: relative;
     display: block;
+    background-image:url(fondo.jpg);
 
 }
 

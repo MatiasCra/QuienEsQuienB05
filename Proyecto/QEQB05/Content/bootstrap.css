@@ -58,7 +58,10 @@ html {
 }
 
 body {
-  margin: 0;
+    margin: 0;
+    background-image: url(~/Content/fondo.jpg);
+    background-repeat: no-repeat !important;
+    background-size: cover;
 }
 
 a:focus {
