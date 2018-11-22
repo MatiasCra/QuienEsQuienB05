@@ -6,29 +6,38 @@
     bool esImpar = Convert.ToBoolean(cont % 2);
 }
 <link rel="stylesheet" href="~/Content/ABMPerso.css">
+
 <h2>Lista de todos los personajes</h2>
 
-<table align="center">
-    <tr>
-        <th>Foto</th>
-        <th>Nombre</th>
-        <th>Foto</th>
-        <th>Nombre</th>
-    </tr>
+@using (Html.BeginForm("Jugar", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+    <table align="center">
+        <tr>
+            <th>Foto</th>
+            <th>Nombre</th>
+            <th>Foto</th>
+            <th>Nombre</th>
+        </tr>
 
         @for (int i = 0; i < cont; i++)
         {
             <tr>
-                <th><img src=@ViewBag.ListaPersonajes[i].UrlDataFoto alt=@ViewBag.ListaPersonajes[i].Nombre height="100" width="100"/></th>
+                <th><img src=@ViewBag.ListaPersonajes[i].UrlDataFoto alt=@ViewBag.ListaPersonajes[i].Nombre height="100" width="100" /></th>
                 <th><label> @ViewBag.ListaPersonajes[i].Nombre </label></th>
                 @if (cont2 != 1)
                 {
-                    
+
                     i++;
-                    <th><img src=@ViewBag.ListaPersonajes[i].UrlDataFoto alt=@ViewBag.ListaPersonajes[i].Nombre height="100" width="100"/></th>
+                    <th><img src=@ViewBag.ListaPersonajes[i].UrlDataFoto alt=@ViewBag.ListaPersonajes[i].Nombre height="100" width="100" /></th>
                     <th><label> @ViewBag.ListaPersonajes[i].Nombre </label></th>
                     cont2 = cont2 - 2;
                 }
             </tr>
         }
-</table>
+    </table>
+    <input type="hidden" name="puntaje" value=@ViewBag.Puntaje />
+    <input type="hidden" name="ListaPers" value=@ViewBag.ListaPersonajes />
+    <input type="hidden" name="Accion" value=@ViewBag.Accion />
+    <input type="submit" value="Continuar" />
+}

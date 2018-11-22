@@ -177,7 +177,9 @@ namespace QEQB05.Controllers
                     }
                 }
             }
+            ViewBag.Puntaje = puntaje;
             ViewBag.ListaPersonajes = elegidos;
+            ViewBag.Accion = "Comenzar"
             return View("TodosPersonajes");
         }
 
