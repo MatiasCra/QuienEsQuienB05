@@ -5,14 +5,15 @@
 @{
     ViewBag.Title = "FormCatPers";
 }
+<body style="background-image: url('/Content/Backoffice.jpg'); background-repeat: no-repeat; background-attachment: fixed;">
+    <h2>Form Cat. Pers</h2>
+    <link rel="stylesheet" href="~/Content/ABMPerso.css">
+    @using (Html.BeginForm("OperacionesCatPers", "Backoffice", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
 
-<h2>Form Cat. Pers</h2>
-<link rel="stylesheet" href="~/Content/ABMPerso.css">
-@using (Html.BeginForm("OperacionesCatPers", "Backoffice", FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-
-    @Html.HiddenFor(x => x.Id);
-    <p>Nombre: </p> @Html.TextBoxFor(x => x.Nombre, new { required = "required", id = "inputText" }) @Html.ValidationMessageFor(x => x.Nombre) <br />
-    <input type="hidden" name="Accion" value=@ViewBag.Accion />
-    <br /><input type="submit" value=Finalizar />
-}
+        @Html.HiddenFor(x => x.Id);
+        <p>Nombre: </p> @Html.TextBoxFor(x => x.Nombre, new { required = "required", id = "inputText" }) @Html.ValidationMessageFor(x => x.Nombre) <br />
+        <input type="hidden" name="Accion" value=@ViewBag.Accion />
+        <br /><input type="submit" value=Finalizar />
+    }
+    </body>

@@ -2,11 +2,12 @@
 @{
     ViewBag.Title = "Error operacion";
 }
+<body style="background-image: url('/Content/Backoffice.jpg'); background-repeat: no-repeat; background-attachment: fixed;">
+    <link rel="stylesheet" href="~/Content/ABMPerso.css">
 
-<link rel="stylesheet" href="~/Content/ABMPerso.css">
+    <h2>Error</h2>
 
-<h2>Error</h2>
+    No se pudo completar la operación
 
-No se pudo completar la operación
-
-@Html.ActionLink("Volver", (string)ViewBag.Link, "Backoffice")
+    @Html.ActionLink("Volver", (string)ViewBag.Link, "Backoffice")
+</body>

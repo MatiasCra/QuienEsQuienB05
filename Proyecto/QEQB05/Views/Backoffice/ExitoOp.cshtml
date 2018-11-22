@@ -3,11 +3,12 @@
     ViewBag.Title = "Exito operacion";
 }
 @Request.Params["x"]
+<body style="background-image: url('/Content/Backoffice.jpg'); background-repeat: no-repeat; background-attachment: fixed;">
+    <link rel="stylesheet" href="~/Content/ABMPerso.css">
 
-<link rel="stylesheet" href="~/Content/ABMPerso.css">
+    <h2>Exito</h2>
 
-<h2>Exito</h2>
+    Operación exitosa
 
-Operación exitosa
-
-@Html.ActionLink("Volver", (string)ViewBag.View, "Backoffice")
+    @Html.ActionLink("Volver", (string)ViewBag.View, "Backoffice")
+</body>

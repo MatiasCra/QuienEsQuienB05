@@ -2,9 +2,10 @@
 @{
     ViewBag.Title = "ResultadoOp";
 }
+<body style="background-image: url('/Content/Backoffice.jpg'); background-repeat: no-repeat; background-attachment: fixed;">
 
+    <link rel="stylesheet" href="~/Content/ABMPerso.css">
+    <p>la operacion se realizo de manera @ViewBag.Estado</p>
 
-<link rel="stylesheet" href="~/Content/ABMPerso.css">
-<p>la operacion se realizo de manera @ViewBag.Estado</p>
-
-@Html.ActionLink("Volver", "ABMPreguntas", "Backoffice")
+    @Html.ActionLink("Volver", "ABMPreguntas", "Backoffice")
+</body>
