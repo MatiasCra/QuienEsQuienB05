@@ -230,7 +230,7 @@
     <Content Include="Content\Inst.css" />
     <Content Include="Content\Logo.jpg" />
     <Content Include="Content\logo10.png" />
-    <Content Include="Content\LogoCompania.jpg" />
+    <Content Include="Content\LogoDeCompania.png" />
     <Content Include="Content\Nomb.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
