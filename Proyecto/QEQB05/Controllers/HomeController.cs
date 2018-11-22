@@ -20,6 +20,24 @@ namespace QEQB05.Controllers
             ViewBag.categorias = BD.ListarTodasCategoriasP();
             return View();
         }
+        public ActionResult Jugar(int puntaje, List<Personaje> ListaPers, string Accion)
+        {
+            if (Accion=="Comenzar")
+            {
+                int espacios = ListaPers.Count;
+                Random rand = new Random((int)DateTime.Now.Ticks);
+                int PersonajeSeleccionado = -1;
+                PersonajeSeleccionado = rand.Next(0, espacios);
+                Personaje Selected = new Personaje();
+                Selected = ListaPers[PersonajeSeleccionado];
+                ViewBag.Selected = Selected;
+            }
+            List<Pregunta> ListaPregs = BD.ListarPreguntas();
+            ViewBag.ListaPregs = ListaPregs;
+            ViewBag.Puntaje = puntaje;
+            ViewBag.ListaPers = ListaPers;
+            return View();
+        }
         public ActionResult Login()
         {
             return View();
