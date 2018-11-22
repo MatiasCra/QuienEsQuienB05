@@ -227,6 +227,7 @@
     <Content Include="Content\fondo.jpg" />
     <Content Include="Content\Inst.css" />
     <Content Include="Content\Logo.jpg" />
+    <Content Include="Content\logo10.png" />
     <Content Include="Content\LogoCompania.jpg" />
     <Content Include="Content\Nomb.css" />
     <Content Include="favicon.ico" />
