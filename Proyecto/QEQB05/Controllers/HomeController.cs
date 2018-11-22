@@ -20,10 +20,29 @@ namespace QEQB05.Controllers
             ViewBag.categorias = BD.ListarTodasCategoriasP();
             return View();
         }
-        public ActionResult Jugar(int puntaje, List<Personaje> ListaPers, string Accion)
+        public ActionResult Jugar(int puntaje, int catElegida, string Accion)
         {
+            List<Personaje> ListaPers = new List<Personaje>();
+            if (catElegida == -1)
+            {
+                ListaPers = BD.ListarPersonajes();
+            }
+            else
+            {
+                foreach (Personaje per in BD.ListarPersonajes())
+                {
+                    foreach (CategoríaP cat in per.Categorías)
+                    {
+                        if (catElegida == cat.Id)
+                        {
+                            ListaPers.Add(per);
+                        }
+                    }
+                }
+            }
             if (Accion=="Comenzar")
             {
+                
                 int espacios = ListaPers.Count;
                 Random rand = new Random((int)DateTime.Now.Ticks);
                 int PersonajeSeleccionado = -1;
@@ -178,6 +197,7 @@ namespace QEQB05.Controllers
         {
             List<Personaje> personajes = BD.ListarPersonajes();
             List<Personaje> elegidos = new List<Personaje>();
+            ViewBag.CatElegida = IdC;
             if (IdC == -1)
             {
                 elegidos = personajes;
