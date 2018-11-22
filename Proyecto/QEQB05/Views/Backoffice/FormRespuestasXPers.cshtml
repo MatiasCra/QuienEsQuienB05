@@ -5,33 +5,34 @@
 }
 
 <link rel="stylesheet" href="~/Content/ABMPerso.css">
+<body style="background-image: url('/Content/Backoffice.jpg'); background-repeat: no-repeat; background-attachment: fixed;">
+    <h2>Cargar respuestas</h2>
 
-<h2>Cargar respuestas</h2>
-
-@using (Html.BeginForm("OperacionesRespuestas2", "Backoffice", FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    <p>Elija todas las preguntas cuya respuesta sea SÍ</p>
-    <br />@Html.Label(Model.Nombre)<br />
-    <img class="imgFormP" src="@ViewBag.AuxFoto" alt="Personaje" /><br />
-
-    foreach (Pregunta P in ViewBag.ListaTodasPregs)
+    @using (Html.BeginForm("OperacionesRespuestas2", "Backoffice", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
-        bool v = false;
-        foreach (Pregunta p in ViewBag.ListaPregPers)
+        <p>Elija todas las preguntas cuya respuesta sea SÍ</p>
+        <br />@Html.Label(Model.Nombre)<br />
+        <img class="imgFormP" src="@ViewBag.AuxFoto" alt="Personaje" /><br />
+
+        foreach (Pregunta P in ViewBag.ListaTodasPregs)
         {
-            if (P.IdPreg == p.IdPreg)
+            bool v = false;
+            foreach (Pregunta p in ViewBag.ListaPregPers)
             {
-                v = true;
-                @Html.Label(p.TextoPreg)
-                <input type="checkbox" name="Box" value=@p.IdPreg checked="checked"><br />
+                if (P.IdPreg == p.IdPreg)
+                {
+                    v = true;
+                    @Html.Label(p.TextoPreg)
+                    <input type="checkbox" name="Box" value=@p.IdPreg checked="checked"><br />
+                }
+            }
+            if (v == false)
+            {
+                @Html.Label(P.TextoPreg)
+                <input type="checkbox" name="Box" value=@P.IdPreg><br />
             }
         }
-        if (v == false)
-        {
-            @Html.Label(P.TextoPreg)
-            <input type="checkbox" name="Box" value=@P.IdPreg><br />
-        }
+        <input type="hidden" name="Id" value=@Model.Id />
+        <br /><input type="submit" value=Finalizar />
     }
-    <input type="hidden" name="Id" value=@Model.Id />
-    <br /><input type="submit" value=Finalizar />
-}
+</body>

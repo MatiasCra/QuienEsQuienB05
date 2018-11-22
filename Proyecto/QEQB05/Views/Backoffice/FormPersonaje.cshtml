@@ -7,56 +7,19 @@
 @{
     ViewBag.Title = "Form personaje";
 }
+<body style="background-image: url('/Content/Backoffice.jpg'); background-repeat: no-repeat; background-attachment: fixed;">
+    <h2>Form personaje</h2>
 
-<h2>Form personaje</h2>
-
-@using (Html.BeginForm("OperacionesPersonaje", "Backoffice", FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    bool a;
-    @Html.HiddenFor(x => x.Id)
-    if (ViewBag.Accion == "Ver")
+    @using (Html.BeginForm("OperacionesPersonaje", "Backoffice", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
-        @Html.HiddenFor(x => x.Id);
-        <p>Nombre: </p> @Html.TextBoxFor(x => x.Nombre, new { disabled = "disabled", id="inputText"})<br />
-        <img class="imgFormP" src="@ViewBag.AuxFoto" alt="Personaje" /><br />
-        
-        foreach (CategoríaP C in ViewBag.Categorias)
+        bool a;
+        @Html.HiddenFor(x => x.Id)
+        if (ViewBag.Accion == "Ver")
         {
-            a = false;
-            foreach (CategoríaP c in ViewBag.CatsP)
-            {
-                if (c.Id == C.Id)
-                {
-                    a = true;
-                    
-                }
-            }
-            if (a == true)
-            {
-                <lbl>@C.Nombre: </lbl><input type="checkbox" name="Box" value=@C.Id checked="checked" disabled="disabled">
-            }
-            else
-            {
-                <lbl>@C.Nombre: </lbl><input type="checkbox" name="Box" value=@C.Id disabled="disabled">
-            }
-        }
-    }
-    else
-    {
-        @Html.HiddenFor(x => x.Id);
-        <p>Nombre: </p> @Html.TextBoxFor(x => x.Nombre, new { required = "required", id = "inputText" }) @Html.ValidationMessageFor(x => x.Nombre) <br />
-        if (ViewBag.Accion == "Insertar")
-        {
-            <p>Foto: </p> <input type="file" name="postedFile" id="postedFile" accept="image/jpg" required/> <br />
-            foreach (CategoríaP C in ViewBag.Categorias)
-            {
-                <lbl>@C.Nombre: </lbl><input type="checkbox" name="Box" value=@C.Id>
-            }
-        }
-        else
-        {
+            @Html.HiddenFor(x => x.Id);
+            <p>Nombre: </p> @Html.TextBoxFor(x => x.Nombre, new { disabled = "disabled", id = "inputText" })<br />
             <img class="imgFormP" src="@ViewBag.AuxFoto" alt="Personaje" /><br />
-            <p>Foto: </p> <input type="file" name="postedFile" id="postedFile" accept="image/jpg"/> <br />
+
             foreach (CategoríaP C in ViewBag.Categorias)
             {
                 a = false;
@@ -70,16 +33,55 @@
                 }
                 if (a == true)
                 {
-                    <lbl>@C.Nombre: </lbl><input type="checkbox" name="Box" value=@C.Id checked="checked">
+                    <lbl>@C.Nombre: </lbl><input type="checkbox" name="Box" value=@C.Id checked="checked" disabled="disabled">
                 }
                 else
                 {
-                    <lbl>@C.Nombre: </lbl><input type="checkbox" name="Box" value=@C.Id >
+                    <lbl>@C.Nombre: </lbl><input type="checkbox" name="Box" value=@C.Id disabled="disabled">
                 }
             }
         }
+        else
+        {
+            @Html.HiddenFor(x => x.Id);
+            <p>Nombre: </p> @Html.TextBoxFor(x => x.Nombre, new { required = "required", id = "inputText" }) @Html.ValidationMessageFor(x => x.Nombre) <br />
+            if (ViewBag.Accion == "Insertar")
+            {
+                <p>Foto: </p> <input type="file" name="postedFile" id="postedFile" accept="image/jpg" required /> <br />
+                foreach (CategoríaP C in ViewBag.Categorias)
+                {
+                    <lbl>@C.Nombre: </lbl><input type="checkbox" name="Box" value=@C.Id>
+                }
+            }
+            else
+            {
+                <img class="imgFormP" src="@ViewBag.AuxFoto" alt="Personaje" /><br />
+                <p>Foto: </p> <input type="file" name="postedFile" id="postedFile" accept="image/jpg" /> <br />
+                foreach (CategoríaP C in ViewBag.Categorias)
+                {
+                    a = false;
+                    foreach (CategoríaP c in ViewBag.CatsP)
+                    {
+                        if (c.Id == C.Id)
+                        {
+                            a = true;
+
+                        }
+                    }
+                    if (a == true)
+                    {
+                        <lbl>@C.Nombre: </lbl><input type="checkbox" name="Box" value=@C.Id checked="checked">
+                    }
+                    else
+                    {
+                        <lbl>@C.Nombre: </lbl><input type="checkbox" name="Box" value=@C.Id>
+                    }
+                }
+            }
+        }
+        <input type="hidden" name="Accion" value=@ViewBag.Accion />
+        <input type="hidden" name="AuxFoto" value="@ViewBag.AuxFoto" />
+        <br /><input type="submit" value=Finalizar />
+
     }
-    <input type="hidden" name="Accion" value=@ViewBag.Accion />
-    <input type="hidden" name="AuxFoto" value="@ViewBag.AuxFoto" />
-    <br /><input type="submit" value=Finalizar />
-}
+</body>

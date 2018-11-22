@@ -7,25 +7,26 @@
 
 
 <h2 >Administrar personajes</h2>
+<body style="background-image: url('/Content/Backoffice.jpg'); background-repeat: no-repeat; background-attachment: fixed;">
+    <br />@Html.ActionLink("Agregar personaje", "EdicionPersonajes", "Backoffice", new { Id = -1, Accion = "Insertar" }, null)<br /><br />
+    <table style="width:100%">
+        <tr>
+            <th>Nombre</th>
+            <th>Foto</th>
 
-<br />@Html.ActionLink("Agregar personaje", "EdicionPersonajes", "Backoffice", new { Id = -1, Accion = "Insertar"}, null)<br /><br />
-<table style="width:100%">
-    <tr>
-        <th>Nombre</th>
-        <th>Foto</th>
+        </tr>
+        @foreach (Personaje p in ViewBag.ListaPersonajes)
+        {
 
-    </tr>
-    @foreach (Personaje p in ViewBag.ListaPersonajes)
-    {
+            <tr>
+                <th>@p.Nombre</th>
+                <th><img class="icon-prev" src="@p.UrlDataFoto" alt="@p.Nombre" height="40" width="40" /></th>
+                <th>@Html.ActionLink("Ver", "EdicionPersonajes", "Backoffice", new { Accion = "Ver", Id = p.Id }, null)</th>
+                <th>@Html.ActionLink("Editar", "EdicionPersonajes", "Backoffice", new { Accion = "Modificar", Id = p.Id }, null)</th>
+                <th>@Html.ActionLink("Eliminar", "EdicionPersonajes", "Backoffice", new { Accion = "Eliminar", Id = p.Id }, null)</th>
+                <th>@Html.ActionLink("Cargar respuestas", "EdicionPersonajes", "Backoffice", new { Accion = "Respuestas", Id = p.Id }, null)</th>
+            </tr>
 
-    <tr>
-        <th>@p.Nombre</th>
-        <th><img class="icon-prev" src="@p.UrlDataFoto" alt="@p.Nombre" height="40" width="40" /></th>
-        <th>@Html.ActionLink("Ver", "EdicionPersonajes", "Backoffice", new { Accion = "Ver", Id = p.Id }, null)</th>
-        <th>@Html.ActionLink("Editar", "EdicionPersonajes", "Backoffice", new { Accion = "Modificar", Id = p.Id }, null)</th>
-        <th>@Html.ActionLink("Eliminar", "EdicionPersonajes", "Backoffice", new { Accion = "Eliminar", Id = p.Id }, null)</th>
-        <th>@Html.ActionLink("Cargar respuestas", "EdicionPersonajes", "Backoffice", new { Accion = "Respuestas", Id = p.Id }, null)</th>
-    </tr>
-
-    }
-</table>
+        }
+    </table>
+</body>
