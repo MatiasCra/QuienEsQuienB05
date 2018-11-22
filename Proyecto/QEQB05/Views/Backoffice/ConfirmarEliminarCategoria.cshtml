@@ -3,15 +3,16 @@
 @{
     ViewBag.Title = "ConfirmarEliminarCategoria";
 }
+<body style="background-image: url('/Content/Backoffice.jpg'); background-repeat: no-repeat; background-attachment: fixed;">
+    <h2>ConfirmarEliminarCategoria</h2>
 
-<h2>ConfirmarEliminarCategoria</h2>
+    @using (Html.BeginForm("OperacionesCatPers", "Backoffice", FormMethod.Post))
+    {
 
-@using (Html.BeginForm("OperacionesCatPers", "Backoffice", FormMethod.Post))
-{
-
-    <h5>¿Está seguro de que quiere eliminar esta categoría?</h5>
-    @Html.HiddenFor(x => x.Id)
-    @Html.HiddenFor(x => x.Nombre)
-    <input type="hidden" name="Accion" value="@ViewBag.Accion" />
-    <input type="submit" value="Finalizar" />
-}
+        <h5>¿Está seguro de que quiere eliminar esta categoría?</h5>
+        @Html.HiddenFor(x => x.Id)
+        @Html.HiddenFor(x => x.Nombre)
+        <input type="hidden" name="Accion" value="@ViewBag.Accion" />
+        <input type="submit" value="Finalizar" />
+    }
+</body>

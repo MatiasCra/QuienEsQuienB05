@@ -2,22 +2,23 @@
 @{
     ViewBag.Title = "Cargar respuestas";
 }
+<body style="background-image: url('/Content/Backoffice.jpg'); background-repeat: no-repeat; background-attachment: fixed;">
+    <link rel="stylesheet" href="~/Content/CargResp.css">
 
-<link rel="stylesheet" href="~/Content/CargResp.css">
+    <h2>Cargar respuestas</h2>
 
-<h2>Cargar respuestas</h2>
-
-<table style="width:100%">
-    <tr>
-        <th>Pregunta</th>
-    </tr>
-    @foreach (Pregunta p in ViewBag.ListaPreg)
-    {
-
+    <table style="width:100%">
         <tr>
-            <th>@p.TextoPreg</th>
-            <th>@Html.ActionLink("Cargar", "FormRespuestas", "Backoffice", new { Texto = p.TextoPreg, Id = p.IdPreg }, null)</th>
+            <th>Pregunta</th>
         </tr>
+        @foreach (Pregunta p in ViewBag.ListaPreg)
+        {
 
-    }
-</table>
+            <tr>
+                <th>@p.TextoPreg</th>
+                <th>@Html.ActionLink("Cargar", "FormRespuestas", "Backoffice", new { Texto = p.TextoPreg, Id = p.IdPreg }, null)</th>
+            </tr>
+
+        }
+    </table>
+</body>

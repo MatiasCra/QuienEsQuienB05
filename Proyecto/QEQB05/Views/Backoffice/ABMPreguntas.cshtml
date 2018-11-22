@@ -3,25 +3,26 @@
     ViewBag.Title = "ABMPreguntas";
 }
 <link rel="stylesheet" href="~/Content/ABMPerso.css">
-<h2>ABMPreguntas</h2>
-<br />@Html.ActionLink("Agregar Pregunta", "EdicionPreguntas", "Backoffice", new { Id = -1, Accion = "Insertar" }, null)<br /><br />
-<table style="width:100%">
-    <tr>
-        <th>Id</th>
-        <th>Pregunta</th>
-        
-
-    </tr>
-    @foreach (Pregunta p in ViewBag.ListaPreguntas)
-    {
-
+<body style="background-image: url('/Content/Backoffice.jpg'); background-repeat: no-repeat; background-attachment: fixed;">
+    <h2>ABMPreguntas</h2>
+    <br />@Html.ActionLink("Agregar Pregunta", "EdicionPreguntas", "Backoffice", new { Id = -1, Accion = "Insertar" }, null)<br /><br />
+    <table style="width:100%">
         <tr>
-            <th>@p.IdPreg</th>
-            <th>@p.TextoPreg</th>
-            <th>@Html.ActionLink("Editar", "EdicionPreguntas", "Backoffice", new { Accion = "Modificar", Id = p.IdPreg }, null)</th>
-            <th>@Html.ActionLink("Eliminar", "EdicionPreguntas", "Backoffice", new { Accion = "Eliminar", Id = p.IdPreg }, null)</th>
+            <th>Id</th>
+            <th>Pregunta</th>
+
+
         </tr>
+        @foreach (Pregunta p in ViewBag.ListaPreguntas)
+        {
 
-    }
-</table>
+            <tr>
+                <th>@p.IdPreg</th>
+                <th>@p.TextoPreg</th>
+                <th>@Html.ActionLink("Editar", "EdicionPreguntas", "Backoffice", new { Accion = "Modificar", Id = p.IdPreg }, null)</th>
+                <th>@Html.ActionLink("Eliminar", "EdicionPreguntas", "Backoffice", new { Accion = "Eliminar", Id = p.IdPreg }, null)</th>
+            </tr>
 
+        }
+    </table>
+</body>

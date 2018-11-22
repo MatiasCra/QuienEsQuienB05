@@ -5,31 +5,32 @@
 }
 
 <link rel="stylesheet" href="~/Content/CargResp.css">
+<body style="background-image: url('/Content/Backoffice.jpg'); background-repeat: no-repeat; background-attachment: fixed;">
+    <h2>Formulario</h2>
 
-<h2>Formulario</h2>
-
-@using (Html.BeginForm("OperacionesRespuestas", "Backoffice", FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    <h3>@Model.TextoPreg</h3>
-    <p>Elija los personajes cuya respuesta es SÍ</p>
-    foreach (Personaje P in ViewBag.ListaTodosPers)
+    @using (Html.BeginForm("OperacionesRespuestas", "Backoffice", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
-        bool v = false;
-        foreach (Personaje p in ViewBag.ListaPersPreg)
+        <h3>@Model.TextoPreg</h3>
+        <p>Elija los personajes cuya respuesta es SÍ</p>
+        foreach (Personaje P in ViewBag.ListaTodosPers)
         {
-            if (P.Id == p.Id)
+            bool v = false;
+            foreach (Personaje p in ViewBag.ListaPersPreg)
             {
-                v = true;
-                <input type="checkbox" name="Box" value=@p.Id checked="checked">
+                if (P.Id == p.Id)
+                {
+                    v = true;
+                    <input type="checkbox" name="Box" value=@p.Id checked="checked">
+                }
             }
+            if (v == false)
+            {
+                <input type="checkbox" name="Box" value=@P.Id>
+            }
+            <img class="icon-prev" src="@P.UrlDataFoto" alt="Personaje" height="50" width="50">
+            @P.Nombre<br />
         }
-        if (v == false)
-        {
-            <input type="checkbox" name="Box" value=@P.Id>
-        }
-        <img class="icon-prev" src="@P.UrlDataFoto" alt="Personaje" height="50" width="50" >
-        @P.Nombre<br />
+        <input type="hidden" name="Id" value=@Model.IdPreg />
+        <br /><input type="submit" value=Finalizar />
+    </body>
     }
-    <input type="hidden" name="Id" value=@Model.IdPreg />
-    <br /><input type="submit" value=Finalizar />
-}

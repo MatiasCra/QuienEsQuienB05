@@ -5,22 +5,23 @@
 
 <h2>ABMCatPersonajes</h2>
 <link rel="stylesheet" href="~/Content/ABMPerso.css">
-
-<br />@Html.ActionLink("Agregar categoría", "EdicionCatPers", "Backoffice", new { Id = -1, Accion = "Insertar" }, null)<br /><br />
-<table style="width:100%">
-    <tr>
-        <th>Nombre</th>
-
-    </tr>
-    @foreach (CategoríaP c in ViewBag.ListaCatPers)
-    {
-
+<body style="background-image: url('/Content/Backoffice.jpg'); background-repeat: no-repeat; background-attachment: fixed;">
+    <br />@Html.ActionLink("Agregar categoría", "EdicionCatPers", "Backoffice", new { Id = -1, Accion = "Insertar" }, null)<br /><br />
+    <table style="width:100%">
         <tr>
-            <th>@c.Nombre</th>
-            
-            <th>@Html.ActionLink("Editar", "EdicionCatPers", "Backoffice", new { Accion = "Modificar", Id = c.Id }, null)</th>
-            <th>@Html.ActionLink("Eliminar", "EdicionCatPers", "Backoffice", new { Accion = "Eliminar", Id = c.Id }, null)</th>
-        </tr>
+            <th>Nombre</th>
 
-    }
-</table>
+        </tr>
+        @foreach (CategoríaP c in ViewBag.ListaCatPers)
+        {
+
+            <tr>
+                <th>@c.Nombre</th>
+
+                <th>@Html.ActionLink("Editar", "EdicionCatPers", "Backoffice", new { Accion = "Modificar", Id = c.Id }, null)</th>
+                <th>@Html.ActionLink("Eliminar", "EdicionCatPers", "Backoffice", new { Accion = "Eliminar", Id = c.Id }, null)</th>
+            </tr>
+
+        }
+    </table>
+</body>
