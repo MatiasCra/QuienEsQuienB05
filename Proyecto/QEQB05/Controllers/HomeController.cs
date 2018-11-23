@@ -54,7 +54,7 @@ namespace QEQB05.Controllers
             List<Pregunta> ListaPregs = BD.ListarPreguntas();
             ViewBag.ListaPregs = ListaPregs;
             ViewBag.Puntaje = puntaje;
-            ViewBag.ListaPers = ListaPers;
+            ViewBag.categoria = catElegida;
             return View();
         }
         public ActionResult Login()
