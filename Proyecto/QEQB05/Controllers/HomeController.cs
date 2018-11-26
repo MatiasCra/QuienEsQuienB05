@@ -16,45 +16,24 @@ namespace QEQB05.Controllers
         }
         public ActionResult ComenzarJuego()
         {
-            ViewBag.puntaje = 1000000;
+            Partida.puntaje = 1000000;
             ViewBag.categorias = BD.ListarTodasCategoriasP();
             return View();
         }
-        public ActionResult Jugar(int puntaje, int catElegida, string Accion)
+        public ActionResult Jugar(string Accion)
         {
-            List<Personaje> ListaPers = new List<Personaje>();
-            if (catElegida == -1)
-            {
-                ListaPers = BD.ListarPersonajes();
-            }
-            else
-            {
-                foreach (Personaje per in BD.ListarPersonajes())
-                {
-                    foreach (CategoríaP cat in per.Categorías)
-                    {
-                        if (catElegida == cat.Id)
-                        {
-                            ListaPers.Add(per);
-                        }
-                    }
-                }
-            }
             if (Accion=="Comenzar")
             {
                 
-                int espacios = ListaPers.Count;
+                int espacios = Partida.Todos.Count;
                 Random rand = new Random((int)DateTime.Now.Ticks);
                 int PersonajeSeleccionado = -1;
                 PersonajeSeleccionado = rand.Next(0, espacios);
                 Personaje Selected = new Personaje();
-                Selected = ListaPers[PersonajeSeleccionado];
-                ViewBag.Selected = Selected;
+                Partida.Seleccionado = Partida.Todos[PersonajeSeleccionado];
             }
             List<Pregunta> ListaPregs = BD.ListarPreguntas();
             ViewBag.ListaPregs = ListaPregs;
-            ViewBag.Puntaje = puntaje;
-            ViewBag.categoria = catElegida;
             return View();
         }
         public ActionResult Login()
@@ -193,14 +172,14 @@ namespace QEQB05.Controllers
             }
         }
         [HttpPost]
-        public ActionResult MostrarTodosPersonajes(int IdC, int puntaje)
+        public ActionResult MostrarTodosPersonajes(int IdC)
         {
             List<Personaje> personajes = BD.ListarPersonajes();
             List<Personaje> elegidos = new List<Personaje>();
-            ViewBag.CatElegida = IdC;
+            Partida.IdCategoria = IdC;
             if (IdC == -1)
             {
-                elegidos = personajes;
+                Partida.Todos = personajes;
             }
             else
             {
@@ -214,9 +193,9 @@ namespace QEQB05.Controllers
                         }
                     }
                 }
+                Partida.Todos = elegidos;
             }
-            ViewBag.Puntaje = puntaje;
-            ViewBag.ListaPersonajes = elegidos;
+            ViewBag.ListaPersonajes = Partida.Todos;
             ViewBag.Accion = "Comenzar";
             return View("TodosPersonajes");
         }

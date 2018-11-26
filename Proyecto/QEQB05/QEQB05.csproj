@@ -209,6 +209,7 @@
     <Compile Include="Models\ConversionIMG.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Partida.cs" />
     <Compile Include="Models\Personaje.cs" />
     <Compile Include="Models\Pregunta.cs" />
     <Compile Include="Models\Usuario.cs" />
