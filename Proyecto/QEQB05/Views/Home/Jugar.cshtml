@@ -9,7 +9,7 @@
     <label>Puntaje: @ViewBag.puntaje</label><br />
     foreach (Pregunta preg in ViewBag.ListaPregs)
     {
-        <input type="radio" name="IdC" value="@preg.IdPreg" /> @Html.Label(preg.TextoPreg)<br />
+        <input type="radio" name="IdC" value="@preg.IdPreg" required/> @Html.Label(preg.TextoPreg)<br />
     }
     @Html.ActionLink("Ver personajes restantes", "VerPersonajesRestantes", "Home")<br />
     @Html.ActionLink("Arriesgar", "Arriesgar", "Home")<br />
