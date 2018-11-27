@@ -19,10 +19,8 @@
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
-    <IISExpressAnonymousAuthentication>
-    </IISExpressAnonymousAuthentication>
-    <IISExpressWindowsAuthentication>
-    </IISExpressWindowsAuthentication>
+    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
@@ -211,6 +209,7 @@
     <Compile Include="Models\ConversionIMG.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Partida.cs" />
     <Compile Include="Models\Personaje.cs" />
     <Compile Include="Models\Pregunta.cs" />
     <Compile Include="Models\Usuario.cs" />
@@ -219,6 +218,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\ABMPerso.css" />
+    <Content Include="Content\AgregarImagen.jpg" />
     <Content Include="Content\Backoffice.jpg" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -229,7 +229,7 @@
     <Content Include="Content\Inst.css" />
     <Content Include="Content\Logo.jpg" />
     <Content Include="Content\logo10.png" />
-    <Content Include="Content\LogoCompania.jpg" />
+    <Content Include="Content\LogoDeCompania.png" />
     <Content Include="Content\Nomb.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -313,6 +313,7 @@
     <Content Include="Views\Backoffice\OpRespuestas2.cshtml" />
     <Content Include="Views\Home\TodosPersonajes.cshtml" />
     <Content Include="Views\Home\ComenzarJuego.cshtml" />
+    <Content Include="Views\Home\Jugar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -16,8 +16,24 @@ namespace QEQB05.Controllers
         }
         public ActionResult ComenzarJuego()
         {
-            ViewBag.puntaje = 1000000;
+            Partida.puntaje = 1000000;
             ViewBag.categorias = BD.ListarTodasCategoriasP();
+            return View();
+        }
+        public ActionResult Jugar(string Accion)
+        {
+            if (Accion=="Comenzar")
+            {
+                
+                int espacios = Partida.Todos.Count;
+                Random rand = new Random((int)DateTime.Now.Ticks);
+                int PersonajeSeleccionado = -1;
+                PersonajeSeleccionado = rand.Next(0, espacios);
+                Personaje Selected = new Personaje();
+                Partida.Seleccionado = Partida.Todos[PersonajeSeleccionado];
+            }
+            List<Pregunta> ListaPregs = BD.ListarPreguntas();
+            ViewBag.ListaPregs = ListaPregs;
             return View();
         }
         public ActionResult Login()
@@ -156,13 +172,14 @@ namespace QEQB05.Controllers
             }
         }
         [HttpPost]
-        public ActionResult MostrarTodosPersonajes(int IdC, int puntaje)
+        public ActionResult MostrarTodosPersonajes(int IdC)
         {
             List<Personaje> personajes = BD.ListarPersonajes();
             List<Personaje> elegidos = new List<Personaje>();
+            Partida.IdCategoria = IdC;
             if (IdC == -1)
             {
-                elegidos = personajes;
+                Partida.Todos = personajes;
             }
             else
             {
@@ -176,8 +193,10 @@ namespace QEQB05.Controllers
                         }
                     }
                 }
+                Partida.Todos = elegidos;
             }
-            ViewBag.ListaPersonajes = elegidos;
+            ViewBag.ListaPersonajes = Partida.Todos;
+            ViewBag.Accion = "Comenzar";
             return View("TodosPersonajes");
         }
 
