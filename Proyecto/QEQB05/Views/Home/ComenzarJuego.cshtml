@@ -6,7 +6,7 @@
 <h2>ComenzarJuego</h2>
 @using (Html.BeginForm("MostrarTodosPersonajes", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-    <input type="radio" name="IdC" value="-1" /> @Html.Label("Todos")<br />
+    <input type="radio" name="IdC" value="-1" checked="checked"/> @Html.Label("Todos")<br />
     {
         foreach (CategoríaP cate in ViewBag.categorias)
         {

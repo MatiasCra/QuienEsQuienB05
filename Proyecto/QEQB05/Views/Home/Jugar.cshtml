@@ -6,11 +6,12 @@
 <h2>Jugar</h2>
 @using (Html.BeginForm("OperacionesJuego", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
+    <label>Puntaje: @ViewBag.puntaje</label><br />
     foreach (Pregunta preg in ViewBag.ListaPregs)
     {
-        <input type="radio" name="IdC" value="@preg.IdPreg" /> @Html.Label(preg.TextoPreg)<br />
+        <input type="radio" name="IdC" value="@preg.IdPreg" required/> @Html.Label(preg.TextoPreg)<br />
     }
-    <input type="hidden" name="puntaje" value=@ViewBag.Puntaje />
-    <input type="hidden" name="ListaPers" value=@ViewBag.ListaPers />
+    @Html.ActionLink("Ver personajes restantes", "VerPersonajesRestantes", "Home")<br />
+    @Html.ActionLink("Arriesgar", "Arriesgar", "Home")<br />
     <input type="submit" value="Continuar" />
 }

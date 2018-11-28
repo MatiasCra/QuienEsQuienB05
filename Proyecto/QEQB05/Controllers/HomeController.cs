@@ -22,6 +22,7 @@ namespace QEQB05.Controllers
         }
         public ActionResult Jugar(string Accion)
         {
+            ViewBag.puntaje = Partida.puntaje;
             if (Accion=="Comenzar")
             {
                 
@@ -195,8 +196,16 @@ namespace QEQB05.Controllers
                 }
                 Partida.Todos = elegidos;
             }
+            Partida.Elegidos = Partida.Todos;
             ViewBag.ListaPersonajes = Partida.Todos;
             ViewBag.Accion = "Comenzar";
+            return View("TodosPersonajes");
+        }
+
+        public ActionResult VerPersonajesRestantes()
+        {
+            Partida.puntaje = Partida.puntaje - 5000;
+            ViewBag.ListaPersonajes = Partida.Elegidos;
             return View("TodosPersonajes");
         }
 
