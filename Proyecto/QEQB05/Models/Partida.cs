@@ -18,6 +18,8 @@ namespace QEQB05.Models
 
         public static Personaje Seleccionado;
 
+        public static List<Pregunta> Preguntas;
+
         public static void ReiniciarPartida()
         {
             IdCategoria = -1;
@@ -25,6 +27,7 @@ namespace QEQB05.Models
             Todos = null;
             puntaje = 1000000;
             Seleccionado = null;
+            Preguntas = null;
         }
     }
 }

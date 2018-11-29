@@ -464,7 +464,9 @@ namespace QEQB05.Models
         {
             byte[] picture = null;
             if (pathArchivo != null)
+            {
                 picture = ConversionIMG.ConvertirAByteArray(pathArchivo);
+            }
             SqlConnection Conexion = Conectar();
             SqlCommand Consulta = Conexion.CreateCommand();
             Consulta.CommandText = "sp_PersonajeAlta";
@@ -821,6 +823,24 @@ namespace QEQB05.Models
                 string Texto = Lector["Texto"].ToString();
                 Pregunta P = new Pregunta (Id, Texto);
                 Lista.Add(P);
+            }
+            Desconectar(Conexion);
+            return Lista;
+        }
+
+        public static List<int> ListarRespuestas (int IdP)
+        {
+            List<int> Lista = new List<int>();
+            SqlConnection Conexion = Conectar();
+            SqlCommand Consulta = Conexion.CreateCommand();
+            Consulta.CommandText = "sp_TraerRespuestas";
+            Consulta.CommandType = System.Data.CommandType.StoredProcedure;
+            Consulta.Parameters.AddWithValue("@pIdPersonaje", IdP);
+            SqlDataReader Lector = Consulta.ExecuteReader();
+            while (Lector.Read())
+            {
+                int Id = Convert.ToInt32(Lector["IDPregunta"]);
+                Lista.Add(Id);
             }
             Desconectar(Conexion);
             return Lista;

@@ -18,6 +18,8 @@ namespace QEQB05.Controllers
         {
             Partida.puntaje = 1000000;
             ViewBag.categorias = BD.ListarTodasCategoriasP();
+            Partida.Preguntas = BD.ListarPreguntas();
+            
             return View();
         }
         public ActionResult Jugar(string Accion)
@@ -176,6 +178,10 @@ namespace QEQB05.Controllers
         public ActionResult MostrarTodosPersonajes(int IdC)
         {
             List<Personaje> personajes = BD.ListarPersonajes();
+            foreach (Personaje per in personajes)
+            {
+                per.Respuestas = BD.ListarRespuestas(per.Id);
+            }
             List<Personaje> elegidos = new List<Personaje>();
             Partida.IdCategoria = IdC;
             if (IdC == -1)
@@ -234,5 +240,135 @@ namespace QEQB05.Controllers
         {
             return View();
         }
+
+        public ActionResult OperacionesJuego (int IdP)
+        {
+            bool y = false;
+            int i = 0;
+            
+            Partida.puntaje = Partida.puntaje - 5000;
+            while (y == false && i < Partida.Seleccionado.Respuestas.Count)
+            {
+                if (IdP == Partida.Seleccionado.Respuestas[i])
+                {
+                    y = true;
+                }
+                else
+                {
+                    i++;
+                }
+            }
+            List<Personaje> auxListaPers = Partida.Elegidos;
+            int a;
+            bool w;
+            for (int b = 0; b < Partida.Elegidos.Count; b++)
+            {
+                a = 0;
+                w = false;
+                if (y == true)
+                {
+                    while (w == false && a < Partida.Elegidos[b].Respuestas.Count)
+                    {
+                        if (IdP == Partida.Elegidos[b].Respuestas[a])
+                        {
+                            w = true;
+                        }
+                        else
+                        {
+                            a++;
+                        }
+                    }
+                    if (w != true)
+                    {
+                        auxListaPers.Remove(Partida.Elegidos[b]);
+                    }
+                }
+                else
+                {
+                    while (w == false && a < Partida.Elegidos[b].Respuestas.Count)
+                    {
+                        if (IdP == Partida.Elegidos[b].Respuestas[a])
+                        {
+                            w = true;
+                        }
+                        else
+                        {
+                            a++;
+                        }
+                    }
+                    if (w == true)
+                    {
+                        auxListaPers.Remove(Partida.Elegidos[b]);
+                    }
+                }
+            }
+            Partida.Elegidos = auxListaPers;
+            if (y == true)
+            {
+                ViewBag.Respuesta = "La respuesta es SÍ";
+            }
+            else
+            {
+                ViewBag.Respuesta = "La respuesta es NO";
+            }
+            ViewBag.Puntaje = Partida.puntaje;
+            ViewBag.ListaPregs = Partida.Preguntas;
+            return View("Jugar");
+        }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
