@@ -20,7 +20,7 @@ else
     <h5>Si fallas perderas 50000 puntos</h5>
 }
 
-@using (Html.BeginForm("VerficarArriesgar", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("VerificarArriesgar", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     if (ViewBag.ListaPersonajes.Count > 1)
     {
@@ -75,8 +75,8 @@ else
                 </tr>
             </table>
         }
-        <input type="hidden" name="AuxPuntaje" value=@ViewBag.AuxPuntaje />
-        <input type="submit" value="Arriesgar" />
     }
+    <input type="hidden" name="AuxPuntaje" value=@ViewBag.AuxPuntaje />
+    <input type="submit" value="Arriesgar" />
 }
 
