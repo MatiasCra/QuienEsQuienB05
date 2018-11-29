@@ -34,7 +34,6 @@ namespace QEQB05.Controllers
                 PersonajeSeleccionado = rand.Next(0, espacios);
                 Personaje Selected = new Personaje();
                 Partida.Seleccionado = Partida.Todos[PersonajeSeleccionado];
-                Partida.Respuestas = BD.ListarRespuestas(PersonajeSeleccionado);
             }
             List<Pregunta> ListaPregs = BD.ListarPreguntas();
             ViewBag.ListaPregs = ListaPregs;
@@ -179,6 +178,10 @@ namespace QEQB05.Controllers
         public ActionResult MostrarTodosPersonajes(int IdC)
         {
             List<Personaje> personajes = BD.ListarPersonajes();
+            foreach (Personaje per in personajes)
+            {
+                per.Respuestas = BD.ListarRespuestas(per.Id);
+            }
             List<Personaje> elegidos = new List<Personaje>();
             Partida.IdCategoria = IdC;
             if (IdC == -1)
@@ -226,10 +229,11 @@ namespace QEQB05.Controllers
         {
             bool y = false;
             int i = 0;
+            
             Partida.puntaje = Partida.puntaje - 5000;
-            while (y == false && i < Partida.Respuestas.Count)
+            while (y == false && i < Partida.Seleccionado.Respuestas.Count)
             {
-                if (IdP == Partida.Respuestas[i])
+                if (IdP == Partida.Seleccionado.Respuestas[i])
                 {
                     y = true;
                 }
@@ -238,6 +242,51 @@ namespace QEQB05.Controllers
                     i++;
                 }
             }
+            List<Personaje> auxListaPers = Partida.Elegidos;
+            int a;
+            bool w;
+            for (int b = 0; b < Partida.Elegidos.Count; b++)
+            {
+                a = 0;
+                w = false;
+                if (y == true)
+                {
+                    while (w == false && a < Partida.Elegidos[b].Respuestas.Count)
+                    {
+                        if (IdP == Partida.Elegidos[b].Respuestas[a])
+                        {
+                            w = true;
+                        }
+                        else
+                        {
+                            a++;
+                        }
+                    }
+                    if (w != true)
+                    {
+                        auxListaPers.Remove(Partida.Elegidos[b]);
+                    }
+                }
+                else
+                {
+                    while (w == false && a < Partida.Elegidos[b].Respuestas.Count)
+                    {
+                        if (IdP == Partida.Elegidos[b].Respuestas[a])
+                        {
+                            w = true;
+                        }
+                        else
+                        {
+                            a++;
+                        }
+                    }
+                    if (w == true)
+                    {
+                        auxListaPers.Remove(Partida.Elegidos[b]);
+                    }
+                }
+            }
+            Partida.Elegidos = auxListaPers;
             if (y == true)
             {
                 ViewBag.Respuesta = "La respuesta es SÍ";

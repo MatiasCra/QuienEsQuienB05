@@ -19,7 +19,5 @@ namespace QEQB05.Models
         public static Personaje Seleccionado;
 
         public static List<Pregunta> Preguntas;
-
-        public static List<int> Respuestas;
     }
 }
