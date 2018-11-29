@@ -18,6 +18,8 @@ namespace QEQB05.Controllers
         {
             Partida.puntaje = 1000000;
             ViewBag.categorias = BD.ListarTodasCategoriasP();
+            Partida.Preguntas = BD.ListarPreguntas();
+            
             return View();
         }
         public ActionResult Jugar(string Accion)
@@ -32,6 +34,7 @@ namespace QEQB05.Controllers
                 PersonajeSeleccionado = rand.Next(0, espacios);
                 Personaje Selected = new Personaje();
                 Partida.Seleccionado = Partida.Todos[PersonajeSeleccionado];
+                Partida.Respuestas = BD.ListarRespuestas(PersonajeSeleccionado);
             }
             List<Pregunta> ListaPregs = BD.ListarPreguntas();
             ViewBag.ListaPregs = ListaPregs;
@@ -218,5 +221,89 @@ namespace QEQB05.Controllers
         {
             return View();
         }
+
+        public ActionResult OperacionesJuego (int IdP)
+        {
+            bool y = false;
+            int i = 0;
+            Partida.puntaje = Partida.puntaje - 5000;
+            while (y == false && i < Partida.Respuestas.Count)
+            {
+                if (IdP == Partida.Respuestas[i])
+                {
+                    y = true;
+                }
+                else
+                {
+                    i++;
+                }
+            }
+            if (y == true)
+            {
+                ViewBag.Respuesta = "La respuesta es SÍ";
+            }
+            else
+            {
+                ViewBag.Respuesta = "La respuesta es NO";
+            }
+            ViewBag.Puntaje = Partida.puntaje;
+            ViewBag.ListaPregs = Partida.Preguntas;
+            return View("Jugar");
+        }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

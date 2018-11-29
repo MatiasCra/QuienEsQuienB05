@@ -6,10 +6,14 @@
 <h2>Jugar</h2>
 @using (Html.BeginForm("OperacionesJuego", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
+    if (ViewBag.Respuesta != null)
+    {
+        <label>Respuesta: @ViewBag.Respuesta</label> <br />
+    }
     <label>Puntaje: @ViewBag.puntaje</label><br />
     foreach (Pregunta preg in ViewBag.ListaPregs)
     {
-        <input type="radio" name="IdC" value="@preg.IdPreg" required/> @Html.Label(preg.TextoPreg)<br />
+        <input type="radio" name="IdP" value="@preg.IdPreg" required/> @Html.Label(preg.TextoPreg)<br />
     }
     @Html.ActionLink("Ver personajes restantes", "VerPersonajesRestantes", "Home")<br />
     @Html.ActionLink("Arriesgar", "Arriesgar", "Home")<br />

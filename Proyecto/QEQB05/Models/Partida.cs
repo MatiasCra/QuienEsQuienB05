@@ -17,5 +17,9 @@ namespace QEQB05.Models
         public static double puntaje;
 
         public static Personaje Seleccionado;
+
+        public static List<Pregunta> Preguntas;
+
+        public static List<int> Respuestas;
     }
 }
