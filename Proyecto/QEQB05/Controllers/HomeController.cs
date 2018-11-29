@@ -16,7 +16,7 @@ namespace QEQB05.Controllers
         }
         public ActionResult ComenzarJuego()
         {
-            Partida.puntaje = 1000000;
+            Partida.ReiniciarPartida();
             ViewBag.categorias = BD.ListarTodasCategoriasP();
             Partida.Preguntas = BD.ListarPreguntas();
             
@@ -231,7 +231,21 @@ namespace QEQB05.Controllers
             return View();
         }
 
-        public ActionResult Registro()
+
+        public ActionResult VerificarArriesgar(int Id, int AuxPuntaje)
+        {
+            if(Partida.Seleccionado.Id == Id)
+            {
+                Partida.puntaje = Partida.puntaje + AuxPuntaje;
+                ViewBag.puntaje = Partida.puntaje;
+                return View("Ganaste");
+            }
+            else
+            {
+                return View("PersonajeFallido");
+            }
+        }
+            public ActionResult Registro()
         {
             return View();
         }
