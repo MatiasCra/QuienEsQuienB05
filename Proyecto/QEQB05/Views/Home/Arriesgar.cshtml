@@ -5,6 +5,8 @@
     bool esImpar = Convert.ToBoolean(cont % 2);
 }
 
+<link rel="stylesheet" href="~/Content/Centrooo.css">
+
 <h2>Arriesgar</h2>
 
 <h3>Elija el personaje</h3>
@@ -20,7 +22,7 @@ else
 
 @if (ViewBag.ListaPersonajes.Count > 1)
 {
-    <table align="center">
+    <table align="center" border="1">
     <tr>
         <th>Elegir</th>
         <th>Foto</th>
@@ -32,19 +34,20 @@ else
 
     @for (int i = 0; i < cont; i++)
     {
-        <tr>
-            
+    <tr>
+        <th><input type="radio" name="Id" value=@ViewBag.ListaPersonajes[i].Id></th>
+        <th><img src=@ViewBag.ListaPersonajes[i].UrlDataFoto alt=@ViewBag.ListaPersonajes[i].Nombre height="100" width="100" /></th>
+        <th><label> @ViewBag.ListaPersonajes[i].Nombre </label></th>
+        @if (cont2 != 1)
+        {
+
+            i++;
+            <th><input type="radio" name="Id" value=@ViewBag.ListaPersonajes[i].Id></th>
             <th><img src=@ViewBag.ListaPersonajes[i].UrlDataFoto alt=@ViewBag.ListaPersonajes[i].Nombre height="100" width="100" /></th>
             <th><label> @ViewBag.ListaPersonajes[i].Nombre </label></th>
-            @if (cont2 != 1)
-            {
-
-                i++;
-                <th><img src=@ViewBag.ListaPersonajes[i].UrlDataFoto alt=@ViewBag.ListaPersonajes[i].Nombre height="100" width="100" /></th>
-                <th><label> @ViewBag.ListaPersonajes[i].Nombre </label></th>
-                cont2 = cont2 - 2;
-            }
-        </tr>
+            cont2 = cont2 - 2;
+        }
+    </tr>
     }
     </table>
 <input type="hidden" name="Accion" value=@ViewBag.Accion />
@@ -59,12 +62,13 @@ else
     }
     else
     {
-        <table align="center">
+        <table align="center" border="1">
             <tr>
                 <th>Foto</th>
                 <th>Nombre</th>
             </tr>
             <tr>
+                <th><input type="radio" name="Id" value=@ViewBag.ListaPersonajes[0].Id></th>
                 <th><img src=@ViewBag.ListaPersonajes[0].UrlDataFoto alt=@ViewBag.ListaPersonajes[0].Nombre height="100" width="100" /></th>
                 <th><label> @ViewBag.ListaPersonajes[0].Nombre </label></th>
             </tr>
