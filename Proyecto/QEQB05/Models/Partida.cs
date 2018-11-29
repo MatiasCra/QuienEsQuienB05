@@ -17,5 +17,14 @@ namespace QEQB05.Models
         public static double puntaje;
 
         public static Personaje Seleccionado;
+
+        public static void ReiniciarPartida()
+        {
+            IdCategoria = -1;
+            Elegidos = null;
+            Todos = null;
+            puntaje = 1000000;
+            Seleccionado = null;
+        }
     }
 }

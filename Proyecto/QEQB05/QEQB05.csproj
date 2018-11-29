@@ -314,6 +314,7 @@
     <Content Include="Views\Home\TodosPersonajes.cshtml" />
     <Content Include="Views\Home\ComenzarJuego.cshtml" />
     <Content Include="Views\Home\Jugar.cshtml" />
+    <Content Include="Views\Home\Arriesgar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

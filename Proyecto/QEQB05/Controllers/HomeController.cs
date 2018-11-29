@@ -209,6 +209,22 @@ namespace QEQB05.Controllers
             return View("TodosPersonajes");
         }
 
+        public ActionResult Arriesgar()
+        {
+            if (Partida.Elegidos.Count <= 5)
+            {
+                ViewBag.AuxPuntaje = Partida.puntaje;
+                Partida.puntaje = Partida.puntaje - Partida.puntaje;
+            }
+            else
+            {
+                ViewBag.AuxPuntaje = 50000;
+                Partida.puntaje = Partida.puntaje - 50000;
+            }
+            ViewBag.ListaPersonajes = Partida.Elegidos;
+            return View();
+        }
+
         public ActionResult Registro()
         {
             return View();
