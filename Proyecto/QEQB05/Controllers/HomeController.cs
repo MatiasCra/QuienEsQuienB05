@@ -234,16 +234,19 @@ namespace QEQB05.Controllers
             }
             else
             {
+                Personaje Borrar = new Personaje();
                 int x = 0;
                 bool v = false;
                 while (x < Partida.Elegidos.Count && v == false)
                 {
                     if(Partida.Elegidos[x].Id == Id)
                     {
-                        Partida.Elegidos.Remove(Partida.Elegidos[x]);
+                        Borrar = Partida.Elegidos[x];
                         v = true;
                     }
+                    x++;
                 }
+                Partida.Elegidos.Remove(Borrar);
                 return View("PersonajeFallido");
             }
         }
