@@ -18,8 +18,6 @@ namespace QEQB05.Controllers
         {
             Partida.ReiniciarPartida();
             ViewBag.categorias = BD.ListarTodasCategoriasP();
-            Partida.Preguntas = BD.ListarPreguntas();
-            
             return View();
         }
         public ActionResult Jugar(string Accion)
@@ -27,16 +25,12 @@ namespace QEQB05.Controllers
             ViewBag.puntaje = Partida.puntaje;
             if (Accion=="Comenzar")
             {
-                
-                int espacios = Partida.Todos.Count;
                 Random rand = new Random((int)DateTime.Now.Ticks);
-                int PersonajeSeleccionado = -1;
-                PersonajeSeleccionado = rand.Next(0, espacios);
-                Personaje Selected = new Personaje();
+                int PersonajeSeleccionado = rand.Next(0, Partida.Todos.Count);
                 Partida.Seleccionado = Partida.Todos[PersonajeSeleccionado];
             }
-            List<Pregunta> ListaPregs = BD.ListarPreguntas();
-            ViewBag.ListaPregs = ListaPregs;
+            Partida.Preguntas = BD.ListarPreguntas();
+            ViewBag.ListaPregs = Partida.Preguntas;
             return View();
         }
         public ActionResult Login()
@@ -182,7 +176,6 @@ namespace QEQB05.Controllers
             {
                 per.Respuestas = BD.ListarRespuestas(per.Id);
             }
-            List<Personaje> elegidos = new List<Personaje>();
             Partida.IdCategoria = IdC;
             if (IdC == -1)
             {
@@ -196,11 +189,10 @@ namespace QEQB05.Controllers
                     {
                         if (IdC == cat.Id)
                         {
-                            elegidos.Add(per);
+                            Partida.Todos.Add(per);
                         }
                     }
                 }
-                Partida.Todos = elegidos;
             }
             Partida.Elegidos = Partida.Todos;
             ViewBag.ListaPersonajes = Partida.Todos;
@@ -268,8 +260,7 @@ namespace QEQB05.Controllers
         public ActionResult OperacionesJuego (int IdP)
         {
             bool y = false;
-            int i = 0;
-            
+            int i = 0;            
             Partida.puntaje = Partida.puntaje - 5000;
             while (y == false && i < Partida.Seleccionado.Respuestas.Count)
             {
@@ -282,8 +273,55 @@ namespace QEQB05.Controllers
                     i++;
                 }
             }
-            List<Personaje> auxListaPers = Partida.Elegidos;
-            int a;
+
+            bool v;
+            int x;
+            List<Personaje> Borrar = new List<Personaje>();
+            if (y == true)
+            {
+                foreach (Personaje Per in Partida.Elegidos)
+                {
+                    v = false;
+                    x = 0;
+                    while (v == false && x < Per.Respuestas.Count)
+                    {
+                        if (Per.Respuestas[x] == IdP)
+                        {
+                            v = true;
+                        }
+                        x++;
+                    }
+                    if (v == false)
+                    {
+                        Borrar.Add(Per);
+                    }
+                }
+            }
+            else
+            {
+                foreach (Personaje Per in Partida.Elegidos)
+                {
+                    v = false;
+                    x = 0;
+                    while (v == false && x < Per.Respuestas.Count)
+                    {
+                        if (Per.Respuestas[x] == IdP)
+                        {
+                            v = true;
+                        }
+                        x++;
+                    }
+                    if (v == true)
+                    {
+                        Borrar.Add(Per);
+                    }
+                }
+            }
+            foreach(Personaje per in Borrar)
+            {
+                Partida.Elegidos.Remove(per);
+            }
+            /*int a;
             bool w;
             for (int b = 0; b < Partida.Elegidos.Count; b++)
             {
@@ -326,7 +364,7 @@ namespace QEQB05.Controllers
                     }
                 }
             }
-            Partida.Elegidos = auxListaPers;
+            Partida.Elegidos = auxListaPers;*/
             if (y == true)
             {
                 ViewBag.Respuesta = "La respuesta es SÍ";
