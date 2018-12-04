@@ -10,8 +10,8 @@ namespace QEQB05.Models
 {
     public class BD
     {
-        //private static string connectionString = "Server=10.128.8.16;Database=QEQB05;User Id=QEQB05; Password=QEQB05;";
-        private static string connectionString = "Server=DESKTOP-FJ4BM8M\\SQLEXPRESS;Database=QEQB05;Trusted_Connection=True;";
+        private static string connectionString = "Server=10.128.8.16;Database=QEQB05;User Id=QEQB05; Password=QEQB05;"; 
+        //private static string connectionString = "Server=DESKTOP-FJ4BM8M\\SQLEXPRESS;Database=QEQB05;Trusted_Connection=True;";
 
         private static SqlConnection Conectar()
         {

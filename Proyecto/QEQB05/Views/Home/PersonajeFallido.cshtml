@@ -3,9 +3,11 @@
     ViewBag.Title = "PersonajeFallido";
 }
 
-<h2>PersonajeFallido</h2>
+<h2>Personaje Fallido</h2>
 
 <h3>Ese no es el personaje elegido</h3>
+<h2>Perdiste!!!!!!!!!!!!!!!</h2>
+<h4>El personaje era @ViewBag.Seleccionado</h4>
 
-@Html.ActionLink("Continuar", "Jugar", "Home", new { Accion = "Continuar" }, null)
+@Html.ActionLink("Continuar", "Index", "Home")
 

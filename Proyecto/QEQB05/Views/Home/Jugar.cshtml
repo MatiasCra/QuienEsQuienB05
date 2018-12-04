@@ -11,6 +11,7 @@
         <label>Respuesta: @ViewBag.Respuesta</label> <br />
     }
     <label>Puntaje: @ViewBag.puntaje</label><br />
+    <label>Personajes Restantes: @ViewBag.CantPersRest</label><br />
     foreach (Pregunta preg in ViewBag.ListaPregs)
     {
         <input type="radio" name="IdP" value="@preg.IdPreg" required/> @Html.Label(preg.TextoPreg)<br />

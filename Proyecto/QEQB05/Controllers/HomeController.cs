@@ -29,6 +29,7 @@ namespace QEQB05.Controllers
                 int PersonajeSeleccionado = rand.Next(0, Partida.Todos.Count);
                 Partida.Seleccionado = Partida.Todos[PersonajeSeleccionado];
             }
+            ViewBag.CantPersRest = Partida.Todos.Count;
             Partida.Preguntas = BD.ListarPreguntas();
             ViewBag.ListaPregs = Partida.Preguntas;
             return View();
@@ -172,6 +173,7 @@ namespace QEQB05.Controllers
         public ActionResult MostrarTodosPersonajes(int IdC)
         {
             List<Personaje> personajes = BD.ListarPersonajes();
+            List<Personaje> extra = new List<Personaje>();
             foreach (Personaje per in personajes)
             {
                 per.Respuestas = BD.ListarRespuestas(per.Id);
@@ -189,10 +191,11 @@ namespace QEQB05.Controllers
                     {
                         if (IdC == cat.Id)
                         {
-                            Partida.Todos.Add(per);
+                            extra.Add(per);
                         }
                     }
                 }
+                Partida.Todos = extra;
             }
             Partida.Elegidos = Partida.Todos;
             ViewBag.ListaPersonajes = Partida.Todos;
@@ -247,6 +250,7 @@ namespace QEQB05.Controllers
                     x++;
                 }
                 Partida.Elegidos.Remove(Borrar);
+                ViewBag.Seleccionado = Partida.Seleccionado.Nombre;
                 return View("PersonajeFallido");
             }
         }
@@ -376,6 +380,7 @@ namespace QEQB05.Controllers
             {
                 ViewBag.Respuesta = "La respuesta es NO";
             }
+            ViewBag.CantPersRest = Partida.Elegidos.Count;
             ViewBag.Puntaje = Partida.puntaje;
             ViewBag.ListaPregs = Partida.Preguntas;
             return View("Jugar");
